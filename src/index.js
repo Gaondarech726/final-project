@@ -7,7 +7,7 @@ import "./index.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/evidance-react">
+    <BrowserRouter basename="/final-project">
       <App />
     </BrowserRouter>
   </React.StrictMode>

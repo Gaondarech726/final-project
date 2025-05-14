@@ -1,8 +1,8 @@
 {
-	"name": "evidance-react",
+	"name": "final-project",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://tate-t.github.io/evidance-react/",
+	"homepage": "https://tate-t.github.io/final-project/",
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.6.1",
 		"@testing-library/dom": "^10.4.0",
