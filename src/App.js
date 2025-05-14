@@ -2,11 +2,12 @@ import { Route, Routes } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import "./index.scss";
-import { MainPage } from "./pages/MainPage";
+
 import { store } from "./redux/store";
 
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MainPage from "./pages/MainPage";
 
 export const App = () => {
   return (
