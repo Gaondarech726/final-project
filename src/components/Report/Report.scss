@@ -1,0 +1,136 @@
+//===
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+//===
+
+$orange-color: #ff751d;
+$main-color: #f5f6fb;
+$main-text-color: #52555f;
+
+$grey-hover: darken($main-color, 5%);
+
+$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
+$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+
+$error-color: #eb5757;
+$correct-color: #407946;
+
+$transition: 0.05s ease;
+
+body {
+  background-image: url(../../img/hero.svg);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  .report-container {
+    margin: 20px;
+
+    width: 1060px;
+    height: 620px;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: start;
+
+    .repirt-nav-container {
+      width: 276px;
+      height: 40px;
+
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: start;
+
+      .finance {
+        width: 138px;
+        height: 40px;
+
+        border-radius: 24px 24px 0 0;
+
+        background-color: $main-color;
+        box-shadow: 10px -11px 20px -14px rgba(7, 11, 15, 0.5);
+
+        &:focus {
+          color: $orange-color;
+          background-color: #fefefe;
+        }
+      }
+    }
+    .cost-container {
+      width: 1060px;
+      height: 579px;
+
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-around;
+      align-items: center;
+
+      border-radius: 0 24px 24px 24px;
+
+      box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+
+      background-color: #fff;
+
+      .filter-container {
+        width: 1020px;
+        height: 44px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .date-container {
+          width: 104px;
+          height: 44px;
+
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          align-items: center;
+
+          input[type="date"] {
+            border: none;
+
+            font-size: 12px;
+            font-weight: 700;
+            font-family: Roboto;
+            color: #333;
+
+            background-color: transparent;
+          }
+        } //TODO
+
+        .search-container {
+          width: 600px;
+          height: 44px;
+
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+
+          background-color: rgb(0, 255, 98);
+
+          .product-description {
+            width: 290px;
+          }
+          //   .product-category {
+          //   }
+          //   .sum-input {
+          //   }
+        }
+        .btn-operators-container {
+          width: 265px;
+          height: 44px;
+
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          background-color: rgb(242, 255, 0);
+
+          button {
+            width: 125px;
+          }
+        }
+      }
+    }
+  }
+}
