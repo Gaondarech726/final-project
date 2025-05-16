@@ -1,9 +1,10 @@
+import Balance from "./../components/Balance/Balance";
 import Report from "../components/Report/Report";
 
 const MainPage = () => {
   return (
     <>
-      <h1>fifgjfkjgf</h1>
+      <Balance />
       <Report />
     </>
   );
