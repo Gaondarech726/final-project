@@ -1,4 +1,4 @@
-import "Header.scss"
+import "./Header.scss"
 const Header = () => {};
 
 export default Header;

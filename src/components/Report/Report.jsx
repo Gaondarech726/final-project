@@ -1,4 +1,4 @@
-import "Report.scss"
+import "./Report.scss"
 const Report = () => {};
 
 export default Report;
