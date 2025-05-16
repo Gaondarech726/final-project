@@ -1,10 +1,23 @@
 import './Login.scss';
 import logo from '../../img/logo.svg';
 import googleLogo from '../../img/google-logo.svg';
+import loginBackground from '../../img/login-background.svg';
+import loginBackgroundSecond from '../../img/login-background-second.svg';
 
 const Login = () => {
 	return (
 		<div className='login-container'>
+			<img src={logo} alt='' className='login-container-logo' />
+			<img
+				src={loginBackground}
+				alt=''
+				className='login-container-background'
+			/>
+			<img
+				src={loginBackgroundSecond}
+				alt=''
+				className='login-container-background-second'
+			/>
 			<div className='login-title-container'>
 				<h1>InvestIQ</h1>
 				<h3>Smart Finance</h3>
