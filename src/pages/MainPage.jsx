@@ -1,5 +1,11 @@
+import Balance from "./../components/Balance/Balance";
+
 const MainPage = () => {
-  return <></>;
+  return (
+    <>
+      <Balance></Balance>
+    </>
+  );
 };
 
 export default MainPage;
