@@ -1,7 +1,6 @@
 import "./Report.scss";
 
 const Report = () => {
-<<<<<<< Updated upstream
   <div class="report-container">
     <div class="repirt-nav-container">
       <button class="finance _costs">Витрати</button>
@@ -122,9 +121,6 @@ const Report = () => {
       </div>
     </div>
   </div>;
-=======
- 
->>>>>>> Stashed changes
 };
 
 export default Report;

@@ -11,11 +11,7 @@ $grey-hover: darken($main-color, 5%);
 $orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
 $grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
 
-<<<<<<< Updated upstream
 $error-color: #e7192e;
-=======
-$error-color: #eb5757;
->>>>>>> Stashed changes
 $correct-color: #407946;
 
 $transition: 0.05s ease;
@@ -68,11 +64,7 @@ body {
       justify-content: space-around;
       align-items: center;
 
-<<<<<<< Updated upstream
       border-radius: 0 24px 24px 24px;
-=======
-      border-radius: 0 0 24px 24px;
->>>>>>> Stashed changes
 
       box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
 
@@ -104,14 +96,6 @@ body {
             color: #333;
 
             background-color: transparent;
-<<<<<<< Updated upstream
-=======
-            -webkit-appearance: none;
-
-            &::-webkit-calendar-picker-indicator {
-              //   opacity: 0;
-            }
->>>>>>> Stashed changes
           }
         } //TODO
 
@@ -123,7 +107,6 @@ body {
           flex-flow: row nowrap;
           justify-content: space-between;
 
-<<<<<<< Updated upstream
           border: $main-color 2px solid;
           border-radius: 16px 16px 16px 0px;
 
@@ -165,15 +148,6 @@ body {
           .sum-input {
             width: 104px;
             padding-left: 20px;
-=======
-          background-color: rgb(0, 255, 98);
-
-          .product-description {
-          }
-          .product-category {
-          }
-          .sum-input {
->>>>>>> Stashed changes
           }
         }
         .btn-operators-container {
@@ -183,17 +157,12 @@ body {
           display: flex;
           flex-flow: row wrap;
           justify-content: space-between;
-<<<<<<< Updated upstream
-=======
-          background-color: rgb(242, 255, 0);
->>>>>>> Stashed changes
 
           button {
             width: 125px;
           }
         }
       }
-<<<<<<< Updated upstream
       //TODO доробити select, календар, вивод грошей
 
       .reoprt-list-container {
@@ -291,8 +260,6 @@ body {
           }
         }
       }
-=======
->>>>>>> Stashed changes
     }
   }
 }
