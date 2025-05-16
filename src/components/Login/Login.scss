@@ -1,0 +1,231 @@
+.login-container {
+	width: 100vw;
+	height: 100vh;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+
+	background-color: #f5f6fb;
+
+	.login-title-container {
+		width: 385px;
+		height: 139px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		h1 {
+			color: #000000;
+			font-family: Roboto;
+			font-weight: 900;
+			font-size: 102px;
+			line-height: 100%;
+			letter-spacing: 0%;
+		}
+
+		h3 {
+			color: #52555f;
+			font-family: Roboto;
+			font-weight: 700;
+			font-size: 16px;
+			line-height: 100%;
+			letter-spacing: 18%;
+			text-transform: uppercase;
+
+			margin-left: 72px;
+		}
+	}
+
+	.login-form-container {
+		width: 436px;
+		height: 535px;
+		border-radius: 30px;
+		background-color: #ffffff;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.login-form {
+			width: 265px;
+			height: 432px;
+
+			.google-login {
+				width: 265px;
+				height: 88px;
+
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				flex-direction: column;
+				margin-bottom: 30px;
+				span {
+					color: #52555f;
+					font-family: Roboto;
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 100%;
+					letter-spacing: 4%;
+				}
+
+				button {
+					width: 122px;
+					height: 40px;
+					background-color: #f6f7fb;
+					border-radius: 26px;
+
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					padding: 10px 20px;
+
+					img {
+						width: 17.5px;
+						margin-right: 10px;
+					}
+
+					span {
+						font-family: Roboto;
+						font-weight: 500;
+						font-size: 14px;
+						line-height: 100%;
+						letter-spacing: 2%;
+						vertical-align: middle;
+
+						color: #000000;
+					}
+				}
+			}
+
+			.email-login {
+				width: 265px;
+				height: 230px;
+				span {
+					color: #52555f;
+					font-family: Roboto;
+					font-weight: 400;
+					font-size: 12px;
+					line-height: 100%;
+					letter-spacing: 4%;
+				}
+
+				.email-login-email {
+					width: 265px;
+					height: 76px;
+					margin-bottom: 30px;
+					margin-top: 20px;
+					span {
+						font-family: Roboto;
+						font-weight: 400;
+						font-size: 12px;
+						line-height: 100%;
+						letter-spacing: 4%;
+						color: #000000;
+						margin-bottom: 10px;
+					}
+
+					input {
+						width: 265;
+						height: 52;
+						border-radius: 30px;
+
+						background-color: #f6f7fb;
+						padding: 17px 20px;
+
+						font-family: Roboto;
+						font-weight: 400;
+						font-size: 14px;
+						line-height: 100%;
+						letter-spacing: 4%;
+						color: #a6abb9;
+					}
+				}
+
+				.email-login-password {
+					width: 265px;
+					height: 76px;
+					span {
+						font-family: Roboto;
+						font-weight: 400;
+						font-size: 12px;
+						line-height: 100%;
+						letter-spacing: 4%;
+						color: #000000;
+						margin-bottom: 10px;
+					}
+
+					input {
+						width: 265;
+						height: 52;
+						border-radius: 30px;
+
+						background-color: #f6f7fb;
+						padding: 17px 20px;
+
+						font-family: Roboto;
+						font-weight: 400;
+						font-size: 14px;
+						line-height: 100%;
+						letter-spacing: 4%;
+						color: #a6abb9;
+					}
+				}
+			}
+		}
+
+		.form-submit-container {
+			width: 265px;
+			height: 44px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-top: 40px;
+
+			.login-btn {
+				width: 125px;
+				height: 44px;
+				border-radius: 16px;
+
+				font-family: Roboto;
+				font-weight: 700;
+				font-size: 12px;
+				line-height: 100%;
+				letter-spacing: 2%;
+				text-align: center;
+				vertical-align: middle;
+				text-transform: uppercase;
+
+				color: #ffffff;
+
+				padding: 12px 24px;
+
+				background-color: #ff751d;
+				filter: drop-shadow(1px 3px #ff6b0859);
+			}
+
+			.register-btn {
+				width: 125px;
+				height: 44px;
+				border-radius: 16px;
+
+				font-family: Roboto;
+				font-weight: 700;
+				font-size: 12px;
+				line-height: 100%;
+				letter-spacing: 2%;
+				text-align: center;
+				vertical-align: middle;
+				text-transform: uppercase;
+
+				color: #52555f;
+
+				padding: 12px 15px;
+
+				background-color: #f5f6fb;
+				filter: drop-shadow(1px 3px#52555f26);
+			}
+		}
+	}
+}
