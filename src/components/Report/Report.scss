@@ -11,7 +11,7 @@ $grey-hover: darken($main-color, 5%);
 $orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
 $grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
 
-$error-color: #eb5757;
+$error-color: #e7192e;
 $correct-color: #407946;
 
 $transition: 0.05s ease;
@@ -107,15 +107,48 @@ body {
           flex-flow: row nowrap;
           justify-content: space-between;
 
-          background-color: rgb(0, 255, 98);
+          border: $main-color 2px solid;
+          border-radius: 16px 16px 16px 0px;
+
+          input {
+            background-color: transparent;
+            color: #c7ccdc;
+            border: none;
+          }
 
           .product-description {
-            width: 290px;
+            width: 250px;
+            padding-left: 20px;
           }
-          //   .product-category {
-          //   }
-          //   .sum-input {
-          //   }
+
+          .product-category {
+            width: 188px;
+            padding-left: 10px;
+
+            border: none;
+            font-family: Roboto;
+
+            color: #c7ccdc;
+            border-right: $main-color 2px solid;
+            border-left: $main-color 2px solid;
+
+            option {
+              font-family: Roboto;
+              font-size: 12px;
+              color: #c7ccdc;
+
+              appearance: none;
+
+              &:select {
+                background-color: #f5f6fb;
+                color: #52555f;
+              }
+            }
+          }
+          .sum-input {
+            width: 104px;
+            padding-left: 20px;
+          }
         }
         .btn-operators-container {
           width: 265px;
@@ -124,10 +157,106 @@ body {
           display: flex;
           flex-flow: row wrap;
           justify-content: space-between;
-          background-color: rgb(242, 255, 0);
 
           button {
             width: 125px;
+          }
+        }
+      }
+      //TODO доробити select, календар, вивод грошей
+
+      .reoprt-list-container {
+        width: 1020px;
+        height: 382px;
+
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        .bill-table {
+          height: 382px;
+          width: 760px;
+          border-radius: 20px 20px 0 0;
+
+          overflow: hidden;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+
+          thead {
+            background-color: $main-color;
+            color: #52555f;
+
+            th {
+              padding: 12px 16px;
+              text-align: left;
+
+              &:first-child {
+                border-top-left-radius: 20px;
+              }
+
+              &:last-child {
+                border-top-right-radius: 20px;
+              }
+            }
+          }
+
+          tbody {
+            height: 403px;
+            width: 760px;
+
+            overflow: hidden;
+
+            tr {
+              border-bottom: 1px solid #0659ff;
+              height: 44px;
+              width: auto;
+
+              td {
+                padding: 12px 16px;
+                color: #52555f;
+              }
+
+              .summ {
+                color: $error-color;
+                font-weight: bold;
+              }
+
+              .delete-btn {
+                text-align: center;
+
+                button {
+                  background: transparent;
+                  border: none;
+                  cursor: pointer;
+                  padding: 4px;
+                }
+
+                svg {
+                  width: 18px;
+                  height: 18px;
+                  transition: transform 0.2s ease;
+                }
+
+                button {
+                  width: 32px;
+                  height: 32px;
+                  border-radius: 50%;
+
+                  &:hover {
+                    background-color: $main-color;
+                    transition: $transition;
+                  }
+                  &:active {
+                    background-color: $grey-hover;
+                    transform: translateY(2px);
+                  }
+
+                  button:hover svg {
+                    transform: scale(1.1);
+                  }
+                }
+              }
+            }
           }
         }
       }
