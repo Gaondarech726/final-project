@@ -9,59 +9,65 @@ const Report = () => {
       </div>
       <div class="cost-container">
         <div class="filter-container">
-          <div class="date-container">
-            <input type="date" id="today-date" />
+          <div class="date-wrapper">
+            <input type="date" class="choose-date" />
           </div>
-          <div class="search-container">
+
+          <div class="bill-container">
             <input
               class="product-description"
               type="text"
               placeholder="Опис товару"
             />
             <select class="product-category" name="" id="">
-              <option value="" disabled selected>
+              <option value="#" disabled selected>
                 Категорія товару
               </option>
-              <option value="transportation">Транспорт</option>
-              <option value="food">Продукти</option>
-              <option value="health">Здоров'я</option>
-              <option value="alcochol">Алкоголь</option>
-              <option value="entertainment.">Розваги</option>
-              <option value="garden">Все для дому</option>
-              <option value="technique">Техніка</option>
-              <option value="utility communications">
-                Комунальний зв'язок
-              </option>
-              <option value="sport-hobby">Спорт, хобі</option>
-              <option value="study">Навчання</option>
-              <option value="other">Інше</option>
+              <option value="#">Транспорт</option>
+              <option value="#">Продукти</option>
+              <option value="#">Здоров'я</option>
+              <option value="#">Алкоголь</option>
+              <option value="#">Розваги</option>
+              <option value="#">Все для дому</option>
+              <option value="#">Техніка</option>
+              <option value="#">Комунальний зв'язок</option>
+              <option value="#">Спорт, хобі</option>
+              <option value="#">Навчання</option>
+              <option value="#">Інше</option>
             </select>
-            <input class="sum-input" type="text" placeholder="0,00" />
+            <input
+              class="amount-input"
+              type="number"
+              min="0"
+              step="0.10"
+              placeholder="0,00"
+            />
           </div>
           <div class="btn-operators-container">
             <button class="btn-orange _enter-btn">ввести</button>
             <button class="btn-grey _clear-btn">Очистити</button>
           </div>
         </div>
-        <div class="reoprt-list-container">
-          <table class="bill-table">
-            <thead>
-              <tr class="tr-title _to-upper-case">
-                <th>Дата</th>
-                <th>Опис</th>
-                <th>Категорія</th>
-                <th>Сума</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td id="date">05.09.2019</td>
-                <td id="description">Метро</td>
-                <td id="category">Транспорт</td>
-                <td class="summ">- 30.00 грн.</td>
-                <td class="delete-btn">
-                  <button class="delete-btn-icon">
+
+        {/* <div class="reoprt-list-container">
+          <div class="bill-table">
+            <div class="thead-div">
+              <ul class="tr-title _to-upper-case">
+                <li class="_data-li">Дата</li>
+                <li class="_description-li">Опис</li>
+                <li class="_category-li">Категорія</li>
+                <li class="_amount-li">Сума</li>
+                <li class="_delete-li"></li>
+              </ul>
+            </div>
+            <div class="tbody-div">
+              <ul class="day-report">
+                <li id="date _data-li">05.09.2019</li>
+                <li id="description _description-li">Метро</li>
+                <li id="category _category-li">Транспорт</li>
+                <li class="amount _amount-li">- 30.00 грн.</li>
+                <li class="delete-btn _delete-li">
+                  <button class="delete-btn-icon ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -87,10 +93,10 @@ const Report = () => {
                       />
                     </svg>
                   </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </li>
+              </ul>
+            </div>
+          </div>
 
           <div class="summary">
             <h3 class="summary-title">Зведення</h3>
@@ -121,7 +127,7 @@ const Report = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
