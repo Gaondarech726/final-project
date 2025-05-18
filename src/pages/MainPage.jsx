@@ -1,10 +1,11 @@
 import Balance from "./../components/Balance/Balance";
-import Report from "../components/Report/Report";
+import Report from "../components/Report/Report.jsx";
 
 const MainPage = () => {
   return (
     <>
       <Balance />
+      
       <Report />
     </>
   );
