@@ -8,8 +8,8 @@ $main-text-color: #52555f;
 
 $grey-hover: darken($main-color, 5%);
 
-$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
-$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+$orange-shadow: 1px 3px 5px #ff6b0859;
+$grey-shadow: 1px 3px 5px #52555f26;
 
 $error-color: #eb5757;
 $correct-color: #407946;
@@ -28,87 +28,91 @@ $transition: 0.05s ease;
 }
 
 body {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
 
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-	img {
-		width: 100%;
-		height: auto;
-		line-height: 0;
-		display: block;
-	}
+  img {
+    width: 100%;
+    height: auto;
+    line-height: 0;
+    display: block;
+  }
 
-	a {
-		text-decoration-line: none;
-		color: $main-text-color;
-	}
+  a {
+    text-decoration-line: none;
+    color: $main-text-color;
+  }
 
-	ul {
-		list-style-type: none;
-	}
+  ul {
+    list-style-type: none;
+  }
 
-	button {
-		cursor: pointer;
-		display: block;
-		border: none;
-		background-color: transparent;
+  button {
+    cursor: pointer;
+    display: block;
+    border: none;
+    background-color: transparent;
 
-		padding: 12px 24px;
-		border-radius: 20%;
+    padding: 12px 24px;
+    border-radius: 16px;
 
-		font-size: 12px;
-		font-weight: 700;
-		text-transform: uppercase;
-	}
-	.btn-orange {
-		background-color: $orange-color;
-		color: #fff;
-		box-shadow: $orange-shadow;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  ._to-upper-case {
+    text-transform: uppercase;
+  }
 
-		&:hover {
-			transition: $transition;
+  .btn-orange {
+    background-color: $orange-color;
+    color: #fff;
+    box-shadow: $orange-shadow;
 
-			background-color: #fff;
-			color: $orange-color;
-			border: $orange-color 2px solid;
-			box-shadow: $orange-shadow;
-		}
-		&:active {
-			transform: translateY(2px);
-		}
-	}
+    &:hover {
+      transition: $transition;
 
-	.btn-grey {
-		background-color: $main-color;
-		color: $main-text-color;
-		box-shadow: $grey-shadow;
+      background-color: #fff;
+      color: $orange-color;
+      border: $orange-color 2px solid;
+      box-shadow: $orange-shadow;
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+  }
 
-		&:hover {
-			transition: $transition;
+  .btn-grey {
+    background-color: $main-color;
+    color: $main-text-color;
+    box-shadow: $grey-shadow;
 
-			background-color: $grey-hover;
-			box-shadow: $grey-shadow;
-		}
-		&:active {
-			transform: translateY(2px);
-		}
-	}
+    &:hover {
+      transition: $transition;
 
-	.input-login {
-		width: auto;
-		background-color: $main-color;
-		padding: 12px 24px;
-		border-radius: 30px;
-		border: none;
+      background-color: $grey-hover;
+      box-shadow: $grey-shadow;
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+  }
 
-		color: $main-text-color;
+  .input-login {
+    width: auto;
+    background-color: $main-color;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
 
-		&:focus {
-			background-color: $grey-hover;
-			box-shadow: $grey-shadow;
-		}
-	}
+    color: $main-text-color;
+
+    &:focus {
+      background-color: $grey-hover;
+      box-shadow: $grey-shadow;
+    }
+  }
 }
