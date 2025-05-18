@@ -55,7 +55,7 @@
     padding-right: 45px;
     padding-left: 12px;
     font-size: 16px;
-    border: 1px solid #fff;
+    border: 3px solid #fff;
     border-radius: 12px;
     background-color: #f5f6fb;
     box-sizing: border-box;
@@ -87,7 +87,13 @@
   text-transform: uppercase;
   width: 125px;
   height: 44px;
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   border-radius: 12px;
   background-color: #f5f6fb;
+  &:hover {
+    transition: background 0.5s;
+    transition: color 0.5s;
+    background: #ff751d;
+    color: #fff;
+  }
 }
