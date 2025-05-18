@@ -246,6 +246,25 @@ body {
 
         button {
           width: 125px;
+
+          box-shadow: none;
+        }
+
+        ._clear-btn {
+          background-color: transparent;
+
+          border-radius: 16px;
+          border: 2px solid #f5f6fb;
+
+          &:hover {
+            transition: $transition;
+
+            background-color: $grey-hover;
+            border: none;
+          }
+          &:active {
+            transform: translateY(2px);
+          }
         }
       }
     }
