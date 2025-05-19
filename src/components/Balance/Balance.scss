@@ -311,3 +311,44 @@
     }
   }
 }
+
+.tippy-box[data-theme~="custom"] {
+  background-color: #0c2340;
+  color: #fff;
+  border-radius: 16px;
+  width: 292px;
+  height: 152px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.tippy-box[data-theme~="custom"][data-placement^="bottom"]
+  > .tippy-arrow::before {
+  color: #0c2340;
+}
+
+.tippy-box[data-theme~="custom"] .custom-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tippy-box[data-theme~="custom"] .custom-tooltip strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tippy-box[data-theme~="custom"] .custom-tooltip .note {
+  font-size: 12px;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  #tippy-1 {
+    transform: translate3d(0px, 260px, 0px) !important;
+  }
+}
