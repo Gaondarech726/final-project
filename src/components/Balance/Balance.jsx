@@ -8,11 +8,14 @@ const Balance = () => {
     <section className="balance">
       <div className="balance__counter">
         <span className="span__balance">Баланс:</span>
-        <div className="input-wrapper">
-          <input type="number" placeholder="0.00" />
-          <span className="currency">UAH</span>
+
+        <div className="balance__inputs">
+          <div className="input-wrapper">
+            <input type="number" placeholder="0.00" />
+            <span className="currency">UAH</span>
+          </div>
+          <button className="button">ПІДТВЕРДИТИ</button>
         </div>
-        <button className="button">ПІДТВЕРДИТИ</button>
       </div>
       <div className="balance__calculations">
         <div className="calculations_button">
