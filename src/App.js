@@ -9,6 +9,7 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MainPage from './pages/MainPage';
 import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 export const App = () => {
 	return (
@@ -16,6 +17,7 @@ export const App = () => {
 			<Routes>
 				<Route path='/' element={<MainPage />} />
 				<Route path='/login' element={<Login />} />
+				<Route path='/register' element={<Register />} />
 			</Routes>
 
 			<ToastContainer

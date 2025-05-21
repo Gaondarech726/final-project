@@ -1,11 +1,11 @@
-import './Login.scss';
+import './Register.scss';
 import logo from '../../img/logo.svg';
 import googleLogo from '../../img/google-logo.svg';
 import loginBackground from '../../img/login-background.svg';
 import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
 	const navigate = useNavigate();
 	return (
 		<div className='login-container'>
@@ -28,7 +28,7 @@ const Login = () => {
 			<div className='login-form-container'>
 				<form className='login-form'>
 					<div className='google-login'>
-						<span>Ви можете авторизуватися за допомогою акаунта Google</span>
+						<span>Ви можете зареєструватися за допомогою акаунта Google</span>
 						<button>
 							<img src={googleLogo} alt='googleLogo' />
 							<span>Google</span>
@@ -37,7 +37,8 @@ const Login = () => {
 
 					<div className='email-login'>
 						<span>
-							Або увійти за допомогою ел. пошти та паролю після реєстрації
+							Або зареєструватися за допомогою ел. пошти та паролю після
+							реєстрації
 						</span>
 
 						<div className='email-login-email'>
@@ -51,14 +52,14 @@ const Login = () => {
 					</div>
 
 					<div className='form-submit-container'>
-						<button className='login-btn'>Увійти</button>
+						<button className='register-register-btn'>реєстрація</button>
 						<button
-							className='register-btn'
+							className='register-login-btn'
 							onClick={() => {
-								navigate('/register');
+								navigate('/login');
 							}}
 						>
-							реєстрація
+							Увійти
 						</button>
 					</div>
 				</form>
@@ -67,4 +68,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default Register;
