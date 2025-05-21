@@ -66,7 +66,51 @@ header {
         padding: 0;
         width: 45px;
       }
-      
+      .mobileLogoutBtn{
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    // tablet
+    height: 56px;
+    .headerDiv {
+      padding-right: 30px;
+      .user {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    // mobile
+    .headerDiv{
+      padding-right: 20px;
+      .user{
+        width: 63px;
+        .userName{
+          display: none;
+        }
+        .verticalLine{
+          display: none;
+        }
+        .logoutBtn{
+          display: none;
+        }
+        .mobileLogoutBtn{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 16px;
+          height: 16px;
+
+          .mobileLogoutBtnImg{
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
     }
   }
 }
