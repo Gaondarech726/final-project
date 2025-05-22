@@ -15,7 +15,7 @@ const Header = ({ username }) => {
 		if (currentUser) {
 			dispatch(logout());
 		} else {
-			navigate('./register');
+			navigate('/register');
 		}
 	};
 
