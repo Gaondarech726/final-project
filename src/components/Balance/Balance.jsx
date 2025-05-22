@@ -1,11 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MdBarChart } from "react-icons/md";
-import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import tippy from "tippy.js";
+import { updateBalance } from "../../redux/authSlice";
 
 import "./Balance.scss";
 
 const Balance = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
+
   useEffect(() => {
     const alreadyShown = localStorage.getItem("balanceTooltipShown");
 
@@ -41,6 +47,17 @@ const Balance = () => {
     }
   }, []);
 
+  const handleBalanceSubmit = () => {
+    const numericBalance = parseFloat(inputBalance);
+    if (!isNaN(numericBalance)) {
+      dispatch(updateBalance(numericBalance));
+    }
+  };
+
+  useEffect(() => {
+    setInputBalance(currentUser?.balance || "");
+  }, [currentUser]);
+
   return (
     <section className="balance">
       <div className="balance__counter">
@@ -48,10 +65,17 @@ const Balance = () => {
 
         <div className="balance__inputs">
           <div className="input-wrapper">
-            <input type="number" placeholder="0.00" />
+            <input
+              type="number"
+              placeholder="0.00"
+              value={inputBalance}
+              onChange={(e) => setInputBalance(e.target.value)}
+            />
             <span className="currency">UAH</span>
           </div>
-          <button className="button">ПІДТВЕРДИТИ</button>
+          <button className="button" onClick={handleBalanceSubmit}>
+            ПІДТВЕРДИТИ
+          </button>
         </div>
       </div>
       <div className="balance__calculations">

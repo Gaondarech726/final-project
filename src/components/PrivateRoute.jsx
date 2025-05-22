@@ -1,12 +1,14 @@
-// import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-// const PrivateRoute = ({ children }) => {
-//   const token = localStorage.getItem("token");
+const PrivateRoute = ({ children }) => {
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
-//   if (!token) {
-//     return <Navigate to="/login" replace />;
-//   }
-//   return children;
-// };
+  if (!currentUser) {
+    return <Navigate to="/login" replace />;
+  }
 
-// export default PrivateRoute;
+  return children;
+};
+
+export default PrivateRoute;
