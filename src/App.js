@@ -1,12 +1,12 @@
-import { Route, Routes } from 'react-router-dom';
+import { Provider } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
+import "./index.scss";
 
-import { Provider } from 'react-redux';
-import './index.scss';
+import { store } from "./redux/store";
 
-import { store } from './redux/store';
+import { Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import { Bounce, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import MainPage from './pages/MainPage';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
@@ -14,10 +14,23 @@ import Register from './components/Register/Register';
 export const App = () => {
 	return (
 		<Provider store={store}>
-			<Routes>
-				<Route path='/' element={<MainPage />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/register' element={<Register />} />
+			<Routes>   
+          {/* <Route path="/" element={<Navigate to="/login" replace />} />
+
+        <Route path="/login" element={<Login />} /> */}
+        <Route path="/" element={<Navigate to="/start" replace />} />
+
+        <Route path="/login" element={<Login />} />
+         <Route path='/register' element={<Register />} />
+
+        <Route
+          path="/start"
+          element={
+            // <PrivateRoute>
+            <MainPage />
+            // </PrivateRoute>
+          }
+        />
 			</Routes>
 
 			<ToastContainer
