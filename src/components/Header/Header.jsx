@@ -1,29 +1,52 @@
-import { Link } from "react-router";
-import "./Header.scss";
-import logo from "../../img/logo.svg";
-import DefaultUserAvatar from "./DefaultUserAvatar.svg";
+import { Link } from 'react-router';
+import './Header.scss';
+import logo from '../../img/logo.svg';
+import DefaultUserAvatar from './DefaultUserAvatar.svg';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ username }) => {
-  return (
-    <header className="header">
-      <div className="headerDiv">
-      <div className="logo">
-        <Link to="../../pages/MainPage.jsx">
-          <img src={logo} alt="Логотип" className="logoImg"/>
-          {/*лого */}
-        </Link>
-      </div>
-      <div className="user">
-            <Link to="/кабінетКористувача " className="profile">
-              <img src={DefaultUserAvatar} alt="Avatar" className="avatarImg" />
-            </Link>
-            <span className="userName">user Name</span> {/* замінити на {userName} */}
-            <div className="verticalLine"></div>
-            <button className="logoutBtn">Вийти</button> {/* Додайти обробник виходу */}
-      </div>
-      </div>
-    </header>
-  );
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	let currentUser = useSelector(state => state.auth.currentUser);
+
+	const handleAuthButton = e => {
+		if (currentUser) {
+			dispatch(logout());
+		} else {
+			navigate('/register');
+		}
+	};
+
+	return (
+		<header className='header'>
+			<div className='headerDiv'>
+				<div className='logo'>
+					<Link to='../../pages/MainPage.jsx'>
+						<img src={logo} alt='Логотип' className='logoImg' />
+						{/*лого */}
+					</Link>
+				</div>
+				<div className='user'>
+					<Link to='/кабінетКористувача ' className='profile'>
+						<img src={DefaultUserAvatar} alt='Avatar' className='avatarImg' />
+					</Link>
+					<span className='userName'>
+						<span className='userName'>
+							{currentUser?.username || 'User name'}
+						</span>
+					</span>{' '}
+					{/* замінити на {userName} */}
+					<div className='verticalLine'></div>
+					<button className='logoutBtn' onClick={handleAuthButton}>
+						{currentUser ? 'Вийти' : 'Увійти'}
+					</button>{' '}
+					{/* Додайти обробник виходу */}
+				</div>
+			</div>
+		</header>
+	);
 };
 
 export default Header;
