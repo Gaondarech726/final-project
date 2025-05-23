@@ -4,7 +4,7 @@ import googleLogo from '../../img/google-logo.svg';
 import loginBackground from '../../img/login-background.svg';
 import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, clearError } from '../../redux/authSlice';
 import { toast } from 'react-toastify';
@@ -18,21 +18,40 @@ const Register = () => {
 	let users = useSelector(state => state.auth.users);
 	let error = useSelector(state => state.auth.error);
 
+	let usersBeforeRegister = useRef(null);
+
 	// відправка форми, додавання юзера
 	const handleSubmit = e => {
 		e.preventDefault();
+		usersBeforeRegister.current = users.length;
+
 		dispatch(register({ username: regName, password: regPass }));
 
-		if (users && error === null) {
-			toast.success('Реєстрація успішна');
-			navigate('../login');
+		if (regName.length < 1) {
+			document.querySelector('.register-input-error').style.display = 'block';
+		}
+		if (regPass.length < 8) {
+			document.querySelector('.register-input-pass-error').style.display =
+				'block';
 		}
 	};
 
 	useEffect(() => {
+		if (
+			usersBeforeRegister.current !== null &&
+			users.length > usersBeforeRegister.current
+		) {
+			toast.success('Успішна реєстрація');
+			navigate('../login');
+
+			document.querySelector('.register-input-pass').value = '';
+			document.querySelector('.register-input-email').value = '';
+		}
+	}, [users, error, usersBeforeRegister, navigate]);
+
+	useEffect(() => {
 		if (error === 'Username already exists') {
 			toast.error('Користувач з таким логіном вже існує');
-			dispatch(clearError());
 		}
 	}, [error, dispatch]);
 
@@ -68,10 +87,7 @@ const Register = () => {
 					</div>
 
 					<div className='email-login'>
-						<span>
-							Або зареєструватися за допомогою ел. пошти та паролю після
-							реєстрації
-						</span>
+						<span>Або зареєструватися за допомогою ел. пошти та паролю</span>
 
 						<div className='email-login-email'>
 							<span>Електронна пошта:</span>
@@ -80,8 +96,11 @@ const Register = () => {
 								placeholder='your@email.com'
 								value={regName}
 								onChange={e => setRegName(e.target.value)}
+								className='register-input-email'
 							/>
+							<p className='register-input-error'>це обов’язкове поле</p>
 						</div>
+
 						<div className='email-login-password'>
 							<span>Пароль:</span>
 							<input
@@ -89,7 +108,11 @@ const Register = () => {
 								placeholder='••••••••'
 								value={regPass}
 								onChange={e => setRegPass(e.target.value)}
+								className='register-input-pass'
 							/>
+							<p className='register-input-pass-error'>
+								довжина паролю &gt;&#61; 8 символів
+							</p>
 						</div>
 					</div>
 

@@ -107,6 +107,12 @@
 					align-items: center;
 					padding: 10px 20px;
 
+					transition: 0.25s all;
+
+					&:hover {
+						scale: 1.03;
+					}
+
 					img {
 						width: 17.5px;
 						margin-right: 10px;
