@@ -6,7 +6,8 @@ import googleLogo from '../../img/google-logo.svg';
 import loginBackgroundSecond from '../../img/login-background-second.svg';
 import loginBackground from '../../img/login-background.svg';
 import logo from '../../img/logo.svg';
-import { clearError, logining } from '../../redux/authSlice';
+import { clearError, logining, register } from '../../redux/authSlice';
+import { useGoogleLogin } from '@react-oauth/google';
 
 import './Login.scss';
 
@@ -40,6 +41,39 @@ const Login = () => {
 		dispatch(logining({ username: logName, password: logPass }));
 	};
 
+	// гугл
+	const googleLogin = useGoogleLogin({
+		async onSuccess(tokenResponse) {
+			const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+				headers: {
+					Authorization: `Bearer ${tokenResponse.access_token}`,
+				},
+			});
+
+			const response = await res.json();
+
+			dispatch(
+				register({
+					username: response.given_name,
+					password: response.sub,
+				})
+			);
+
+			dispatch(
+				logining({
+					username: response.given_name,
+					password: response.sub,
+				})
+			);
+
+			navigate('../');
+		},
+
+		onError() {
+			toast.error('Помилка авторизації');
+		},
+	});
+
 	return (
 		<div className='login-container'>
 			<a href='./'>
@@ -65,7 +99,12 @@ const Login = () => {
 				<form className='login-form' onSubmit={handleSubmit}>
 					<div className='google-login'>
 						<span>Ви можете авторизуватися за допомогою акаунта Google</span>
-						<button type='button'>
+						<button
+							type='button'
+							onClick={() => {
+								googleLogin();
+							}}
+						>
 							<img src={googleLogo} alt='googleLogo' />
 							<span>Google</span>
 						</button>

@@ -6,8 +6,9 @@ import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, clearError } from '../../redux/authSlice';
+import { register, clearError, logining } from '../../redux/authSlice';
 import { toast } from 'react-toastify';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Register = () => {
 		}
 	};
 
+	// обробка помилок, успішна рега
 	useEffect(() => {
 		if (
 			usersBeforeRegister.current !== null &&
@@ -54,6 +56,40 @@ const Register = () => {
 			toast.error('Користувач з таким логіном вже існує');
 		}
 	}, [error, dispatch]);
+
+	// гугл
+	const googleLogin = useGoogleLogin({
+		async onSuccess(tokenResponse) {
+			usersBeforeRegister.current = users.length;
+			const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+				headers: {
+					Authorization: `Bearer ${tokenResponse.access_token}`,
+				},
+			});
+
+			const response = await res.json();
+
+			dispatch(
+				register({
+					username: response.given_name,
+					password: response.sub,
+				})
+			);
+
+			dispatch(
+				logining({
+					username: response.given_name,
+					password: response.sub,
+				})
+			);
+
+			navigate('../');
+		},
+
+		onError() {
+			toast.error('Помилка авторизації');
+		},
+	});
 
 	return (
 		<div className='login-container'>
@@ -80,7 +116,12 @@ const Register = () => {
 				<form className='login-form' onSubmit={handleSubmit}>
 					<div className='google-login'>
 						<span>Ви можете зареєструватися за допомогою акаунта Google</span>
-						<button type='button'>
+						<button
+							type='button'
+							onClick={() => {
+								googleLogin();
+							}}
+						>
 							<img src={googleLogo} alt='googleLogo' />
 							<span>Google</span>
 						</button>

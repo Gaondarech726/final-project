@@ -18,8 +18,6 @@ const authSlice = createSlice({
 				user => user.username === action.payload.username
 			);
 
-			console.log(action.payload);
-
 			if (existing) {
 				state.error = 'Username already exists';
 			} else if (
