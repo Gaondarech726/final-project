@@ -3,7 +3,7 @@ import "./Report.scss";
 const Report = () => {
   return (
     <div class="report-container">
-      <div class="repirt-nav-container">
+      <div class="report-nav-container">
         <button class="finance _costs">Витрати</button>
         <button class="finance _income">Дохід</button>
       </div>
@@ -49,7 +49,7 @@ const Report = () => {
           </div>
         </div>
 
-        {/* <div class="reoprt-list-container">
+        <div class="reoprt-list-container">
           <div class="bill-table">
             <div class="thead-div">
               <ul class="tr-title _to-upper-case">
@@ -62,9 +62,9 @@ const Report = () => {
             </div>
             <div class="tbody-div">
               <ul class="day-report">
-                <li id="date _data-li">05.09.2019</li>
-                <li id="description _description-li">Метро</li>
-                <li id="category _category-li">Транспорт</li>
+                <li class="date _data-li">05.09.2019</li>
+                <li class="description _description-li">Метро</li>
+                <li class="category _category-li">Транспорт</li>
                 <li class="amount _amount-li">- 30.00 грн.</li>
                 <li class="delete-btn _delete-li">
                   <button class="delete-btn-icon ">
@@ -95,10 +95,13 @@ const Report = () => {
                   </button>
                 </li>
               </ul>
+              <ul></ul>
+              <ul></ul>
+              <ul></ul>
             </div>
           </div>
 
-          <div class="summary">
+          {/* <div class="summary">
             <h3 class="summary-title">Зведення</h3>
             <ul class="summary-list _to-upper-case">
               <li>
@@ -126,8 +129,8 @@ const Report = () => {
                 <span>18 000.00</span>
               </li>
             </ul>
-          </div>
-        </div> */}
+          </div> */}
+        </div>
       </div>
     </div>
   );
