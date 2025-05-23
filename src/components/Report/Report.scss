@@ -1,0 +1,311 @@
+//===
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+//===
+
+$orange-color: #ff751d;
+$main-color: #f5f6fb;
+$main-text-color: #52555f;
+
+$grey-hover: darken($main-color, 5%);
+
+$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
+$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+
+$error-color: #e7192e;
+$correct-color: #407946;
+
+$transition: 0.05s ease;
+
+body {
+  background-image: url(../../img/hero.svg);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  .report-container {
+    margin: 20px;
+
+    width: 1060px;
+    height: 620px;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    align-items: start;
+
+    .repirt-nav-container {
+      width: 276px;
+      height: 40px;
+
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: start;
+
+      .finance {
+        width: 138px;
+        height: 40px;
+
+        border-radius: 24px 24px 0 0;
+
+        background-color: $main-color;
+        box-shadow: 10px -11px 20px -14px rgba(7, 11, 15, 0.5);
+
+        &:focus {
+          color: $orange-color;
+          background-color: #fefefe;
+        }
+      }
+    }
+    .cost-container {
+      width: 1060px;
+      height: 579px;
+
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-around;
+      align-items: center;
+
+      border-radius: 0 24px 24px 24px;
+
+      box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+
+      background-color: #fff;
+
+      .filter-container {
+        width: 1020px;
+        height: 44px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        // .date-wrapper {
+        //   position: relative;
+        //   width: 120px;
+
+        //   .calendar-icon {
+        //     position: absolute;
+        //     left: 10px;
+        //     top: 50%;
+        //     transform: translateY(-50%);
+        //     pointer-events: none;
+        //   }
+
+        //   .today-date {
+        //     width: 100%;
+        //     padding-left: 35px;
+        //     background: transparent;
+        //     border: none;
+        //     font-weight: 900;
+        //     font-size: 12px;
+        //     font-family: Roboto;
+        //     color: #52555f;
+
+        //     &::-webkit-calendar-picker-indicator {
+        //       opacity: 0;
+        //       position: absolute;
+        //       width: 100%;
+        //       height: 100%;
+        //       left: 0;
+        //       top: 0;
+        //       cursor: pointer;
+        //     }
+        //   }
+        // }
+
+        .date-wrapper {
+          width: 98px;
+          height: 44px;
+          padding-top: 2px;
+
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: end;
+          padding-left: 20px;
+          align-items: center;
+
+          border: none;
+          background-color: transparent;
+
+          color: $main-text-color;
+
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 900;
+
+          background-image: url(./svg/calendar-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 0 13.8px;
+
+          .choose-date {
+            width: 100%;
+            padding-left: 35px;
+            background: transparent;
+            border: none;
+            font-weight: 900;
+            font-size: 12px;
+            font-family: Roboto;
+            color: #52555f;
+
+            &::-webkit-calendar-picker-indicator {
+              opacity: 0;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              left: 0;
+              top: 0;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .bill-container {
+        width: 600px;
+        height: 44px;
+
+        overflow: hidden;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        border: $main-color 2px solid;
+        border-radius: 16px 16px 16px 0px;
+
+        input {
+          background-color: transparent;
+          color: #c7ccdc;
+          border: none;
+
+          &:focus {
+            background-color: $grey-hover;
+            color: $main-text-color;
+          }
+          &::placeholder {
+            color: #c7ccdc;
+          }
+        }
+
+        .product-description {
+          width: 250px;
+          padding-left: 20px;
+          border-right: $main-color 2px solid;
+        }
+
+        .product-category {
+          width: 188px;
+          padding-left: 10px;
+
+          border: none;
+          font-family: Roboto;
+
+          color: #c7ccdc;
+
+          option {
+            font-family: Roboto;
+            font-size: 12px;
+            color: #c7ccdc;
+
+            appearance: none;
+          }
+        }
+
+        .amount-input {
+          width: 92px;
+          height: 44px;
+
+          color: $main-color;
+
+          display: flex;
+          flex-flow: row wrap;
+
+          text-align: end;
+          align-items: center;
+
+          padding-right: 50px;
+
+          background-image: url(./svg/calculator-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 106px 12px;
+
+          border-left: $main-color 2px solid;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          appearance: none;
+        }
+      }
+      .btn-operators-container {
+        width: 265px;
+        height: 44px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        button {
+          width: 125px;
+
+          box-shadow: none;
+        }
+
+        ._clear-btn {
+          background-color: transparent;
+
+          border-radius: 16px;
+          border: 2px solid #f5f6fb;
+
+          &:hover {
+            transition: $transition;
+
+            background-color: $grey-hover;
+            border: none;
+          }
+          &:active {
+            transform: translateY(2px);
+          }
+        }
+      }
+    }
+
+    // .reoprt-list-container {
+    //   width: 1020px;
+    //   height: 382px;
+
+    //   display: flex;
+    //   flex-flow: row wrap;
+    //   align-items: center;
+    //   justify-content: space-between;
+
+    //   .bill-table {
+    //     overflow: hidden;
+    //     width: 760px;
+    //     height: 403px;
+
+    //     border: $main-color 2px solid;
+    //     border-radius: 20px 20px 0 0;
+
+    //     display: flex;
+    //     flex-flow: column wrap;
+
+    //     box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+
+    //     .thead-div {
+    //       background-color: $main-color;
+
+    //       height: 38px;
+    //       width: 760px;
+
+    //       ul {
+    //         display: flex;
+    //         flex-flow: row wrap;
+
+    //         li:first-child {
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+  }
+}

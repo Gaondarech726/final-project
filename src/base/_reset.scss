@@ -1,27 +1,13 @@
 //===
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../utiles/vars";
 //===
-
-
-
-$orange-color: #ff751d;
-$main-color: #f5f6fb;
-$main-text-color: #52555f;
-
-$grey-hover: darken($main-color, 5%);
-
-$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
-$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
-
-$error-color: #eb5757;
-$correct-color: #407946;
-
-$transition: 0.05s ease;
 
 * {
   margin: 0;
   padding: 0;
   font-family: Roboto;
+  border: none;
 }
 
 *:focus {
@@ -58,12 +44,16 @@ body {
     background-color: transparent;
 
     padding: 12px 24px;
-    border-radius: 20%;
+    border-radius: 16px;
 
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
   }
+  ._to-upper-case {
+    text-transform: uppercase;
+  }
+
   .btn-orange {
     background-color: $orange-color;
     color: #fff;
