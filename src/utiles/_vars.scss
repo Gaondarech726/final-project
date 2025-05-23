@@ -1,1 +1,13 @@
-$test: #000;
+$orange-color: #ff751d;
+$main-text-color: #52555f;
+$main-color: #f5f6fb;
+
+$grey-hover: darken($main-color, 5%);
+
+$orange-shadow: 1px 3px 5px #ff6b0859;
+$grey-shadow: 1px 3px 5px #52555f26;
+
+$error-color: #eb5757;
+$correct-color: #407946;
+
+$transition: 0.05s ease;
