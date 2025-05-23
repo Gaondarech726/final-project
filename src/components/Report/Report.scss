@@ -49,12 +49,17 @@ body {
         background-color: $main-color;
         box-shadow: 10px -11px 20px -14px rgba(7, 11, 15, 0.5);
 
-        &:focus {
-          color: $orange-color;
+        &:hover {
+          background-color: lighten($main-color, 5%);
+        }
+
+        &._active {
           background-color: #fefefe;
+          color: $orange-color;
         }
       }
     }
+
     .cost-container {
       width: 1060px;
       height: 579px;
@@ -77,40 +82,6 @@ body {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
-
-        // .date-wrapper {
-        //   position: relative;
-        //   width: 120px;
-
-        //   .calendar-icon {
-        //     position: absolute;
-        //     left: 10px;
-        //     top: 50%;
-        //     transform: translateY(-50%);
-        //     pointer-events: none;
-        //   }
-
-        //   .today-date {
-        //     width: 100%;
-        //     padding-left: 35px;
-        //     background: transparent;
-        //     border: none;
-        //     font-weight: 900;
-        //     font-size: 12px;
-        //     font-family: Roboto;
-        //     color: #52555f;
-
-        //     &::-webkit-calendar-picker-indicator {
-        //       opacity: 0;
-        //       position: absolute;
-        //       width: 100%;
-        //       height: 100%;
-        //       left: 0;
-        //       top: 0;
-        //       cursor: pointer;
-        //     }
-        //   }
-        // }
 
         .date-wrapper {
           width: 98px;
@@ -201,6 +172,7 @@ body {
           padding-left: 10px;
 
           border: none;
+          border-radius: 0;
           font-family: Roboto;
 
           color: #c7ccdc;
@@ -333,6 +305,15 @@ body {
         ._description-li {
           width: 184px;
           text-align: left;
+
+          overflow: hidden;
+
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-word;
+          max-height: calc(1.4em * 3);
         }
 
         ._category-li {
@@ -350,63 +331,82 @@ body {
         }
 
         .tbody-div {
-          display: flex;
-          flex-flow: column wrap;
-
-          height: 344px;
+          max-height: 344px;
           width: 760px;
 
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          display: block;
+
+          scrollbar-width: thin;
+          scrollbar-color: $orange-color transparent;
+
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: $main-color;
+            border-radius: 4px;
+          }
+          &::-webkit-scrollbar-button {
+            display: none;
+            height: 0;
+            width: 0;
+          }
+
           ul {
-            height: 38px;
-            width: 760px;
-
             display: flex;
-            flex-flow: row wrap;
-
+            flex-direction: row;
             align-items: center;
+            height: 38px;
+            width: 100%;
 
             border-bottom: 2px solid $main-color;
-
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 0 10px;
 
             li {
               height: 14px;
               margin: 10px;
-
               color: $main-text-color;
-
               font-family: Roboto;
               font-size: 12px;
               font-weight: 400;
             }
 
             ._amount-li {
-              color: $error-color;
               font-weight: 700;
+
+              &.income {
+                color: $correct-color;
+              }
+
+              &.expense {
+                color: $error-color;
+              }
             }
 
             ._delete-li {
               height: 32px;
-
               display: flex;
               justify-content: center;
               align-items: center;
-
               margin: 0;
 
               .delete-btn-icon {
                 width: 32px;
                 height: 32px;
-
                 padding: 7.3px;
 
-                background-color: $main-color;
-
                 &:hover {
-                  transition: $transition;
                   background-color: $grey-hover;
                 }
+
                 &:active {
                   transform: translateY(2px);
                 }
@@ -415,6 +415,11 @@ body {
           }
         }
       }
+    }
+
+    &::selection {
+      background-color: $orange-color;
+      color: #fff;
     }
   }
 }
