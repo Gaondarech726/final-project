@@ -8,6 +8,11 @@ body {
 
   background: #f5f6fb;
 }
+
+* {
+  transition: all 0.5s ease;
+}
+
 @import url(./base/_reset.scss);
 
 @import url(./utiles/_vars.scss);

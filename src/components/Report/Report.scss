@@ -78,188 +78,234 @@ body {
         flex-flow: row wrap;
         justify-content: space-between;
 
-        .date-container {
-          width: 104px;
+        // .date-wrapper {
+        //   position: relative;
+        //   width: 120px;
+
+        //   .calendar-icon {
+        //     position: absolute;
+        //     left: 10px;
+        //     top: 50%;
+        //     transform: translateY(-50%);
+        //     pointer-events: none;
+        //   }
+
+        //   .today-date {
+        //     width: 100%;
+        //     padding-left: 35px;
+        //     background: transparent;
+        //     border: none;
+        //     font-weight: 900;
+        //     font-size: 12px;
+        //     font-family: Roboto;
+        //     color: #52555f;
+
+        //     &::-webkit-calendar-picker-indicator {
+        //       opacity: 0;
+        //       position: absolute;
+        //       width: 100%;
+        //       height: 100%;
+        //       left: 0;
+        //       top: 0;
+        //       cursor: pointer;
+        //     }
+        //   }
+        // }
+
+        .date-wrapper {
+          width: 98px;
           height: 44px;
+          padding-top: 2px;
 
           display: flex;
           flex-flow: row wrap;
-          justify-content: space-between;
+          justify-content: end;
+          padding-left: 20px;
           align-items: center;
 
-          input[type="date"] {
-            border: none;
+          border: none;
+          background-color: transparent;
 
+          color: $main-text-color;
+
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 900;
+
+          background-image: url(./svg/calendar-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 0 13.8px;
+
+          .choose-date {
+            width: 100%;
+            padding-left: 35px;
+            background: transparent;
+            border: none;
+            font-weight: 900;
             font-size: 12px;
-            font-weight: 700;
             font-family: Roboto;
-            color: #333;
+            color: #52555f;
 
-            background-color: transparent;
-          }
-        } //TODO
-
-        .search-container {
-          width: 600px;
-          height: 44px;
-
-          display: flex;
-          flex-flow: row nowrap;
-          justify-content: space-between;
-
-          border: $main-color 2px solid;
-          border-radius: 16px 16px 16px 0px;
-
-          input {
-            background-color: transparent;
-            color: #c7ccdc;
-            border: none;
-          }
-
-          .product-description {
-            width: 250px;
-            padding-left: 20px;
-          }
-
-          .product-category {
-            width: 188px;
-            padding-left: 10px;
-
-            border: none;
-            font-family: Roboto;
-
-            color: #c7ccdc;
-            border-right: $main-color 2px solid;
-            border-left: $main-color 2px solid;
-
-            option {
-              font-family: Roboto;
-              font-size: 12px;
-              color: #c7ccdc;
-
-              appearance: none;
-
-              &:select {
-                background-color: #f5f6fb;
-                color: #52555f;
-              }
+            &::-webkit-calendar-picker-indicator {
+              opacity: 0;
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              left: 0;
+              top: 0;
+              cursor: pointer;
             }
-          }
-          .sum-input {
-            width: 104px;
-            padding-left: 20px;
-          }
-        }
-        .btn-operators-container {
-          width: 265px;
-          height: 44px;
-
-          display: flex;
-          flex-flow: row wrap;
-          justify-content: space-between;
-
-          button {
-            width: 125px;
           }
         }
       }
-      //TODO доробити select, календар, вивод грошей
 
-      .reoprt-list-container {
-        width: 1020px;
-        height: 382px;
+      .bill-container {
+        width: 600px;
+        height: 44px;
+
+        overflow: hidden;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        border: $main-color 2px solid;
+        border-radius: 16px 16px 16px 0px;
+
+        input {
+          background-color: transparent;
+          color: #c7ccdc;
+          border: none;
+
+          &:focus {
+            background-color: $grey-hover;
+            color: $main-text-color;
+          }
+          &::placeholder {
+            color: #c7ccdc;
+          }
+        }
+
+        .product-description {
+          width: 250px;
+          padding-left: 20px;
+          border-right: $main-color 2px solid;
+        }
+
+        .product-category {
+          width: 188px;
+          padding-left: 10px;
+
+          border: none;
+          font-family: Roboto;
+
+          color: #c7ccdc;
+
+          option {
+            font-family: Roboto;
+            font-size: 12px;
+            color: #c7ccdc;
+
+            appearance: none;
+          }
+        }
+
+        .amount-input {
+          width: 92px;
+          height: 44px;
+
+          color: $main-color;
+
+          display: flex;
+          flex-flow: row wrap;
+
+          text-align: end;
+          align-items: center;
+
+          padding-right: 50px;
+
+          background-image: url(./svg/calculator-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 106px 12px;
+
+          border-left: $main-color 2px solid;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          appearance: none;
+        }
+      }
+      .btn-operators-container {
+        width: 265px;
+        height: 44px;
 
         display: flex;
         flex-flow: row wrap;
-        align-items: center;
         justify-content: space-between;
 
-        .bill-table {
-          height: 382px;
-          width: 760px;
-          border-radius: 20px 20px 0 0;
+        button {
+          width: 125px;
 
-          overflow: hidden;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+          box-shadow: none;
+        }
 
-          thead {
-            background-color: $main-color;
-            color: #52555f;
+        ._clear-btn {
+          background-color: transparent;
 
-            th {
-              padding: 12px 16px;
-              text-align: left;
+          border-radius: 16px;
+          border: 2px solid #f5f6fb;
 
-              &:first-child {
-                border-top-left-radius: 20px;
-              }
+          &:hover {
+            transition: $transition;
 
-              &:last-child {
-                border-top-right-radius: 20px;
-              }
-            }
+            background-color: $grey-hover;
+            border: none;
           }
-
-          tbody {
-            height: 403px;
-            width: 760px;
-
-            overflow: hidden;
-
-            tr {
-              border-bottom: 1px solid #0659ff;
-              height: 44px;
-              width: auto;
-
-              td {
-                padding: 12px 16px;
-                color: #52555f;
-              }
-
-              .summ {
-                color: $error-color;
-                font-weight: bold;
-              }
-
-              .delete-btn {
-                text-align: center;
-
-                button {
-                  background: transparent;
-                  border: none;
-                  cursor: pointer;
-                  padding: 4px;
-                }
-
-                svg {
-                  width: 18px;
-                  height: 18px;
-                  transition: transform 0.2s ease;
-                }
-
-                button {
-                  width: 32px;
-                  height: 32px;
-                  border-radius: 50%;
-
-                  &:hover {
-                    background-color: $main-color;
-                    transition: $transition;
-                  }
-                  &:active {
-                    background-color: $grey-hover;
-                    transform: translateY(2px);
-                  }
-
-                  button:hover svg {
-                    transform: scale(1.1);
-                  }
-                }
-              }
-            }
+          &:active {
+            transform: translateY(2px);
           }
         }
       }
     }
+
+    // .reoprt-list-container {
+    //   width: 1020px;
+    //   height: 382px;
+
+    //   display: flex;
+    //   flex-flow: row wrap;
+    //   align-items: center;
+    //   justify-content: space-between;
+
+    //   .bill-table {
+    //     overflow: hidden;
+    //     width: 760px;
+    //     height: 403px;
+
+    //     border: $main-color 2px solid;
+    //     border-radius: 20px 20px 0 0;
+
+    //     display: flex;
+    //     flex-flow: column wrap;
+
+    //     box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+
+    //     .thead-div {
+    //       background-color: $main-color;
+
+    //       height: 38px;
+    //       width: 760px;
+
+    //       ul {
+    //         display: flex;
+    //         flex-flow: row wrap;
+
+    //         li:first-child {
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
