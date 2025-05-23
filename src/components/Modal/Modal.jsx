@@ -1,3 +1,4 @@
+
 import "./Modal.scss";
 export const Modal = () => {
   return (
@@ -9,7 +10,6 @@ export const Modal = () => {
       </div>
     </div>
   );
-  
 };
 
 export const ModalTwo = () => {

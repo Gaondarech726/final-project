@@ -1,0 +1,116 @@
+header {
+  width: 100vw;
+  height: 65px;
+  position: relative;
+
+  .headerDiv {
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 40px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      .logoImg {
+        height: 39px;
+      }
+    }
+
+    .user {
+      width: 192px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 30px;
+
+      .profile {
+        width: 32px;
+        height: 32px;
+
+        .avatarImg {
+          width: 32px;
+        }
+      }
+      .userName {
+        width: 64;
+        height: 14;
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 4%;
+        text-align: right;
+        color: rgba(82, 85, 95, 1);
+      }
+      .verticalLine {
+        border-width: 1px;
+        border: 1px solid rgba(224, 229, 235, 1);
+        width: 0;
+        height: 36px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .logoutBtn {
+        font-family: Roboto;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 4%;
+        text-decoration: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 0%;
+        color: rgba(82, 85, 95, 1);
+        padding: 0;
+        width: 45px;
+      }
+      .mobileLogoutBtn{
+        display: none;
+      }
+    }
+  }
+
+  @media (max-width: 1200px) {
+    // tablet
+    height: 56px;
+    .headerDiv {
+      padding-right: 30px;
+      .user {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    // mobile
+    .headerDiv{
+      padding-right: 20px;
+      .user{
+        width: 63px;
+        .userName{
+          display: none;
+        }
+        .verticalLine{
+          display: none;
+        }
+        .logoutBtn{
+          display: none;
+        }
+        .mobileLogoutBtn{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 16px;
+          height: 16px;
+
+          .mobileLogoutBtnImg{
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}

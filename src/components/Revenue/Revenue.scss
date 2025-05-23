@@ -1,0 +1,64 @@
+//===
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+//===
+
+$orange-color: #ff751d;
+$main-color: #f5f6fb;
+$main-text-color: #52555f;
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
+
+  list-style: none;
+  font-family: roboto;
+  color: $main-text-color;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+hr{
+  border: none;
+  background-color: $main-color;
+  height: 3px;
+} 
+
+
+.reduction {
+  background-color: $main-color;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 250px;
+  padding: 20px 0;
+}
+
+.reduction-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: black;
+  font-weight: bold;
+  
+}
+
+.reduction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.reduction-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: $main-color;
+  border-bottom: 3px solid $main-color;
+}
+
+.reduction-list li:last-child {
+  border-bottom: none;
+  border-radius: 0 0 20px 20px;
+}

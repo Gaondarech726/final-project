@@ -1,9 +1,14 @@
-import { Modal, ModalTwo } from "../components/Modal/Modal";
+
+import Header from "../components/Header/Header";
+import Report from "../components/Report/Report";
+import Balance from "./../components/Balance/Balance";
+
 const MainPage = () => {
   return (
     <>
-      <Modal />
-      <ModalTwo />
+      <Header />
+      <Balance />
+      <Report />
     </>
   );
 };
