@@ -1,7 +1,18 @@
 @import "../../utiles/vars";
 
-.balance {
+.calculations {
   width: 100vw;
+  padding: 0 110px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.calc-balance {
+  width: 100vw;
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,34 +27,45 @@
     flex-direction: row;
     width: 369px;
     height: 44px;
-    .balance__inputs {
+
+    .calc-balance__inputs {
       display: flex;
       flex-direction: row;
       align-items: center;
     }
   }
 
-  .balance__return {
+  .calc-balance__return {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     gap: 15px;
-    .return__arrow {
+
+    .calc-return__arrow {
       color: $orange-color;
     }
-    .return__p {
+
+    .calc-return__p {
+      font-size: 12px;
       color: $main-text-color;
     }
   }
 }
 
-.span__balance {
+.calc-span__balance {
+  font-size: 12px;
   color: $main-text-color;
   padding-right: 21px;
 }
 
-.input-wrapper {
+.calc-span__balance {
+  font-size: 12px;
+  color: $main-text-color;
+  padding-right: 21px;
+}
+
+.calc-input-wrapper {
   position: relative;
   display: inline-block;
   width: 125px;
@@ -68,7 +90,8 @@
     }
   }
 
-  .currency {
+  .calc-currency {
+    font-size: 12px;
     color: $main-text-color;
     position: absolute;
     right: 22px;
@@ -80,7 +103,7 @@
   }
 }
 
-.button {
+.calc-button {
   color: $main-text-color;
   font-size: 12px;
   text-transform: uppercase;
@@ -97,8 +120,34 @@
   }
 }
 
+.calc-balance__period {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .period__p {
+    font-size: 12px;
+    color: $main-text-color;
+  }
+  .period__div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 13px;
+    .period__arrow {
+      color: $orange-color;
+    }
+    .period__date {
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+}
+
 @media (max-width: 768px) {
-  .balance {
+  .calc-balance {
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -118,12 +167,12 @@
     }
   }
 
-  .span__balance {
+  .calc-span__balance {
     color: $main-text-color;
     padding-right: 21px;
   }
 
-  .input-wrapper {
+  .calc-input-wrapper {
     position: relative;
     display: inline-block;
     width: 125px;
@@ -148,7 +197,7 @@
       }
     }
 
-    .currency {
+    .calc-currency {
       color: $main-text-color;
       position: absolute;
       right: 10px;
@@ -160,7 +209,7 @@
     }
   }
 
-  .button {
+  .calc-button {
     color: $main-text-color;
     font-size: 12px;
     text-transform: uppercase;
@@ -170,8 +219,7 @@
     border-radius: 12px;
     background-color: $main-color;
     &:hover {
-      transition: background 0.5s;
-      transition: color 0.5s;
+      transition: background 0.5s, color 0.5s;
       background: $orange-color;
       color: #fff;
     }
@@ -179,7 +227,7 @@
 }
 
 @media (max-width: 480px) {
-  .balance {
+  .calc-balance {
     margin-top: 30px;
     width: 100vw;
     display: flex;
@@ -195,7 +243,8 @@
       flex-direction: column;
       width: 248px;
       height: 44px;
-      .balance__inputs {
+
+      .calc-balance__inputs {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -203,14 +252,14 @@
     }
   }
 
-  .span__balance {
+  .calc-span__balance {
     color: $main-text-color;
     padding-right: 0;
     text-align: center;
     padding-bottom: 6px;
   }
 
-  .input-wrapper {
+  .calc-input-wrapper {
     position: relative;
     display: inline-block;
     width: 125px;
@@ -225,7 +274,6 @@
       font-size: 16px;
       border: 3px solid #fff;
       border-radius: 12px 0 0 12px;
-
       background-color: $main-color;
       box-sizing: border-box;
 
@@ -236,7 +284,7 @@
       }
     }
 
-    .currency {
+    .calc-currency {
       color: $main-text-color;
       position: absolute;
       right: 22px;
@@ -248,7 +296,7 @@
     }
   }
 
-  .button {
+  .calc-button {
     color: $main-text-color;
     font-size: 12px;
     text-transform: uppercase;
