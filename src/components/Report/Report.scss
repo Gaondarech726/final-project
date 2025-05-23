@@ -29,7 +29,7 @@ body {
 
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: start;
 
     .report-nav-container {
@@ -380,6 +380,12 @@ body {
               font-size: 12px;
               font-weight: 400;
             }
+
+            ._amount-li {
+              color: $error-color;
+              font-weight: 700;
+            }
+
             ._delete-li {
               height: 32px;
 
@@ -387,18 +393,22 @@ body {
               justify-content: center;
               align-items: center;
 
-              margin-top: 0;
-              margin-bottom: 0;
+              margin: 0;
 
               .delete-btn-icon {
                 width: 32px;
                 height: 32px;
 
-                background-color: greenyellow;
+                padding: 7.3px;
 
-                svg {
-                  width: 18px;
-                  height: 18px;
+                background-color: $main-color;
+
+                &:hover {
+                  transition: $transition;
+                  background-color: $grey-hover;
+                }
+                &:active {
+                  transform: translateY(2px);
                 }
               }
             }
