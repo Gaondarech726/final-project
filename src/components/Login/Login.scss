@@ -225,6 +225,12 @@
 
 				background-color: #ff751d;
 				box-shadow: 1px 3px 5px 0px #ff6b0859;
+
+				transition: 0.25s all;
+
+				&:hover {
+					scale: 1.03;
+				}
 			}
 
 			.register-btn {
@@ -247,6 +253,12 @@
 
 				background-color: #f5f6fb;
 				box-shadow: 1px 3px 5px 0px #52555f26;
+
+				transition: 0.25s all;
+
+				&:hover {
+					scale: 1.03;
+				}
 			}
 		}
 	}

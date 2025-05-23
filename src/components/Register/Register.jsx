@@ -4,9 +4,10 @@ import googleLogo from '../../img/google-logo.svg';
 import loginBackground from '../../img/login-background.svg';
 import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../redux/authSlice';
+import { register, clearError } from '../../redux/authSlice';
+import { toast } from 'react-toastify';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -23,11 +24,17 @@ const Register = () => {
 		dispatch(register({ username: regName, password: regPass }));
 
 		if (users && error === null) {
+			toast.success('Реєстрація успішна');
 			navigate('../login');
-		} else {
-			console.log('navigate error');
 		}
 	};
+
+	useEffect(() => {
+		if (error === 'Username already exists') {
+			toast.error('Користувач з таким логіном вже існує');
+			dispatch(clearError());
+		}
+	}, [error, dispatch]);
 
 	return (
 		<div className='login-container'>
@@ -54,7 +61,7 @@ const Register = () => {
 				<form className='login-form' onSubmit={handleSubmit}>
 					<div className='google-login'>
 						<span>Ви можете зареєструватися за допомогою акаунта Google</span>
-						<button>
+						<button type='button'>
 							<img src={googleLogo} alt='googleLogo' />
 							<span>Google</span>
 						</button>
