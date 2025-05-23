@@ -7,6 +7,7 @@ import { store } from "./redux/store";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Calculations from "./components/Calculations/Calculations";
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import Register from "./components/Register/Register";
@@ -19,6 +20,15 @@ export const App = () => {
         <Route path="/" element={<Navigate to="/start" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/calculations"
+          element={
+            <PrivateRoute>
+              <Calculations />
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/start"
