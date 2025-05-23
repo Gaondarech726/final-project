@@ -2,6 +2,7 @@ header {
   width: 100vw;
   height: 65px;
   position: relative;
+  background: rgba(255, 255, 255, 1);
 
   .headerDiv {
     height: 100%;
@@ -20,7 +21,7 @@ header {
     }
 
     .user {
-      width: 192px;
+      width: 270px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -29,6 +30,7 @@ header {
       .profile {
         width: 32px;
         height: 32px;
+        margin-right: 5px;
 
         .avatarImg {
           width: 32px;
