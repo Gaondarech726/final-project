@@ -39,10 +39,6 @@ const Report = () => {
     localStorage.setItem("entries", JSON.stringify(entries));
   }, [entries]);
 
-  const addEntry = (newEntry) => {
-    setEntries((prev) => [...prev, newEntry]);
-  };
-
   const inputSectionRef = useRef(null);
 
   useEffect(() => {
@@ -85,9 +81,7 @@ const Report = () => {
       type,
       date: new Date(date).toLocaleDateString("uk-UA"),
       description,
-      category,
       amount: parseFloat(amount).toFixed(2),
-
       category: finalCategory,
     };
 
