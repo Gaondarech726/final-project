@@ -6,7 +6,7 @@ import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, clearError, logining } from '../../redux/authSlice';
+import { register, logining } from '../../redux/authSlice';
 import { toast } from 'react-toastify';
 import { useGoogleLogin } from '@react-oauth/google';
 
