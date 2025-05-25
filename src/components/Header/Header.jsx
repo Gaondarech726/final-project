@@ -29,7 +29,7 @@ const Header = ({ username }) => {
           </Link>
         </div>
         <div className="user">
-          <Link to="/кабінетКористувача " className="profile">
+          <Link to="#" className="profile">
             <img src={DefaultUserAvatar} alt="Avatar" className="avatarImg" />
           </Link>
           <span className="userName">
@@ -43,7 +43,7 @@ const Header = ({ username }) => {
             {currentUser ? "Вийти" : "Увійти"}
           </button>{" "}
           {/* Додайти обробник виходу */}
-          <button className="mobileLogoutBtn">
+          <button className="mobileLogoutBtn" onClick={handleAuthButton}>
             <img
               src={mobileLogoutBtnImg}
               alt="Вийти"

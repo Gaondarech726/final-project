@@ -1,16 +1,156 @@
 .YouSureModal {
-  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 28vw;
+  // width: 400px;
   height: 200px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 30px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+
+  .YouSureButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+  }
   .YouSureTextModal {
-    width: 130px;
+    // width: 280px;
+    width: 20vw;
     height: 20px;
+    color: #52555f;
+    display: flex;
+
+    justify-content: center;
   }
   .YouSureYesModal {
-    width: 120px;
+    color: white;
+    // width: 120px;
+    width: 8vw;
     height: 40px;
+    border: 1px solid #ff751d;
+    border-radius: 16px;
+    background-color: #ff751d;
   }
   .YouSureNoModal {
-    width: 120px;
+    // width: 120px;
+    width: 8vw;
     height: 40px;
+    border: 2px solid #f5f6fb;
+    border-radius: 16px;
+    margin-left: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .YouSureModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // width: 400px;
+    width: 52vw;
+    height: 200px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 30px;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+
+    .YouSureButtons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      margin-top: 20px;
+    }
+    .YouSureTextModal {
+      // width: 280px;
+      width: 87vw;
+      height: 20px;
+      color: #52555f;
+      display: flex;
+
+      justify-content: center;
+    }
+    .YouSureYesModal {
+      color: white;
+      // width: 120px;
+      width: 15vw;
+      height: 40px;
+      border: 1px solid #ff751d;
+      border-radius: 16px;
+      background-color: #ff751d;
+    }
+    .YouSureNoModal {
+      // width: 120px;
+      width: 15vw;
+      height: 40px;
+      border: 2px solid #f5f6fb;
+      border-radius: 16px;
+      margin-left: 40px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .YouSureModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    // width: 400px;
+    width: 125vw;
+    height: 200px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 30px;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+
+    .YouSureButtons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      margin-top: 20px;
+    }
+    .YouSureTextModal {
+      // width: 280px;
+      width: 87vw;
+      height: 20px;
+      color: #52555f;
+      display: flex;
+
+      justify-content: center;
+    }
+    .YouSureYesModal {
+      color: white;
+      // width: 120px;
+      width: 37vw;
+      height: 40px;
+      border: 1px solid #ff751d;
+      border-radius: 16px;
+      background-color: #ff751d;
+    }
+    .YouSureNoModal {
+      // width: 120px;
+      width: 37vw;
+      height: 40px;
+      border: 2px solid #f5f6fb;
+      border-radius: 16px;
+      margin-left: 40px;
+    }
   }
 }
