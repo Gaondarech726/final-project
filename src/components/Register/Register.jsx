@@ -21,19 +21,46 @@ const Register = () => {
 
 	let usersBeforeRegister = useRef(null);
 
+	const isValidEmail = async email => {
+		const apiKey = '6cd2f04760db46df9b9b71f25d1eaa74';
+		const response = await fetch(
+			`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`
+		);
+		const data = await response.json();
+
+		if (data.deliverability === 'DELIVERABLE') {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	// відправка форми, додавання юзера
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		usersBeforeRegister.current = users.length;
 
-		dispatch(register({ username: regName, password: regPass }));
+		const isValid = await isValidEmail(regName);
 
+		if (isValid) {
+			dispatch(register({ username: regName, password: regPass }));
+		} else {
+			document.querySelector('.register-input-error').style.display = 'block';
+			document.querySelector('.register-input-error').innerHTML =
+				'Введіть існуючий email';
+		}
 		if (regName.length < 1) {
 			document.querySelector('.register-input-error').style.display = 'block';
+			document.querySelector('.register-input-error').innerHTML =
+				'це обов’язкове поле';
 		}
+
 		if (regPass.length < 8) {
 			document.querySelector('.register-input-pass-error').style.display =
 				'block';
+		} else {
+			document.querySelector('.register-input-pass-error').style.display =
+				'none';
 		}
 	};
 
