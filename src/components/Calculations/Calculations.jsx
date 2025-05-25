@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import tippy from "tippy.js";
 import { updateBalance } from "../../redux/authSlice";
 
+import { Link } from "react-router-dom";
 import "./Calculations.scss";
 
 const Calculations = () => {
@@ -61,10 +62,10 @@ const Calculations = () => {
   return (
     <section className="calculations">
       <section className="calc-balance">
-        <div className="calc-balance__return">
+        <Link className="calc-balance__return" to="/start">
           <FaLongArrowAltLeft className="calc-return__arrow" />
           <p className="calc-return__p">Повернутись на головну</p>
-        </div>
+        </Link>
         <div className="calc-balance__counter">
           <span className="calc-span__balance">Баланс:</span>
 
