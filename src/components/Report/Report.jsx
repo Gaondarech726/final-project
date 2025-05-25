@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./Report.scss";
-import Modal from "../Modal/Modal";
+import { Modal } from "../Modal/Modal";
 
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";

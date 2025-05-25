@@ -7,10 +7,71 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: column;
+}
+
+.verticalLine {
+  border-width: 1px;
+  border: 1px solid rgba(224, 229, 235, 1);
+  width: 0;
+  height: 36px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.calc-balance_period {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 }
 
+.calc-expenses__income {
+  padding: 0 110px;
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: 50px;
+  margin: 0;
+  .calc-expenses_income-show {
+    border-radius: 12px;
+    padding: 0 110px;
+    height: 40px;
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 320px;
+
+    .calc-expenses,
+    .calc-income {
+      width: 189px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 14px;
+    }
+    .calc-expenses__number {
+      color: #e53935;
+      font-weight: bold;
+    }
+
+    .calc-income__number {
+      color: #407946;
+      font-weight: bold;
+    }
+  }
+}
+
 .calc-balance {
+  gap: 225px;
+  padding: 0 110px;
   width: 100vw;
   box-sizing: border-box;
   display: flex;
@@ -22,7 +83,6 @@
 
   &__counter {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: row;
     width: 369px;
@@ -103,23 +163,6 @@
   }
 }
 
-.calc-button {
-  color: $main-text-color;
-  font-size: 12px;
-  text-transform: uppercase;
-  width: 125px;
-  height: 44px;
-  border: 3px solid #fff;
-  border-radius: 12px;
-  background-color: $main-color;
-  &:hover {
-    transition: background 0.5s;
-    transition: color 0.5s;
-    background: $orange-color;
-    color: #fff;
-  }
-}
-
 .calc-balance__period {
   display: flex;
   justify-content: center;
@@ -139,6 +182,7 @@
       color: $orange-color;
     }
     .period__date {
+      text-align: center;
       color: black;
       font-size: 14px;
       font-weight: bold;
@@ -147,7 +191,47 @@
 }
 
 @media (max-width: 768px) {
+  .calc-expenses__income {
+    padding: 0 140px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    margin: 0;
+    .calc-expenses_income-show {
+      padding: 0 110px;
+      height: 40px;
+      width: 100vw;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+
+      .calc-expenses,
+      .calc-income {
+        width: 189px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 14px;
+      }
+      .calc-expenses__number {
+        color: #e53935;
+        font-weight: bold;
+      }
+
+      .calc-income__number {
+        color: #407946;
+        font-weight: bold;
+      }
+    }
+  }
   .calc-balance {
+    padding: 0 110px;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -208,33 +292,85 @@
       font-size: 14px;
     }
   }
-
-  .calc-button {
-    color: $main-text-color;
-    font-size: 12px;
-    text-transform: uppercase;
-    width: 125px;
-    height: 44px;
-    border: 3px solid #fff;
-    border-radius: 12px;
-    background-color: $main-color;
-    &:hover {
-      transition: background 0.5s, color 0.5s;
-      background: $orange-color;
-      color: #fff;
-    }
-  }
 }
 
 @media (max-width: 480px) {
+  .calc-expenses__income {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    margin: 0;
+    .verticalLine {
+      height: 70.5px;
+    }
+    .calc-expenses_income-show {
+      padding: 0;
+      height: 85px;
+      width: 285px;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+
+      .calc-expenses,
+      .calc-income {
+        width: 189px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .calc-expenses__number {
+        color: #e53935;
+        font-weight: bold;
+      }
+
+      .calc-income__number {
+        color: #407946;
+        font-weight: bold;
+      }
+    }
+  }
+  .calculations {
+    padding: 0;
+  }
+
+  .calc-return__p {
+    display: none;
+  }
   .calc-balance {
+    padding: 0;
+    position: relative;
     margin-top: 30px;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column-reverse;
-    height: 134px;
+    flex-direction: column;
+    gap: 10px;
+    height: 173px;
+    margin-bottom: 30px;
+
+    .calc-balance__return {
+      width: 24px;
+      height: 24px;
+      top: 0;
+      left: 19px;
+      position: absolute;
+    }
+
+    .calc-balance_period {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column-reverse;
+      gap: 22px;
+    }
 
     &__counter {
       display: flex;
@@ -273,7 +409,7 @@
       padding-left: 12px;
       font-size: 16px;
       border: 3px solid #fff;
-      border-radius: 12px 0 0 12px;
+      border-radius: 12px;
       background-color: $main-color;
       box-sizing: border-box;
 
@@ -293,22 +429,6 @@
       font-weight: bold;
       pointer-events: none;
       font-size: 14px;
-    }
-  }
-
-  .calc-button {
-    color: $main-text-color;
-    font-size: 12px;
-    text-transform: uppercase;
-    width: 125px;
-    height: 44px;
-    border: 3px solid #fff;
-    border-radius: 0 12px 12px 0;
-    background-color: $main-color;
-    &:hover {
-      transition: background 0.5s, color 0.5s;
-      background: $orange-color;
-      color: #fff;
     }
   }
 }
