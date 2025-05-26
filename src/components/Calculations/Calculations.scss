@@ -69,7 +69,6 @@
 }
 
 .calc-costs {
-  padding: 0 110px;
   width: 100vw;
   box-sizing: border-box;
   display: flex;
@@ -82,6 +81,7 @@
   .calc-costs-show {
     margin-top: 30px;
     border-radius: 12px;
+    box-sizing: border-box;
     padding: 0 110px;
     height: 358px;
     width: 100vw;
@@ -166,6 +166,43 @@
 
   .costs__arrow {
     color: $orange-color;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.calc-chart {
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  height: 422px;
+  margin-top: 60px;
+
+  .chart__show {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+
+  .chart__div {
+    border-radius: 12px;
+    height: 40px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100vw;
+    box-sizing: border-box;
+    text-align: center;
   }
 }
 
@@ -280,6 +317,9 @@
     gap: 13px;
     .period__arrow {
       color: $orange-color;
+      &:hover {
+        cursor: pointer;
+      }
     }
     .period__date {
       text-align: center;
@@ -501,6 +541,11 @@
 }
 
 @media (max-width: 480px) {
+  .calc-chart {
+    .chart__show {
+      width: 100vw;
+    }
+  }
   .calc-costs {
     padding: 0 20px;
     width: 100vw;

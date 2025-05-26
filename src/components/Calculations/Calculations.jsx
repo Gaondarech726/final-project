@@ -4,26 +4,32 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import tippy from "tippy.js";
 import { updateBalance } from "../../redux/authSlice";
-import { ReactComponent as AlcoholIcon } from "./svg/Alcohol.svg";
-import { ReactComponent as CommunicationIcon } from "./svg/Communication.svg";
-import { ReactComponent as EducationIcon } from "./svg/Education.svg";
-import { ReactComponent as EntertainmentIcon } from "./svg/Entertainment.svg";
-import { ReactComponent as EquipmentIcon } from "./svg/Equipment.svg";
-import { ReactComponent as EverythingForTheHomeIcon } from "./svg/EverythingForTheHome.svg";
-import { ReactComponent as HealthIcon } from "./svg/Health.svg";
-import { ReactComponent as OtherIcon } from "./svg/Other.svg";
-import { ReactComponent as ProductsIcon } from "./svg/Products.svg";
-import { ReactComponent as SportIcon } from "./svg/Sport.svg";
-import { ReactComponent as TransportIcon } from "./svg/Transport.svg";
+import { ReactComponent as AlcoholIcon } from "./svg/costs/Alcohol.svg";
+import { ReactComponent as CommunicationIcon } from "./svg/costs/Communication.svg";
+import { ReactComponent as EducationIcon } from "./svg/costs/Education.svg";
+import { ReactComponent as EntertainmentIcon } from "./svg/costs/Entertainment.svg";
+import { ReactComponent as EquipmentIcon } from "./svg/costs/Equipment.svg";
+import { ReactComponent as EverythingForTheHomeIcon } from "./svg/costs/EverythingForTheHome.svg";
+import { ReactComponent as HealthIcon } from "./svg/costs/Health.svg";
+import { ReactComponent as OtherIcon } from "./svg/costs/Other.svg";
+import { ReactComponent as ProductsIcon } from "./svg/costs/Products.svg";
+import { ReactComponent as SportIcon } from "./svg/costs/Sport.svg";
+import { ReactComponent as TransportIcon } from "./svg/costs/Transport.svg";
+import { ReactComponent as AdditionalRevenueIcon } from "./svg/revenues/AdditionalRevenue.svg";
+import { ReactComponent as SalaryIcon } from "./svg/revenues/Salary.svg";
 
 import { Link } from "react-router-dom";
 import Header from "./../Header/Header";
 import "./Calculations.scss";
+import DynamicCategoryChart from "./DynamicCategoryChart";
 
 const Calculations = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
+
+  const [viewMode, setViewMode] = useState("costs"); // "costs" or "revenues"
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const alreadyShown = localStorage.getItem("balanceTooltipShown");
@@ -71,73 +77,23 @@ const Calculations = () => {
     setInputBalance(currentUser?.balance || "");
   }, [currentUser]);
 
-  const categories = [
-    {
-      order: 1,
-      name: "products",
-      path: "./svg/Products.svg",
-      renderName: "Продукти",
-    },
-    {
-      order: 2,
-      name: "alcohol",
-      path: "./svg/Alcohol.svg",
-      renderName: "Алкоголь",
-    },
-    {
-      order: 3,
-      name: "entertainment",
-      path: "./svg/Entertainment.svg",
-      renderName: "Розваги",
-    },
-    {
-      order: 4,
-      name: "health",
-      path: "./svg/Health.svg",
-      renderName: "Здоров'я",
-    },
-    {
-      order: 5,
-      name: "transport",
-      path: "./svg/Transport.svg",
-      renderName: "Транспорт",
-    },
-    {
-      order: 6,
-      name: "everythingForTheHome",
-      path: "./svg/EverythingForTheHome.svg",
-      renderName: "Все для дому",
-    },
-    {
-      order: 7,
-      name: "equipment",
-      path: "./svg/Equipment.svg",
-      renderName: "Техніка",
-    },
-    {
-      order: 8,
-      name: "communication",
-      path: "./svg/Communication.svg",
-      renderName: "Комуналка, Зв’язок",
-    },
-    {
-      order: 9,
-      name: "sport",
-      path: "./svg/Sport.svg",
-      renderName: "Спорт",
-    },
-    {
-      order: 10,
-      name: "education",
-      path: "./svg/Education.svg",
-      renderName: "Навчання",
-    },
-    {
-      order: 11,
-      name: "other",
-      path: "./svg/Other.svg",
-      renderName: "Інше",
-    },
+  const categoriesCosts = [
+    { order: 1, name: "products", renderName: "Продукти" },
+    { order: 2, name: "alcohol", renderName: "Алкоголь" },
+    { order: 3, name: "entertainment", renderName: "Розваги" },
+    { order: 4, name: "health", renderName: "Здоров'я" },
+    { order: 5, name: "transport", renderName: "Транспорт" },
+    { order: 6, name: "everythingForTheHome", renderName: "Все для дому" },
+    { order: 7, name: "equipment", renderName: "Техніка" },
+    { order: 8, name: "communication", renderName: "Комуналка, Зв’язок" },
+    { order: 9, name: "sport", renderName: "Спорт" },
+    { order: 10, name: "education", renderName: "Навчання" },
+    { order: 11, name: "other", renderName: "Інше" },
+  ];
+
+  const categoriesRevenues = [
+    { order: 1, name: "salary", renderName: "ЗП" },
+    { order: 2, name: "additionalRevenue", renderName: "Дод. Дохід" },
   ];
 
   const iconsMap = {
@@ -152,9 +108,17 @@ const Calculations = () => {
     sport: SportIcon,
     education: EducationIcon,
     other: OtherIcon,
+    salary: SalaryIcon,
+    additionalRevenue: AdditionalRevenueIcon,
   };
 
-  const [activeCategory, setActiveCategory] = useState(null);
+  const toggleViewMode = () => {
+    setViewMode((prev) => (prev === "costs" ? "revenues" : "costs"));
+    setActiveCategory(null);
+  };
+
+  const currentCategories =
+    viewMode === "costs" ? categoriesCosts : categoriesRevenues;
 
   return (
     <>
@@ -168,7 +132,6 @@ const Calculations = () => {
           <div className="calc-balance_period">
             <div className="calc-balance__counter">
               <span className="calc-span__balance">Баланс:</span>
-
               <div className="calc-balance__inputs">
                 <div className="calc-input-wrapper">
                   <input
@@ -191,6 +154,7 @@ const Calculations = () => {
             </div>
           </div>
         </section>
+
         <section className="calc-expenses__income">
           <div className="calc-expenses_income-show">
             <div className="calc-expenses">
@@ -204,16 +168,26 @@ const Calculations = () => {
             </div>
           </div>
         </section>
+
         <section className="calc-costs">
           <div className="calc-costs-show">
             <div className="costs__div">
-              <MdKeyboardArrowLeft className="costs__arrow" />
-              <p className="costs__p">Витрати</p>
-              <MdKeyboardArrowRight className="costs__arrow" />
+              <MdKeyboardArrowLeft
+                className="costs__arrow"
+                onClick={toggleViewMode}
+              />
+              <p className="costs__p">
+                {viewMode === "costs" ? "Витрати" : "Доходи"}
+              </p>
+              <MdKeyboardArrowRight
+                className="costs__arrow"
+                onClick={toggleViewMode}
+              />
             </div>
+
             <div className="costs__categories">
               <div className="categories__top-row">
-                {categories.slice(0, 6).map(({ name, renderName }) => {
+                {currentCategories.slice(0, 6).map(({ name, renderName }) => {
                   const IconComponent = iconsMap[name];
                   return (
                     <div
@@ -233,26 +207,35 @@ const Calculations = () => {
                 })}
               </div>
 
-              <div className="categories__bottom-row">
-                {categories.slice(6).map(({ name, renderName }) => {
-                  const IconComponent = iconsMap[name];
-                  return (
-                    <div
-                      key={name}
-                      className="categories__category"
-                      onClick={() => setActiveCategory(name)}
-                    >
-                      <p className="categories__money">5000</p>
-                      <IconComponent
-                        className={`categories__icon ${
-                          activeCategory === name ? "active" : ""
-                        }`}
-                      />
-                      <p className="categories__name">{renderName}</p>
-                    </div>
-                  );
-                })}
-              </div>
+              {currentCategories.length > 6 && (
+                <div className="categories__bottom-row">
+                  {currentCategories.slice(6).map(({ name, renderName }) => {
+                    const IconComponent = iconsMap[name];
+                    return (
+                      <div
+                        key={name}
+                        className="categories__category"
+                        onClick={() => setActiveCategory(name)}
+                      >
+                        <p className="categories__money">5000</p>
+                        <IconComponent
+                          className={`categories__icon ${
+                            activeCategory === name ? "active" : ""
+                          }`}
+                        />
+                        <p className="categories__name">{renderName}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <div className="calc-chart">
+              <DynamicCategoryChart
+                activeCategory={activeCategory}
+                viewMode={viewMode}
+              />
             </div>
           </div>
         </section>
