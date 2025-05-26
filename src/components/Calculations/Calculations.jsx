@@ -31,6 +31,8 @@ const Calculations = () => {
   const [viewMode, setViewMode] = useState("costs");
   const [activeCategory, setActiveCategory] = useState(null);
 
+  const [financeEntries, setFinanceEntries] = useState([]);
+
   useEffect(() => {
     const alreadyShown = localStorage.getItem("balanceTooltipShown");
 
@@ -66,16 +68,21 @@ const Calculations = () => {
     }
   }, []);
 
-  // const handleBalanceSubmit = () => {
-  //   const numericBalance = parseFloat(inputBalance);
-  //   if (!isNaN(numericBalance)) {
-  //     dispatch(updateBalance(numericBalance));
-  //   }
-  // };
-
   useEffect(() => {
     setInputBalance(currentUser?.balance || "");
   }, [currentUser]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("financeEntries");
+    if (data) {
+      try {
+        const parsed = JSON.parse(data);
+        setFinanceEntries(parsed);
+      } catch (e) {}
+    } else {
+      setFinanceEntries([]);
+    }
+  }, []);
 
   const categoriesCosts = [
     { order: 1, name: "products", renderName: "Продукти" },
@@ -120,6 +127,25 @@ const Calculations = () => {
   const currentCategories =
     viewMode === "costs" ? categoriesCosts : categoriesRevenues;
 
+  const getSumByCategory = (renderName) => {
+    const sum = financeEntries
+      .filter(
+        (entry) =>
+          entry.type === (viewMode === "costs" ? "Витрати" : "Дохід") &&
+          entry.category === renderName
+      )
+      .reduce((total, entry) => total + Number(entry.amount), 0);
+    return sum;
+  };
+
+  const totalCosts = financeEntries
+    .filter((entry) => entry.type === "Витрати")
+    .reduce((sum, entry) => sum + Number(entry.amount), 0);
+
+  const totalRevenues = financeEntries
+    .filter((entry) => entry.type === "Дохід")
+    .reduce((sum, entry) => sum + Number(entry.amount), 0);
+
   return (
     <>
       <Header />
@@ -159,12 +185,16 @@ const Calculations = () => {
           <div className="calc-expenses_income-show">
             <div className="calc-expenses">
               <p className="calc-expenses__p">Витрати: </p>
-              <p className="calc-expenses__number">- 14500 грн</p>
+              <p className="calc-expenses__number">
+                - {totalCosts.toFixed(2)} грн
+              </p>
             </div>
             <div className="verticalLine"></div>
             <div className="calc-income">
               <p className="calc-income__p">Доходи: </p>
-              <p className="calc-income__number">+ 14500 грн</p>
+              <p className="calc-income__number">
+                + {totalRevenues.toFixed(2)} грн
+              </p>
             </div>
           </div>
         </section>
@@ -189,13 +219,14 @@ const Calculations = () => {
               <div className="categories__top-row">
                 {currentCategories.slice(0, 6).map(({ name, renderName }) => {
                   const IconComponent = iconsMap[name];
+                  const sum = getSumByCategory(renderName);
                   return (
                     <div
                       key={name}
                       className="categories__category"
                       onClick={() => setActiveCategory(name)}
                     >
-                      <p className="categories__money">5000</p>
+                      <p className="categories__money">{sum.toFixed(2)}</p>
                       <IconComponent
                         className={`categories__icon ${
                           activeCategory === name ? "active" : ""
@@ -211,13 +242,14 @@ const Calculations = () => {
                 <div className="categories__bottom-row">
                   {currentCategories.slice(6).map(({ name, renderName }) => {
                     const IconComponent = iconsMap[name];
+                    const sum = getSumByCategory(renderName);
                     return (
                       <div
                         key={name}
                         className="categories__category"
                         onClick={() => setActiveCategory(name)}
                       >
-                        <p className="categories__money">5000</p>
+                        <p className="categories__money">{sum.toFixed(2)}</p>
                         <IconComponent
                           className={`categories__icon ${
                             activeCategory === name ? "active" : ""
@@ -234,6 +266,10 @@ const Calculations = () => {
             <div className="calc-chart">
               <DynamicCategoryChart
                 activeCategory={activeCategory}
+                categoryDisplayName={
+                  currentCategories.find((cat) => cat.name === activeCategory)
+                    ?.renderName
+                }
                 viewMode={viewMode}
               />
             </div>
