@@ -66,12 +66,12 @@ const Calculations = () => {
     }
   }, []);
 
-  const handleBalanceSubmit = () => {
-    const numericBalance = parseFloat(inputBalance);
-    if (!isNaN(numericBalance)) {
-      dispatch(updateBalance(numericBalance));
-    }
-  };
+  // const handleBalanceSubmit = () => {
+  //   const numericBalance = parseFloat(inputBalance);
+  //   if (!isNaN(numericBalance)) {
+  //     dispatch(updateBalance(numericBalance));
+  //   }
+  // };
 
   useEffect(() => {
     setInputBalance(currentUser?.balance || "");
