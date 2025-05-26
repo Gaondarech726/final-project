@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import tippy from "tippy.js";
 // import { updateBalance } from "../../redux/authSlice";
 import { ReactComponent as AlcoholIcon } from "./svg/costs/Alcohol.svg";
