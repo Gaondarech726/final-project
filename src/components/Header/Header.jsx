@@ -23,7 +23,7 @@ const Header = ({ username }) => {
     <header className="header">
       <div className="headerDiv">
         <div className="logo">
-          <Link to="../../pages/MainPage.jsx">
+          <Link to="/start">
             <img src={logo} alt="Логотип" className="logoImg" />
             {/*лого */}
           </Link>
