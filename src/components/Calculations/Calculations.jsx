@@ -3,7 +3,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import tippy from "tippy.js";
-import { updateBalance } from "../../redux/authSlice";
+// import { updateBalance } from "../../redux/authSlice";
 import { ReactComponent as AlcoholIcon } from "./svg/costs/Alcohol.svg";
 import { ReactComponent as CommunicationIcon } from "./svg/costs/Communication.svg";
 import { ReactComponent as EducationIcon } from "./svg/costs/Education.svg";
@@ -24,11 +24,11 @@ import "./Calculations.scss";
 import DynamicCategoryChart from "./DynamicCategoryChart";
 
 const Calculations = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
 
-  const [viewMode, setViewMode] = useState("costs"); // "costs" or "revenues"
+  const [viewMode, setViewMode] = useState("costs");
   const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
