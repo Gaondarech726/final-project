@@ -15,6 +15,7 @@ const DynamicCategoryChart = ({
   activeCategory,
   categoryDisplayName,
   viewMode,
+  currentDate,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [financeEntries, setFinanceEntries] = useState([]);
@@ -31,7 +32,7 @@ const DynamicCategoryChart = ({
         const parsed = JSON.parse(storedData);
         setFinanceEntries(parsed);
       } catch (e) {
-        console.error("Помилка парсинга financeEntries:", e);
+        console.error("Ошибка парсинга financeEntries:", e);
         setFinanceEntries([]);
       }
     }
@@ -52,18 +53,20 @@ const DynamicCategoryChart = ({
     revenues: "Дохід",
   };
 
+  // Фильтруем по категории, типу и по текущей дате
   const filteredEntries = financeEntries.filter(
     (entry) =>
-      entry.type === typeMap[viewMode] && entry.category === categoryDisplayName
+      entry.type === typeMap[viewMode] &&
+      entry.category === categoryDisplayName &&
+      entry.date === currentDate
   );
 
-  // Debugging output
-  console.log("viewMode:", viewMode);
-  console.log("categoryDisplayName:", categoryDisplayName);
-  console.log("Filtered entries:", filteredEntries);
+  if (filteredEntries.length === 0) {
+    return <div className="chart__div">Немає даних для обраної категорії</div>;
+  }
 
+  // Группируем суммы по описанию
   const groupedData = {};
-
   filteredEntries.forEach((entry) => {
     const key = entry.description || "Інше";
     const amount = parseFloat(entry.amount) || 0;
@@ -71,16 +74,10 @@ const DynamicCategoryChart = ({
     groupedData[key] += amount;
   });
 
-  console.log("Grouped data:", groupedData);
-
   const chartDataArray = Object.entries(groupedData).map(([name, value]) => ({
     name,
     value,
   }));
-
-  if (chartDataArray.length === 0) {
-    return <div className="chart__div">Немає даних для обраної категорії</div>;
-  }
 
   const data = {
     labels: chartDataArray.map((item) => item.name),

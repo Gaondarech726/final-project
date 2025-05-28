@@ -3,7 +3,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
 import tippy from "tippy.js";
-// import { updateBalance } from "../../redux/authSlice";
+
 import { ReactComponent as AlcoholIcon } from "./svg/costs/Alcohol.svg";
 import { ReactComponent as CommunicationIcon } from "./svg/costs/Communication.svg";
 import { ReactComponent as EducationIcon } from "./svg/costs/Education.svg";
@@ -19,23 +19,36 @@ import { ReactComponent as AdditionalRevenueIcon } from "./svg/revenues/Addition
 import { ReactComponent as SalaryIcon } from "./svg/revenues/Salary.svg";
 
 import { Link } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 import Header from "./../Header/Header";
 import "./Calculations.scss";
 import DynamicCategoryChart from "./DynamicCategoryChart";
 
 const Calculations = () => {
-  // const dispatch = useDispatch();
+  // Форматирование даты в строку DD.MM.YYYY
+  const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
+  // Состояние выбранной даты
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // Из Redux текущий пользователь и баланс
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
 
+  // Режим просмотра: "costs" или "revenues"
   const [viewMode, setViewMode] = useState("costs");
   const [activeCategory, setActiveCategory] = useState(null);
 
+  // Все финансовые записи (из localStorage)
   const [financeEntries, setFinanceEntries] = useState([]);
 
   useEffect(() => {
     const alreadyShown = localStorage.getItem("balanceTooltipShown");
-
     if (!alreadyShown) {
       const inputWrapper = document.querySelector(
         ".calc-balance__inputs .calc-input-wrapper"
@@ -78,7 +91,9 @@ const Calculations = () => {
       try {
         const parsed = JSON.parse(data);
         setFinanceEntries(parsed);
-      } catch (e) {}
+      } catch (e) {
+        setFinanceEntries([]);
+      }
     } else {
       setFinanceEntries([]);
     }
@@ -118,6 +133,38 @@ const Calculations = () => {
     salary: SalaryIcon,
     additionalRevenue: AdditionalRevenueIcon,
   };
+  const toggleDate = (direction) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const newDate = new Date(selectedDate);
+    newDate.setHours(0, 0, 0, 0);
+
+    if (direction === "prev") {
+      newDate.setDate(newDate.getDate() - 1);
+      setSelectedDate(newDate);
+    } else if (direction === "next") {
+      const nextDate = new Date(newDate);
+      nextDate.setDate(nextDate.getDate() + 1);
+      nextDate.setHours(0, 0, 0, 0);
+
+      if (nextDate <= today) {
+        setSelectedDate(nextDate);
+      } else {
+        toast.error("Не можливо побачити розрахунки на завтра!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+    }
+  };
 
   const toggleViewMode = () => {
     setViewMode((prev) => (prev === "costs" ? "revenues" : "costs"));
@@ -127,23 +174,31 @@ const Calculations = () => {
   const currentCategories =
     viewMode === "costs" ? categoriesCosts : categoriesRevenues;
 
+  const filteredEntries = financeEntries.filter(
+    (entry) =>
+      entry.type === (viewMode === "costs" ? "Витрати" : "Дохід") &&
+      entry.date === formatDate(selectedDate)
+  );
+
   const getSumByCategory = (renderName) => {
-    const sum = financeEntries
-      .filter(
-        (entry) =>
-          entry.type === (viewMode === "costs" ? "Витрати" : "Дохід") &&
-          entry.category === renderName
-      )
+    const sum = filteredEntries
+      .filter((entry) => entry.category === renderName)
       .reduce((total, entry) => total + Number(entry.amount), 0);
     return sum;
   };
 
   const totalCosts = financeEntries
-    .filter((entry) => entry.type === "Витрати")
+    .filter(
+      (entry) =>
+        entry.type === "Витрати" && entry.date === formatDate(selectedDate)
+    )
     .reduce((sum, entry) => sum + Number(entry.amount), 0);
 
   const totalRevenues = financeEntries
-    .filter((entry) => entry.type === "Дохід")
+    .filter(
+      (entry) =>
+        entry.type === "Дохід" && entry.date === formatDate(selectedDate)
+    )
     .reduce((sum, entry) => sum + Number(entry.amount), 0);
 
   return (
@@ -173,9 +228,15 @@ const Calculations = () => {
             <div className="calc-balance__period">
               <p className="period__p">Поточний період</p>
               <div className="period__div">
-                <MdKeyboardArrowLeft className="period__arrow" />
-                <p className="period__date">Листопад 2025</p>
-                <MdKeyboardArrowRight className="period__arrow" />
+                <MdKeyboardArrowLeft
+                  className="period__arrow"
+                  onClick={() => toggleDate("prev")}
+                />
+                <p className="period__date">{formatDate(selectedDate)}</p>
+                <MdKeyboardArrowRight
+                  className="period__arrow"
+                  onClick={() => toggleDate("next")}
+                />
               </div>
             </div>
           </div>
@@ -271,6 +332,7 @@ const Calculations = () => {
                     ?.renderName
                 }
                 viewMode={viewMode}
+                currentDate={formatDate(selectedDate)}
               />
             </div>
           </div>
