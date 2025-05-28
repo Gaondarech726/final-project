@@ -19,7 +19,6 @@ import { ReactComponent as AdditionalRevenueIcon } from "./svg/revenues/Addition
 import { ReactComponent as SalaryIcon } from "./svg/revenues/Salary.svg";
 
 import { Link } from "react-router-dom";
-import { Bounce, toast } from "react-toastify";
 import Header from "./../Header/Header";
 import "./Calculations.scss";
 import DynamicCategoryChart from "./DynamicCategoryChart";
@@ -134,9 +133,6 @@ const Calculations = () => {
     additionalRevenue: AdditionalRevenueIcon,
   };
   const toggleDate = (direction) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
     const newDate = new Date(selectedDate);
     newDate.setHours(0, 0, 0, 0);
 
@@ -144,25 +140,8 @@ const Calculations = () => {
       newDate.setDate(newDate.getDate() - 1);
       setSelectedDate(newDate);
     } else if (direction === "next") {
-      const nextDate = new Date(newDate);
-      nextDate.setDate(nextDate.getDate() + 1);
-      nextDate.setHours(0, 0, 0, 0);
-
-      if (nextDate <= today) {
-        setSelectedDate(nextDate);
-      } else {
-        toast.error("Не можливо побачити розрахунки на завтра!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      }
+      newDate.setDate(newDate.getDate() + 1);
+      setSelectedDate(newDate);
     }
   };
 
