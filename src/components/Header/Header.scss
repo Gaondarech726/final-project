@@ -68,14 +68,13 @@ header {
         padding: 0;
         width: 45px;
       }
-      .mobileLogoutBtn{
+      .mobileLogoutBtn {
         display: none;
       }
     }
   }
 
   @media (max-width: 1200px) {
-    // tablet
     height: 56px;
     .headerDiv {
       padding-right: 30px;
@@ -86,28 +85,27 @@ header {
   }
 
   @media (max-width: 767px) {
-    // mobile
-    .headerDiv{
+    .headerDiv {
       padding-right: 20px;
-      .user{
+      .user {
         width: 63px;
-        .userName{
+        .userName {
           display: none;
         }
-        .verticalLine{
+        .verticalLine {
           display: none;
         }
-        .logoutBtn{
+        .logoutBtn {
           display: none;
         }
-        .mobileLogoutBtn{
+        .mobileLogoutBtn {
           display: flex;
           justify-content: center;
           align-items: center;
           width: 16px;
           height: 16px;
 
-          .mobileLogoutBtnImg{
+          .mobileLogoutBtnImg {
             width: 16px;
             height: 16px;
           }

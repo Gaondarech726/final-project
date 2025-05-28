@@ -7,7 +7,7 @@ import DefaultUserAvatar from "./DefaultUserAvatar.svg";
 import "./Header.scss";
 import mobileLogoutBtnImg from "./mobileLogoutBtn.svg";
 
-const Header = ({ username }) => {
+const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let currentUser = useSelector((state) => state.auth.currentUser);
@@ -25,7 +25,6 @@ const Header = ({ username }) => {
         <div className="logo">
           <Link to="../../pages/MainPage.jsx">
             <img src={logo} alt="Логотип" className="logoImg" />
-            {/*лого */}
           </Link>
         </div>
         <div className="user">
@@ -37,12 +36,10 @@ const Header = ({ username }) => {
               {currentUser?.username || "User name"}
             </span>
           </span>{" "}
-          {/* замінити на {userName} */}
           <div className="verticalLine"></div>
           <button className="logoutBtn" onClick={handleAuthButton}>
             {currentUser ? "Вийти" : "Увійти"}
           </button>{" "}
-          {/* Додайти обробник виходу */}
           <button className="mobileLogoutBtn" onClick={handleAuthButton}>
             <img
               src={mobileLogoutBtnImg}
