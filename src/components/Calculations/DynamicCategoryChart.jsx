@@ -31,7 +31,7 @@ const DynamicCategoryChart = ({
         const parsed = JSON.parse(storedData);
         setFinanceEntries(parsed);
       } catch (e) {
-        console.error("Ошибка парсинга financeEntries:", e);
+        console.error("Помилка парсинга financeEntries:", e);
         setFinanceEntries([]);
       }
     }
@@ -49,13 +49,18 @@ const DynamicCategoryChart = ({
 
   const typeMap = {
     costs: "Витрати",
-    revenues: "Доходи",
+    revenues: "Дохід",
   };
 
   const filteredEntries = financeEntries.filter(
     (entry) =>
       entry.type === typeMap[viewMode] && entry.category === categoryDisplayName
   );
+
+  // Debugging output
+  console.log("viewMode:", viewMode);
+  console.log("categoryDisplayName:", categoryDisplayName);
+  console.log("Filtered entries:", filteredEntries);
 
   const groupedData = {};
 
@@ -65,6 +70,8 @@ const DynamicCategoryChart = ({
     if (!groupedData[key]) groupedData[key] = 0;
     groupedData[key] += amount;
   });
+
+  console.log("Grouped data:", groupedData);
 
   const chartDataArray = Object.entries(groupedData).map(([name, value]) => ({
     name,
@@ -96,7 +103,10 @@ const DynamicCategoryChart = ({
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: (context) => `${context.parsed.x || context.parsed.y} грн`,
+          label: (context) => {
+            const value = isMobile ? context.parsed.x : context.parsed.y;
+            return `${value} грн`;
+          },
         },
       },
     },
