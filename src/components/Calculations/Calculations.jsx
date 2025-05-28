@@ -174,7 +174,7 @@ const Calculations = () => {
               <p className="period__p">Поточний період</p>
               <div className="period__div">
                 <MdKeyboardArrowLeft className="period__arrow" />
-                <p className="period__date">Листопад 2019</p>
+                <p className="period__date">Листопад 2025</p>
                 <MdKeyboardArrowRight className="period__arrow" />
               </div>
             </div>
