@@ -202,6 +202,7 @@ const Report = () => {
 
             <input
               className="amount-input"
+              maxLength={10}
               type="number"
               step="0.10"
               placeholder="0,00"
@@ -294,6 +295,43 @@ const Report = () => {
                 ))}
             </div>
           </div>
+          {/* Аня */}
+          {(() => {
+            const getMonthName = (dateString) => {
+              const [day, month, year] = dateString.split(".");
+              const date = new Date(`${year}-${month}-${day}`);
+              return date.toLocaleString("uk-UA", { month: "long" });
+            };
+
+            const monthlySummary = {};
+
+            entries
+              .filter((entry) => entry.type === type)
+              .forEach((entry) => {
+                const month = getMonthName(entry.date);
+                if (!monthlySummary[month]) {
+                  monthlySummary[month] = 0;
+                }
+                monthlySummary[month] += parseFloat(entry.amount);
+              });
+
+            return (
+              <div className="reduction _to-upper-case">
+                <h3 className="reduction-title">Зведення</h3>
+
+                {Object.entries(monthlySummary).map(([month, amount]) => (
+                  <ul key={month} className="reduction-list">
+                    <li>
+                      <span className="_mounth-li">{month}</span>
+                      <span className="_mounth-amount-li">
+                        {amount.toFixed(2)}
+                      </span>
+                    </li>
+                  </ul>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </div>
 
