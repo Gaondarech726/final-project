@@ -8,7 +8,7 @@ import "tippy.js/themes/light.css";
 
 const Report = () => {
   const [type, setType] = useState("Витрати");
-  const [customCategory, setCustomCategory] = useState("");
+  // const [customCategory, setCustomCategory] = useState("");
   const [date, setDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0];
