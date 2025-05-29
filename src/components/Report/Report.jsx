@@ -8,18 +8,16 @@ import "tippy.js/themes/light.css";
 
 const Report = () => {
   const [type, setType] = useState("Витрати");
-
-  const getTodayDate = () => {
+  const [customCategory, setCustomCategory] = useState("");
+  const [date, setDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0];
-  };
-
-  const [customCategory, setCustomCategory] = useState("");
-
-  const [date, setDate] = useState(getTodayDate);
+  });
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
+  const [expenseCategory, setExpenseCategory] = useState("");
+  const [incomeCategory, setIncomeCategory] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
 
@@ -27,17 +25,6 @@ const Report = () => {
     const saved = localStorage.getItem("entries");
     return saved ? JSON.parse(saved) : [];
   });
-
-  const handleClearFields = () => {
-    setDescription("");
-    setCategory("");
-    setAmount("");
-    setDate(getTodayDate());
-  };
-
-  useEffect(() => {
-    localStorage.setItem("entries", JSON.stringify(entries));
-  }, [entries]);
 
   const inputSectionRef = useRef(null);
 
@@ -52,8 +39,29 @@ const Report = () => {
     localStorage.setItem("financeEntries", JSON.stringify(entries));
   }, [entries]);
 
+  const handleClearFields = () => {
+    setDescription("");
+    setAmount("");
+    setDate(() => {
+      const today = new Date();
+      return today.toISOString().split("T")[0];
+    });
+    setCustomCategory("");
+    setExpenseCategory("");
+    setIncomeCategory("");
+  };
+
   const handleAddEntry = () => {
-    if (!description || !category || !amount || !date) {
+    const selectedCategory =
+      type === "Витрати"
+        ? expenseCategory === "Інше"
+          ? customCategory
+          : expenseCategory
+        : incomeCategory === "Інше"
+        ? customCategory
+        : incomeCategory;
+
+    if (!description || !selectedCategory || !amount || !date) {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
@@ -68,13 +76,11 @@ const Report = () => {
           trigger: "manual",
           hideOnClick: true,
         });
-
         instance.show();
         setTimeout(() => instance.hide(), 3000);
       }
       return;
     }
-    const finalCategory = category === "Інше" ? customCategory : category;
 
     const newEntry = {
       id: Date.now(),
@@ -82,13 +88,11 @@ const Report = () => {
       date: new Date(date).toLocaleDateString("uk-UA"),
       description,
       amount: parseFloat(amount).toFixed(2),
-      category: finalCategory,
+      category: selectedCategory,
     };
 
     setEntries([...entries, newEntry]);
-    setDescription("");
-    setCategory("");
-    setAmount("");
+    handleClearFields();
   };
 
   const handleAskDelete = (id) => {
@@ -110,20 +114,18 @@ const Report = () => {
   return (
     <div className="report-container">
       <div className="report-nav-container">
-        <div className="report-nav-container">
-          <button
-            className={`finance ${type === "Витрати" ? "_active" : ""}`}
-            onClick={() => setType("Витрати")}
-          >
-            Витрати
-          </button>
-          <button
-            className={`finance ${type === "Дохід" ? "_active" : ""}`}
-            onClick={() => setType("Дохід")}
-          >
-            Дохід
-          </button>
-        </div>
+        <button
+          className={`finance ${type === "Витрати" ? "_active" : ""}`}
+          onClick={() => setType("Витрати")}
+        >
+          Витрати
+        </button>
+        <button
+          className={`finance ${type === "Дохід" ? "_active" : ""}`}
+          onClick={() => setType("Дохід")}
+        >
+          Дохід
+        </button>
       </div>
 
       <div className="cost-container">
@@ -147,36 +149,58 @@ const Report = () => {
               maxLength={25}
               spellCheck={true}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleAddEntry();
-                }
-                if (e.key === "Delete") {
-                  handleClearFields();
-                }
+                if (e.key === "Enter") handleAddEntry();
+                if (e.key === "Delete") handleClearFields();
               }}
             />
-            {category !== "Інше" ? (
+
+            {type === "Витрати" ? (
+              expenseCategory !== "Інше" ? (
+                <select
+                  className="product-category"
+                  value={expenseCategory}
+                  onChange={(e) => setExpenseCategory(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Категорія витрат
+                  </option>
+                  {[
+                    "Транспорт",
+                    "Продукти",
+                    "Здоров'я",
+                    "Алкоголь",
+                    "Розваги",
+                    "Все для дому",
+                    "Техніка",
+                    "Комунальний зв'язок",
+                    "Спорт, хобі",
+                    "Навчання",
+                    "Інше",
+                  ].map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  className="product-category"
+                  type="text"
+                  placeholder="Інше..."
+                  value={customCategory}
+                  onChange={(e) => setCustomCategory(e.target.value)}
+                />
+              )
+            ) : incomeCategory !== "Інше" ? (
               <select
                 className="product-category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                value={incomeCategory}
+                onChange={(e) => setIncomeCategory(e.target.value)}
               >
                 <option value="" disabled>
-                  Категорія товару
+                  Категорія доходу
                 </option>
-                {[
-                  "Транспорт",
-                  "Продукти",
-                  "Здоров'я",
-                  "Алкоголь",
-                  "Розваги",
-                  "Все для дому",
-                  "Техніка",
-                  "Комунальний зв'язок",
-                  "Спорт, хобі",
-                  "Навчання",
-                  "Інше",
-                ].map((cat) => (
+                {["ЗП", "Дод. прибуток", "Інше"].map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>
@@ -189,32 +213,19 @@ const Report = () => {
                 placeholder="Інше..."
                 value={customCategory}
                 onChange={(e) => setCustomCategory(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleAddEntry();
-                  }
-                  if (e.key === "Delete") {
-                    handleClearFields();
-                  }
-                }}
               />
             )}
 
             <input
               className="amount-input"
-              maxLength={10}
               type="number"
               step="0.10"
               placeholder="0,00"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleAddEntry();
-                }
-                if (e.key === "Delete") {
-                  handleClearFields();
-                }
+                if (e.key === "Enter") handleAddEntry();
+                if (e.key === "Delete") handleClearFields();
               }}
             />
           </div>
@@ -258,7 +269,6 @@ const Report = () => {
                       {entry.type === "Витрати" ? "- " : "+ "}
                       {entry.amount} грн.
                     </li>
-
                     <li className="delete-btn _delete-li">
                       <button
                         className="delete-btn-icon"
@@ -295,7 +305,7 @@ const Report = () => {
                 ))}
             </div>
           </div>
-          {/* Аня */}
+
           {(() => {
             const getMonthName = (dateString) => {
               const [day, month, year] = dateString.split(".");
@@ -318,26 +328,30 @@ const Report = () => {
             return (
               <div className="reduction _to-upper-case">
                 <h3 className="reduction-title">Зведення</h3>
-
-                {Object.entries(monthlySummary).map(([month, amount]) => (
-                  <ul key={month} className="reduction-list">
-                    <li>
-                      <span className="_mounth-li">{month}</span>
-                      <span className="_mounth-amount-li">
-                        {amount.toFixed(2)}
-                      </span>
-                    </li>
-                  </ul>
-                ))}
+                <div style={{ maxHeight: "238px", overflowY: "auto" }}>
+                  {Object.entries(monthlySummary).map(([month, amount]) => (
+                    <ul key={month} className="reduction-list">
+                      <li>
+                        <span className="_mounth-li">{month}</span>
+                        <span className="_mounth-amount-li">
+                          {amount.toFixed(2)}
+                        </span>
+                      </li>
+                    </ul>
+                  ))}
+                </div>
               </div>
             );
           })()}
         </div>
-      </div>
 
-      {isModalOpen && (
-        <Modal onConfirm={handleConfirmDelete} onCancel={handleCancelDelete} />
-      )}
+        {isModalOpen && (
+          <Modal
+            onConfirm={handleConfirmDelete}
+            onCancel={handleCancelDelete}
+          />
+        )}
+      </div>
     </div>
   );
 };

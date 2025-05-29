@@ -303,17 +303,13 @@ body {
         }
 
         ._description-li {
+          height: 14px;
+
           width: 184px;
           text-align: left;
 
-          overflow: hidden;
-
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          word-break: break-word;
-          max-height: calc(1.4em * 3);
+          overflow-x: scroll;
+          scrollbar-width: none;
         }
 
         ._category-li {
@@ -383,6 +379,9 @@ body {
 
             ._amount-li {
               font-weight: 700;
+
+              overflow-x: scroll;
+              scrollbar-width: none;
 
               &.income {
                 color: $correct-color;
@@ -461,10 +460,17 @@ body {
           justify-content: space-between;
 
           span {
+            width: 84px;
+
             font-family: Roboto;
             font-size: 12px;
             font-weight: 400;
             color: $main-text-color;
+          }
+          ._mounth-amount-li {
+            text-align: end;
+            overflow-x: scroll;
+            scrollbar-width: none;
           }
         }
       }
