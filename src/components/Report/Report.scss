@@ -22,8 +22,6 @@ body {
   background-size: auto;
 
   .report-container {
-    margin: 20px;
-
     width: 1060px;
     height: 620px;
 
@@ -31,6 +29,8 @@ body {
     flex-flow: column wrap;
     justify-content: space-around;
     align-items: start;
+
+    margin: 0 auto;
 
     .report-nav-container {
       width: 276px;
@@ -156,6 +156,7 @@ body {
             background-color: $grey-hover;
             color: $main-text-color;
           }
+
           &::placeholder {
             color: #c7ccdc;
           }
