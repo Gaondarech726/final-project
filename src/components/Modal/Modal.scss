@@ -9,17 +9,7 @@
   border: none;
 }
 
-$orange-color: #ff751d;
-$main-color: #f5f6fb;
-$main-text-color: #52555f;
-
-$grey-hover: darken($main-color, 5%);
-
-$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
-$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
-
-$error-color: #e7192e;
-$correct-color: #407946;
+@import "../../utiles/vars";
 
 $transition: 0.05s ease;
 .ModalOverlay {
