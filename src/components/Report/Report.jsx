@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import "./Report.scss";
+import { useEffect, useRef, useState } from "react";
 import { Modal } from "../Modal/Modal";
+import "./Report.scss";
 
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
@@ -8,13 +8,13 @@ import "tippy.js/themes/light.css";
 
 const Report = () => {
   const [type, setType] = useState("Витрати");
-  // const [customCategory, setCustomCategory] = useState("");
+  const [customCategory, setCustomCategory] = useState("");
   const [date, setDate] = useState(() => {
     const today = new Date();
     return today.toISOString().split("T")[0];
   });
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
