@@ -38,14 +38,16 @@ export const ModalTwo = ({ onConfirm, onCancel }) => {
   return (
     <div className="ModalOverlay">
       <div className="YouSureModal">
-        <h3 className="YouSureTextModal">Ви дійсно хочете вийти?</h3>
-        <div className="YouSureButtons">
-          <button className="YouSureYesModal" onClick={onConfirm}>
-            Так
-          </button>
-          <button className="YouSureNoModal" onClick={onCancel}>
-            Ні
-          </button>
+        <div className="data-container">
+          <h3 className="YouSureTextModal">Ви дійсно хочете вийти?</h3>
+          <div className="YouSureButtons">
+            <button className="btn-orange" onClick={onConfirm}>
+              Так
+            </button>
+            <button className="btn-grey _no-btn" onClick={onCancel}>
+              Ні
+            </button>
+          </div>
         </div>
       </div>
     </div>
