@@ -352,3 +352,17 @@
     transform: translate3d(0px, 260px, 0px) !important;
   }
 }
+
+.button:disabled {
+  background-color: $main-color !important;
+  color: $main-text-color !important;
+  border-color: #fff !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.button:disabled:hover {
+  cursor: not-allowed !important;
+  background-color: $main-color !important;
+  color: $main-text-color !important;
+}
