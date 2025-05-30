@@ -49,20 +49,31 @@ const Balance = () => {
   }, []);
 
   useEffect(() => {
-    setInputBalance(currentUser?.balance || "");
+    const savedUser = localStorage.getItem("currentUser");
+    const parsedUser = savedUser ? JSON.parse(savedUser) : null;
 
-    // Перевіряємо, чи вже встановлено баланс у localStorage
-    const savedBalance = localStorage.getItem("balance");
-    if (savedBalance && parseFloat(savedBalance) > 0) {
-      setIsBalanceSet(true);
+    if (parsedUser) {
+      setInputBalance(parsedUser.balance || "");
+      if (parseFloat(parsedUser.balance) > 0) {
+        setIsBalanceSet(true);
+      }
     }
-  }, [currentUser]);
+  }, []);
 
   const handleBalanceSubmit = () => {
     const numericBalance = parseFloat(inputBalance);
     if (!isNaN(numericBalance)) {
       dispatch(updateBalance(numericBalance));
-      localStorage.setItem("balance", numericBalance);
+
+      const savedUser = localStorage.getItem("currentUser");
+      const parsedUser = savedUser ? JSON.parse(savedUser) : {};
+
+      const updatedUser = {
+        ...parsedUser,
+        balance: numericBalance,
+      };
+
+      localStorage.setItem("currentUser", JSON.stringify(updatedUser));
       setIsBalanceSet(true);
     }
   };
