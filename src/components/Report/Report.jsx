@@ -65,11 +65,11 @@ const Report = () => {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
-            <div style="text-align:left;">
-              <strong>Заповніть усі поля!</strong><br/>
-              Опис, категорія, сума та дата — обов'язкові
-            </div>
-          `,
+          <div style="text-align:left;">
+            <strong>Заповніть усі поля!</strong><br/>
+            Опис, категорія, сума та дата — обов'язкові
+          </div>
+        `,
           allowHTML: true,
           placement: "top",
           theme: "light",
@@ -82,12 +82,27 @@ const Report = () => {
       return;
     }
 
+    const currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
+    const entryAmount = parseFloat(amount);
+
+    if (type === "Витрати" && entryAmount > currentBalance) {
+      alert("Недостатньо коштів на рахунку!");
+      return;
+    }
+
+    const newBalance =
+      type === "Витрати"
+        ? currentBalance - entryAmount
+        : currentBalance + entryAmount;
+
+    localStorage.setItem("balance", newBalance.toFixed(2));
+
     const newEntry = {
       id: Date.now(),
       type,
       date: new Date(date).toLocaleDateString("uk-UA"),
       description,
-      amount: parseFloat(amount).toFixed(2),
+      amount: entryAmount.toFixed(2),
       category: selectedCategory,
     };
 
