@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import "./Report.scss";
+import { useEffect, useRef, useState } from "react";
 import { Modal } from "../Modal/Modal";
+import "./Report.scss";
 
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
@@ -14,7 +14,7 @@ const Report = () => {
     return today.toISOString().split("T")[0];
   });
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  // const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
@@ -65,11 +65,11 @@ const Report = () => {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
-            <div style="text-align:left;">
-              <strong>Заповніть усі поля!</strong><br/>
-              Опис, категорія, сума та дата — обов'язкові
-            </div>
-          `,
+          <div style="text-align:left;">
+            <strong>Заповніть усі поля!</strong><br/>
+            Опис, категорія, сума та дата — обов'язкові
+          </div>
+        `,
           allowHTML: true,
           placement: "top",
           theme: "light",
@@ -82,12 +82,27 @@ const Report = () => {
       return;
     }
 
+    const currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
+    const entryAmount = parseFloat(amount);
+
+    if (type === "Витрати" && entryAmount > currentBalance) {
+      alert("Недостатньо коштів на рахунку!");
+      return;
+    }
+
+    const newBalance =
+      type === "Витрати"
+        ? currentBalance - entryAmount
+        : currentBalance + entryAmount;
+
+    localStorage.setItem("balance", newBalance.toFixed(2));
+
     const newEntry = {
       id: Date.now(),
       type,
       date: new Date(date).toLocaleDateString("uk-UA"),
       description,
-      amount: parseFloat(amount).toFixed(2),
+      amount: entryAmount.toFixed(2),
       category: selectedCategory,
     };
 
