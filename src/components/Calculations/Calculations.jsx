@@ -114,7 +114,7 @@ const Calculations = () => {
 
   const categoriesRevenues = [
     { order: 1, name: "salary", renderName: "ЗП" },
-    { order: 2, name: "additionalRevenue", renderName: "Дод. Дохід" },
+    { order: 2, name: "additionalRevenue", renderName: "Дод. прибуток" },
   ];
 
   const iconsMap = {
