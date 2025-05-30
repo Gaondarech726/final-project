@@ -6,26 +6,39 @@ import { logout } from "../../redux/authSlice";
 import DefaultUserAvatar from "./DefaultUserAvatar.svg";
 import "./Header.scss";
 import mobileLogoutBtnImg from "./mobileLogoutBtn.svg";
+import { useState } from "react";
+import { ModalTwo } from "../Modal/Modal"; // <-- імпортуємо модалку
 
 const Header = ({ username }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let currentUser = useSelector((state) => state.auth.currentUser);
+  const currentUser = useSelector((state) => state.auth.currentUser);
 
-  const handleAuthButton = (e) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleAuthButton = () => {
     if (currentUser) {
-      dispatch(logout());
+      setIsModalOpen(true); // відкриваємо модалку замість logout
     } else {
       navigate("./register");
     }
   };
+
+  const handleConfirmLogout = () => {
+    dispatch(logout());
+    setIsModalOpen(false);
+  };
+
+  const handleCancelLogout = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="headerDiv">
         <div className="logo">
           <Link to="/start">
             <img src={logo} alt="Логотип" className="logoImg" />
-            {/*лого */}
           </Link>
         </div>
         <div className="user">
@@ -33,16 +46,12 @@ const Header = ({ username }) => {
             <img src={DefaultUserAvatar} alt="Avatar" className="avatarImg" />
           </Link>
           <span className="userName">
-            <span className="userName">
-              {currentUser?.username || "User name"}
-            </span>
-          </span>{" "}
-          {/* замінити на {userName} */}
+            {currentUser?.username || "User name"}
+          </span>
           <div className="verticalLine"></div>
           <button className="logoutBtn" onClick={handleAuthButton}>
             {currentUser ? "Вийти" : "Увійти"}
-          </button>{" "}
-          {/* Додайти обробник виходу */}
+          </button>
           <button className="mobileLogoutBtn" onClick={handleAuthButton}>
             <img
               src={mobileLogoutBtnImg}
@@ -52,6 +61,13 @@ const Header = ({ username }) => {
           </button>
         </div>
       </div>
+
+      {isModalOpen && (
+        <ModalTwo
+          onConfirm={handleConfirmLogout}
+          onCancel={handleCancelLogout}
+        />
+      )}
     </header>
   );
 };
