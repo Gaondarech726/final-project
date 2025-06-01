@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import tippy from 'tippy.js';
 import { updateBalance } from '../../redux/authSlice';
-import mainPageBackground from '../../img/login-background.svg';
 
 import './Balance.scss';
 

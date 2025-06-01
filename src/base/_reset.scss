@@ -1,13 +1,13 @@
 //===
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import '../utiles/vars';
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../utiles/vars";
 //===
 
 * {
-	margin: 0;
-	padding: 0;
-	font-family: Roboto;
-	border: none;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto;
+  border: none;
 }
 $orange-color: #ff751d;
 $main-color: #f5f6fb;
@@ -21,98 +21,98 @@ $grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
 $error-color: #e7192e;
 $correct-color: #407946;
 
-$transition: 0.1s ease;
+$transition: 0.05s ease;
 
 *:focus {
-	outline: none;
+  outline: none;
 }
 
 body {
-	scroll-behavior: smooth;
+  scroll-behavior: smooth;
 
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-	img {
-		width: 100%;
-		height: auto;
-		line-height: 0;
-		display: block;
-	}
+  img {
+    width: 100%;
+    height: auto;
+    line-height: 0;
+    display: block;
+  }
 
-	a {
-		text-decoration-line: none;
-		color: $main-text-color;
-	}
+  a {
+    text-decoration-line: none;
+    color: $main-text-color;
+  }
 
-	ul {
-		list-style-type: none;
-	}
+  ul {
+    list-style-type: none;
+  }
 
-	button {
-		cursor: pointer;
-		display: block;
-		border: none;
-		background-color: transparent;
+  button {
+    cursor: pointer;
+    display: block;
+    border: none;
+    background-color: transparent;
 
-		padding: 12px 24px;
-		border-radius: 16px;
+    padding: 12px 24px;
+    border-radius: 16px;
 
-		font-size: 12px;
-		font-weight: 700;
-		text-transform: uppercase;
-	}
-	._to-upper-case {
-		text-transform: uppercase;
-	}
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  ._to-upper-case {
+    text-transform: uppercase;
+  }
 
-	.btn-orange {
-		background-color: $orange-color;
-		color: #fff;
-		box-shadow: $orange-shadow;
+  .btn-orange {
+    background-color: $orange-color;
+    color: #fff;
+    box-shadow: $orange-shadow;
 
-		&:hover {
-			transition: $transition;
+    &:hover {
+      transition: $transition;
 
-			background-color: #fff;
-			color: $orange-color;
-			border: $orange-color 2px solid;
-			box-shadow: $orange-shadow;
-		}
-		&:active {
-			transform: translateY(2px);
-		}
-	}
+      background-color: #fff;
+      color: $orange-color;
+      border: $orange-color 2px solid;
+      box-shadow: $orange-shadow;
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+  }
 
-	.btn-grey {
-		background-color: $main-color;
-		color: $main-text-color;
-		box-shadow: $grey-shadow;
+  .btn-grey {
+    background-color: $main-color;
+    color: $main-text-color;
+    box-shadow: $grey-shadow;
 
-		&:hover {
-			transition: $transition;
+    &:hover {
+      transition: $transition;
 
-			background-color: $grey-hover;
-			box-shadow: $grey-shadow;
-		}
-		&:active {
-			transform: translateY(2px);
-		}
-	}
+      background-color: $grey-hover;
+      box-shadow: $grey-shadow;
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+  }
 
-	.input-login {
-		width: auto;
-		background-color: $main-color;
-		padding: 12px 24px;
-		border-radius: 30px;
-		border: none;
+  .input-login {
+    width: auto;
+    background-color: $main-color;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
 
-		color: $main-text-color;
+    color: $main-text-color;
 
-		&:focus {
-			background-color: $grey-hover;
-			box-shadow: $grey-shadow;
-		}
-	}
+    &:focus {
+      background-color: $grey-hover;
+      box-shadow: $grey-shadow;
+    }
+  }
 }
