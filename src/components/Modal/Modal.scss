@@ -1,104 +1,116 @@
 //===
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 //===
 
 * {
-  margin: 0;
-  padding: 0;
-  font-family: Roboto;
-  border: none;
+	margin: 0;
+	padding: 0;
+	font-family: Roboto;
+	border: none;
 }
 
-@import "../../utiles/vars";
+@import '../../utiles/vars';
 
 $transition: 0.05s ease;
+
+@keyframes modalFadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 .ModalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
 
-  width: 100vw;
-  height: 100vh;
+	width: 100vw;
+	height: 100vh;
 
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  z-index: 999;
+	background-color: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(5px);
+	z-index: 999;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  .YouSureModal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
+	.YouSureModal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1000;
 
-    height: 200px;
-    width: 28vw;
+		height: 200px;
+		width: 28vw;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-    background-color: #fff;
+		background-color: #fff;
 
-    border: none;
-    border-radius: 30px;
+		border: none;
+		border-radius: 30px;
 
-    font-family: Roboto;
-    font-weight: 500;
-    font-size: 14px;
+		font-family: Roboto;
+		font-weight: 500;
+		font-size: 14px;
 
-    .data-container {
-      height: 84px;
-      width: 265px;
+		animation: modalFadeIn 0.4s ease-out;
 
-      display: flex;
-      flex-flow: column wrap;
-      justify-content: space-between;
-      align-items: center;
+		.data-container {
+			height: 84px;
+			width: 265px;
 
-      .YouSureTextModal {
-        width: 265px;
-        height: 20px;
-        color: #52555f;
-        display: flex;
+			display: flex;
+			flex-flow: column wrap;
+			justify-content: space-between;
+			align-items: center;
 
-        justify-content: center;
-      }
-      .YouSureButtons {
-        display: flex;
-        flex-flow: row wrap;
+			.YouSureTextModal {
+				width: 265px;
+				height: 20px;
+				color: #52555f;
+				display: flex;
 
-        width: 265px;
+				justify-content: center;
+			}
+			.YouSureButtons {
+				display: flex;
+				flex-flow: row wrap;
 
-        justify-content: space-between;
-        align-items: center;
+				width: 265px;
 
-        button {
-          height: 44px;
-          width: 125px;
-          box-shadow: none;
-        }
-        ._no-btn {
-          background-color: transparent;
+				justify-content: space-between;
+				align-items: center;
 
-          border-radius: 16px;
-          border: 2px solid #f5f6fb;
+				button {
+					height: 44px;
+					width: 125px;
+					box-shadow: none;
+				}
+				._no-btn {
+					background-color: transparent;
 
-          &:hover {
-            transition: $transition;
+					border-radius: 16px;
+					border: 2px solid #f5f6fb;
 
-            background-color: $grey-hover;
-            border: none;
-          }
-          &:active {
-            transform: translateY(2px);
-          }
-        }
-      }
-    }
-  }
+					&:hover {
+						transition: $transition;
+
+						background-color: $grey-hover;
+						border: none;
+					}
+					&:active {
+						transform: translateY(2px);
+					}
+				}
+			}
+		}
+	}
 }
