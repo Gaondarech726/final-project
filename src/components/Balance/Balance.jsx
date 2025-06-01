@@ -11,6 +11,7 @@ const Balance = () => {
 	const dispatch = useDispatch();
 	const currentUser = useSelector(state => state.auth.currentUser);
 	const [inputBalance, setInputBalance] = useState(currentUser?.balance || '');
+	const [isBalanceSet, setIsBalanceSet] = useState(false);
 
 	useEffect(() => {
 		const alreadyShown = localStorage.getItem('balanceTooltipShown');
@@ -47,16 +48,35 @@ const Balance = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		const savedUser = localStorage.getItem('currentUser');
+		const parsedUser = savedUser ? JSON.parse(savedUser) : null;
+
+		if (parsedUser) {
+			setInputBalance(parsedUser.balance || '');
+			if (parseFloat(parsedUser.balance) > 0) {
+				setIsBalanceSet(true);
+			}
+		}
+	}, []);
+
 	const handleBalanceSubmit = () => {
 		const numericBalance = parseFloat(inputBalance);
 		if (!isNaN(numericBalance)) {
 			dispatch(updateBalance(numericBalance));
+
+			const savedUser = localStorage.getItem('currentUser');
+			const parsedUser = savedUser ? JSON.parse(savedUser) : {};
+
+			const updatedUser = {
+				...parsedUser,
+				balance: numericBalance,
+			};
+
+			localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+			setIsBalanceSet(true);
 		}
 	};
-
-	useEffect(() => {
-		setInputBalance(currentUser?.balance || '');
-	}, [currentUser]);
 
 	return (
 		<section className='balance'>
@@ -69,11 +89,21 @@ const Balance = () => {
 							type='number'
 							placeholder='0.00'
 							value={inputBalance}
-							onChange={e => setInputBalance(e.target.value)}
+							onChange={e => {
+								const value = e.target.value;
+								if (/^\d*\.?\d{0,2}$/.test(value)) {
+									setInputBalance(value);
+								}
+							}}
+							disabled={isBalanceSet}
 						/>
 						<span className='currency'>UAH</span>
 					</div>
-					<button className='button' onClick={handleBalanceSubmit}>
+					<button
+						className='button'
+						onClick={handleBalanceSubmit}
+						disabled={isBalanceSet}
+					>
 						ПІДТВЕРДИТИ
 					</button>
 				</div>
