@@ -61,7 +61,6 @@ const Balance = () => {
 
 	return (
 		<section className='balance'>
-			<img src={mainPageBackground} alt='' className='mainPage-background' />
 			<div className='balance__counter'>
 				<span className='span__balance'>Баланс:</span>
 
