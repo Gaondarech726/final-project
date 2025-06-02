@@ -1,3 +1,4 @@
+// Report.jsx
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import "./Report.scss";
@@ -6,7 +7,16 @@ import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { Bounce, toast } from "react-toastify";
+import { updateBalance } from "../../redux/authSlice";
+
 const Report = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+
+  const currentBalance = currentUser ? parseFloat(currentUser.balance) : 0;
+
   const [type, setType] = useState("Витрати");
   const [customCategory, setCustomCategory] = useState("");
   const [date, setDate] = useState(() => {
@@ -14,7 +24,6 @@ const Report = () => {
     return today.toISOString().split("T")[0];
   });
   const [description, setDescription] = useState("");
-  // const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
@@ -22,7 +31,7 @@ const Report = () => {
   const [entryToDelete, setEntryToDelete] = useState(null);
 
   const [entries, setEntries] = useState(() => {
-    const saved = localStorage.getItem("entries");
+    const saved = localStorage.getItem("financeEntries");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -65,11 +74,11 @@ const Report = () => {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
-          <div style="text-align:left;">
-            <strong>Заповніть усі поля!</strong><br/>
-            Опис, категорія, сума та дата — обов'язкові
-          </div>
-        `,
+            <div style="text-align:left;">
+              <strong>Заповніть усі поля!</strong><br/>
+              Опис, категорія, сума та дата — обов'язкові
+            </div>
+          `,
           allowHTML: true,
           placement: "top",
           theme: "light",
@@ -82,20 +91,34 @@ const Report = () => {
       return;
     }
 
-    const currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
     const entryAmount = parseFloat(amount);
-
-    if (type === "Витрати" && entryAmount > currentBalance) {
-      alert("Недостатньо коштів на рахунку!");
+    if (isNaN(entryAmount) || entryAmount <= 0) {
       return;
     }
 
-    const newBalance =
-      type === "Витрати"
-        ? currentBalance - entryAmount
-        : currentBalance + entryAmount;
+    let newBalance = currentBalance;
 
-    localStorage.setItem("balance", newBalance.toFixed(2));
+    if (type === "Витрати") {
+      if (entryAmount > currentBalance) {
+        toast.error("Недостатньо коштів на рахунку", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        return;
+      }
+      newBalance = currentBalance - entryAmount;
+    } else {
+      newBalance = currentBalance + entryAmount;
+    }
+
+    dispatch(updateBalance(newBalance));
 
     const newEntry = {
       id: Date.now(),
@@ -116,6 +139,19 @@ const Report = () => {
   };
 
   const handleConfirmDelete = () => {
+    const entryToRemove = entries.find((entry) => entry.id === entryToDelete);
+    if (entryToRemove) {
+      let newBalance = currentBalance;
+      const amountToRemove = parseFloat(entryToRemove.amount);
+
+      if (entryToRemove.type === "Витрати") {
+        newBalance = currentBalance + amountToRemove;
+      } else {
+        newBalance = currentBalance - amountToRemove;
+      }
+      dispatch(updateBalance(newBalance));
+    }
+
     setEntries(entries.filter((entry) => entry.id !== entryToDelete));
     setIsModalOpen(false);
     setEntryToDelete(null);
