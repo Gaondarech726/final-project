@@ -1,526 +1,499 @@
 //===
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../../utiles/vars";
+
 //===
 
-$orange-color: #ff751d;
-$main-color: #f5f6fb;
-$main-text-color: #52555f;
-
-$grey-hover: darken($main-color, 5%);
-
-$orange-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
-$grey-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
-
-$error-color: #e7192e;
-$correct-color: #407946;
-
-$transition: 0.05s ease;
-
 @keyframes ReportAnimation {
-	0% {
-		opacity: 0;
-		transform: translateY(-5px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(0);
-	}
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 body {
-	background-image: url(../../img/hero.svg);
-	background-repeat: no-repeat;
-	background-size: auto;
-
-	.report-container {
-		width: 1060px;
-		height: 620px;
-
-		display: flex;
-		flex-flow: column wrap;
-		justify-content: space-around;
-		align-items: start;
-
-		margin: 0 auto;
-
-		.report-nav-container {
-			width: 276px;
-			height: 40px;
-
-			display: flex;
-			flex-flow: row-reverse;
-			justify-content: start;
-
-			.finance {
-				width: 138px;
-				height: 40px;
-
-				border-radius: 24px 24px 0 0;
-
-				background-color: $main-color;
-				box-shadow: 10px -11px 20px -14px rgba(7, 11, 15, 0.5);
-
-				&:hover {
-					background-color: lighten($main-color, 5%);
-				}
-
-				&._active {
-					background-color: #fefefe;
-					color: $orange-color;
-				}
-			}
-		}
-
-		.cost-container {
-			width: 1060px;
-			height: 579px;
-
-			display: flex;
-			flex-flow: column wrap;
-			justify-content: space-around;
-			align-items: center;
-
-			border-radius: 0 24px 24px 24px;
-
-			box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
-
-			background-color: #fff;
-
-			.filter-container {
-				width: 1020px;
-				height: 44px;
-
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: space-between;
-
-				.date-wrapper {
-					width: 98px;
-					height: 44px;
-					padding-top: 2px;
-
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: end;
-					padding-left: 20px;
-					align-items: center;
-
-					border: none;
-					background-color: transparent;
-
-					color: $main-text-color;
-
-					font-family: Roboto;
-					font-size: 12px;
-					font-weight: 900;
-
-					background-image: url(./svg/calendar-icon.svg);
-					background-repeat: no-repeat;
-					background-position: 0 13.8px;
-
-					.choose-date {
-						position: relative;
-						top: 0;
-						left: 0;
-
-						width: 100%;
-						padding-left: 35px;
-						background: transparent;
-						border: none;
-						font-weight: 900;
-						font-size: 12px;
-						font-family: Roboto;
-						color: #52555f;
-
-						&::-webkit-calendar-picker-indicator {
-							position: absolute;
-							opacity: 0;
-							width: 100%;
-							height: 100%;
-							left: 0;
-							top: 0;
-							cursor: pointer;
-						}
-					}
-				}
-			}
-
-			.bill-container {
-				width: 600px;
-				height: 44px;
-
-				overflow: hidden;
-
-				display: flex;
-				flex-flow: row nowrap;
-				justify-content: space-between;
-
-				border: $main-color 2px solid;
-				border-radius: 16px 16px 16px 0px;
-
-				input {
-					background-color: transparent;
-					color: #c7ccdc;
-					border: none;
-
-					&:focus {
-						background-color: $grey-hover;
-						color: $main-text-color;
-					}
-
-					&::placeholder {
-						color: #c7ccdc;
-					}
-				}
-
-				.product-description {
-					width: 250px;
-					padding-left: 20px;
-					border-right: $main-color 2px solid;
-				}
-
-				.product-category {
-					width: 188px;
-					padding-left: 10px;
-
-					border: none;
-					border-radius: 0;
-					font-family: Roboto;
-
-					color: #c7ccdc;
-
-					option {
-						font-family: Roboto;
-						font-size: 12px;
-						color: #c7ccdc;
-
-						appearance: none;
-					}
-				}
-
-				.amount-input {
-					width: 92px;
-					height: 44px;
-
-					color: $main-color;
-
-					display: flex;
-					flex-flow: row wrap;
-
-					text-align: end;
-					align-items: center;
-
-					padding-right: 50px;
-
-					background-image: url(./svg/calculator-icon.svg);
-					background-repeat: no-repeat;
-					background-position: 106px 12px;
-
-					border-left: $main-color 2px solid;
-				}
-
-				input[type='number']::-webkit-inner-spin-button,
-				input[type='number']::-webkit-outer-spin-button {
-					appearance: none;
-				}
-			}
-			.btn-operators-container {
-				width: 265px;
-				height: 44px;
-
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: space-between;
-
-				button {
-					width: 125px;
-
-					box-shadow: none;
-				}
-
-				._clear-btn {
-					background-color: transparent;
-
-					border-radius: 16px;
-					border: 2px solid #f5f6fb;
-
-					&:hover {
-						transition: $transition;
-
-						background-color: $grey-hover;
-						border: none;
-					}
-					&:active {
-						transform: translateY(2px);
-					}
-				}
-			}
-		}
-
-		.reoprt-list-container {
-			width: 1020px;
-			height: 382px;
-
-			display: flex;
-			flex-flow: row wrap;
-			align-items: start;
-			justify-content: space-between;
-
-			.bill-table {
-				overflow: hidden;
-				width: 760px;
-				height: 403px;
-
-				border: $main-color 2px solid;
-				border-radius: 20px 20px 0 0;
-
-				display: flex;
-				flex-flow: column wrap;
-
-				box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
-				// background-color: greenyellow;
-
-				.thead-div {
-					background-color: $main-color;
-
-					height: 38px;
-					width: 760px;
-
-					ul {
-						height: 38px;
-						width: 760px;
-
-						display: flex;
-						flex-flow: row wrap;
-						align-items: center;
-						justify-content: space-between;
-
-						font-family: Roboto;
-						font-size: 12px;
-						font-weight: bold;
-						text-align: center;
-
-						padding-left: 10px;
-						padding-right: 10px;
-
-						li {
-							height: 14px;
-							margin: 10px;
-						}
-					}
-				}
-				._data-li {
-					width: 104px;
-					text-align: left;
-				}
-
-				._description-li {
-					height: 14px;
-
-					width: 184px;
-					text-align: left;
-
-					overflow-x: scroll;
-					scrollbar-width: none;
-				}
-
-				._category-li {
-					width: 172px;
-					text-align: center;
-				}
-
-				._amount-li {
-					width: 104px;
-					text-align: right;
-				}
-
-				._delete-li {
-					width: 96px;
-				}
-
-				.tbody-div {
-					max-height: 344px;
-					width: 760px;
-
-					overflow-y: auto;
-					overflow-x: hidden;
-
-					display: block;
-
-					scrollbar-width: thin;
-					scrollbar-color: $orange-color transparent;
-
-					.day-report {
-						animation: ReportAnimation 0.5s ease-out;
-
-						&:hover {
-							scale: 1.02;
-						}
-					}
-
-					&::-webkit-scrollbar {
-						width: 6px;
-					}
-
-					&::-webkit-scrollbar-track {
-						background: transparent;
-					}
-
-					&::-webkit-scrollbar-thumb {
-						background-color: $main-color;
-						border-radius: 4px;
-					}
-					&::-webkit-scrollbar-button {
-						display: none;
-						height: 0;
-						width: 0;
-					}
-
-					ul {
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-						height: 38px;
-						width: 100%;
-
-						border-bottom: 2px solid $main-color;
-						padding: 0 10px;
-
-						overflow: hidden;
-
-						li {
-							height: 14px;
-							margin: 10px;
-							color: $main-text-color;
-							font-family: Roboto;
-							font-size: 12px;
-							font-weight: 400;
-						}
-
-						._amount-li {
-							font-weight: 700;
-
-							overflow-x: scroll;
-							scrollbar-width: none;
-
-							&.income {
-								color: $correct-color;
-							}
-
-							&.expense {
-								color: $error-color;
-							}
-						}
-
-						._delete-li {
-							height: 32px;
-							display: flex;
-							justify-content: center;
-							align-items: center;
-							margin: 0;
-
-							.delete-btn-icon {
-								width: 32px;
-								height: 32px;
-								padding: 7.3px;
-
-								&:hover {
-									background-color: $grey-hover;
-								}
-
-								&:active {
-									transform: translateY(2px);
-								}
-							}
-						}
-					}
-				}
-			}
-
-			//Аня
-
-			.reduction {
-				background-color: $main-color;
-				border-radius: 20px 20px 20px 0;
-
-				height: 270px;
-				width: 230px;
-
-				overflow: hidden;
-			}
-
-			.reduction-title {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				font-size: 12px;
-
-				color: black;
-
-				padding: 15px;
-
-				border-bottom: 2px solid #fff;
-			}
-
-			.reduction-list {
-				height: 40px;
-
-				display: flex;
-				align-items: center;
-
-				padding: 0 20px;
-
-				border-bottom: 2px solid #fff;
-
-				li {
-					width: 100%;
-
-					display: flex;
-					justify-content: space-between;
-
-					span {
-						width: 84px;
-
-						font-family: Roboto;
-						font-size: 12px;
-						font-weight: 400;
-						color: $main-text-color;
-					}
-					._mounth-amount-li {
-						text-align: end;
-						overflow-x: scroll;
-						scrollbar-width: none;
-					}
-				}
-			}
-
-			@media (min-width: 768px) and (max-width: 1024px) {
-				.reduction {
-					margin: 0;
-					padding: 81px;
-				}
-
-				.reduction-list li {
-					padding: 8px 16px;
-					font-size: 14px;
-				}
-
-				.reduction-title {
-					font-size: 18px;
-				}
-			}
-
-			@media (max-width: 480px) {
-				.reduction {
-					display: none;
-				}
-			}
-		}
-
-		&::selection {
-			background-color: $orange-color;
-			color: #fff;
-		}
-	}
+  background-image: url(../../img/hero.svg);
+  background-repeat: no-repeat;
+  background-size: auto;
+
+  .report-container {
+    width: 1060px;
+    height: 620px;
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-items: start;
+
+    margin: 0 auto;
+
+    .report-nav-container {
+      width: 276px;
+      height: 40px;
+
+      display: flex;
+      flex-flow: row-reverse;
+      justify-content: start;
+
+      .finance {
+        width: 138px;
+        height: 40px;
+
+        border-radius: 24px 24px 0 0;
+
+        background-color: $main-color;
+        box-shadow: 10px -11px 20px -14px rgba(7, 11, 15, 0.5);
+
+        &:hover {
+          background-color: lighten($main-color, 5%);
+        }
+
+        &._active {
+          background-color: #fefefe;
+          color: $orange-color;
+        }
+      }
+    }
+
+    .cost-container {
+      width: 1060px;
+      height: 579px;
+
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-around;
+      align-items: center;
+
+      border-radius: 0 24px 24px 24px;
+
+      box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+
+      background-color: #fff;
+
+      .filter-container {
+        width: 1020px;
+        height: 44px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .date-wrapper {
+          width: 98px;
+          height: 44px;
+          padding-top: 2px;
+
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: end;
+          padding-left: 20px;
+          align-items: center;
+
+          border: none;
+          background-color: transparent;
+
+          color: $main-text-color;
+
+          font-family: Roboto;
+          font-size: 12px;
+          font-weight: 900;
+
+          background-image: url(./svg/calendar-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 0 13.8px;
+
+          .choose-date {
+            position: relative;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            padding-left: 35px;
+            background: transparent;
+            border: none;
+            font-weight: 900;
+            font-size: 12px;
+            font-family: Roboto;
+            color: #52555f;
+
+            &::-webkit-calendar-picker-indicator {
+              position: absolute;
+              opacity: 0;
+              width: 100%;
+              height: 100%;
+              left: 0;
+              top: 0;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      .bill-container {
+        width: 600px;
+        height: 44px;
+
+        // overflow: hidden;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+
+        border: $main-color 2px solid;
+        border-radius: 16px 16px 16px 0px;
+
+        input {
+          background-color: transparent;
+          color: #c7ccdc;
+          border: none;
+
+          &:focus {
+            background-color: $grey-hover;
+            color: $main-text-color;
+          }
+
+          &::placeholder {
+            color: #c7ccdc;
+          }
+        }
+
+        .product-description {
+          width: 250px;
+          padding-left: 20px;
+          border-right: $main-color 2px solid;
+
+          border-radius: 15px 0 0 0px;
+        }
+
+        .amount-input {
+          width: 92px;
+          height: 44px;
+
+          border-radius: 0 15px 15px 0;
+
+          color: $main-color;
+
+          display: flex;
+          flex-flow: row wrap;
+
+          text-align: end;
+          align-items: center;
+
+          padding-right: 50px;
+
+          background-image: url(./svg/calculator-icon.svg);
+          background-repeat: no-repeat;
+          background-position: 106px 12px;
+
+          border-left: $main-color 2px solid;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          appearance: none;
+        }
+      }
+      .btn-operators-container {
+        width: 265px;
+        height: 44px;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        button {
+          width: 125px;
+
+          box-shadow: none;
+        }
+
+        ._clear-btn {
+          background-color: transparent;
+
+          border-radius: 16px;
+          border: 2px solid #f5f6fb;
+
+          &:hover {
+            transition: $transition;
+
+            background-color: $grey-hover;
+            border: none;
+          }
+          &:active {
+            transform: translateY(2px);
+          }
+        }
+      }
+    }
+
+    .reoprt-list-container {
+      width: 1020px;
+      height: 382px;
+
+      display: flex;
+      flex-flow: row wrap;
+      align-items: start;
+      justify-content: space-between;
+
+      .bill-table {
+        overflow: hidden;
+        width: 760px;
+        height: 403px;
+
+        border: $main-color 2px solid;
+        border-radius: 20px 20px 0 0;
+
+        display: flex;
+        flex-flow: column wrap;
+
+        box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+        // background-color: greenyellow;
+
+        .thead-div {
+          background-color: $main-color;
+
+          height: 38px;
+          width: 760px;
+
+          ul {
+            height: 38px;
+            width: 760px;
+
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+
+            padding-left: 10px;
+            padding-right: 10px;
+
+            li {
+              height: 14px;
+              margin: 10px;
+            }
+          }
+        }
+        ._data-li {
+          width: 104px;
+          text-align: left;
+        }
+
+        ._description-li {
+          height: 14px;
+
+          width: 184px;
+          text-align: left;
+
+          overflow-x: scroll;
+          scrollbar-width: none;
+        }
+
+        ._category-li {
+          width: 172px;
+          text-align: center;
+        }
+
+        ._amount-li {
+          width: 104px;
+          text-align: right;
+        }
+
+        ._delete-li {
+          width: 96px;
+        }
+
+        .tbody-div {
+          max-height: 344px;
+          width: 760px;
+
+          overflow-y: auto;
+          overflow-x: hidden;
+
+          display: block;
+
+          scrollbar-width: thin;
+          scrollbar-color: $orange-color transparent;
+
+          .day-report {
+            animation: ReportAnimation 0.5s ease-out;
+
+            &:hover {
+              scale: 1.02;
+            }
+          }
+
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background-color: $main-color;
+            border-radius: 4px;
+          }
+          &::-webkit-scrollbar-button {
+            display: none;
+            height: 0;
+            width: 0;
+          }
+
+          ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 38px;
+            width: 100%;
+
+            border-bottom: 2px solid $main-color;
+            padding: 0 10px;
+
+            overflow: hidden;
+
+            li {
+              height: 14px;
+              margin: 10px;
+              color: $main-text-color;
+              font-family: Roboto;
+              font-size: 12px;
+              font-weight: 400;
+            }
+
+            ._amount-li {
+              font-weight: 700;
+
+              overflow-x: scroll;
+              scrollbar-width: none;
+
+              &.income {
+                color: $correct-color;
+              }
+
+              &.expense {
+                color: $error-color;
+              }
+            }
+
+            ._delete-li {
+              height: 32px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin: 0;
+
+              .delete-btn-icon {
+                width: 32px;
+                height: 32px;
+                padding: 7.3px;
+
+                &:hover {
+                  background-color: $grey-hover;
+                }
+
+                &:active {
+                  transform: translateY(2px);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      //Аня
+
+      .reduction {
+        background-color: $main-color;
+        border-radius: 20px 20px 20px 0;
+
+        height: 270px;
+        width: 230px;
+
+        overflow: hidden;
+      }
+
+      .reduction-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 12px;
+
+        color: black;
+
+        padding: 15px;
+
+        border-bottom: 2px solid #fff;
+      }
+
+      .reduction-list {
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+
+        padding: 0 20px;
+
+        border-bottom: 2px solid #fff;
+
+        li {
+          width: 100%;
+
+          display: flex;
+          justify-content: space-between;
+
+          span {
+            width: 84px;
+
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 400;
+            color: $main-text-color;
+          }
+          ._mounth-amount-li {
+            text-align: end;
+            overflow-x: scroll;
+            scrollbar-width: none;
+          }
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .reduction {
+          margin: 0;
+          padding: 81px;
+        }
+
+        .reduction-list li {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+
+        .reduction-title {
+          font-size: 18px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .reduction {
+          display: none;
+        }
+      }
+    }
+
+    &::selection {
+      background-color: $orange-color;
+      color: #fff;
+    }
+  }
 }

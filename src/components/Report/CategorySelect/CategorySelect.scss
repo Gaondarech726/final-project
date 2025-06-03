@@ -1,0 +1,107 @@
+//===
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../../../utiles/vars";
+
+//===
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.custom-select {
+  position: relative;
+
+  width: 188px;
+  height: 40px;
+
+  .select-selected {
+    position: absolute;
+    width: 168px;
+    height: 32px;
+
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 400;
+    color: #c7ccdc;
+
+    padding-left: 20px;
+    padding-top: 7px;
+    cursor: pointer;
+    user-select: none;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .select-arrow {
+      margin-right: 10px;
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+
+    &.select-arrow-active .select-arrow {
+      transform: rotate(0deg);
+    }
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 10px;
+
+    transform: translateY(-50%);
+
+    width: 12px;
+    height: 7px;
+  }
+}
+
+.select-items {
+  position: absolute;
+  background-color: #fff;
+  top: 115%;
+  left: -1.5px;
+  right: 0;
+  z-index: 99;
+
+  border: 2px solid $main-color;
+  border-top: none;
+  width: 186.5px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  max-height: 0;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: max-height 1s ease, opacity 1s ease, visibility 1s ease;
+
+  &.open {
+    max-height: 362px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  div {
+    color: $main-text-color;
+    padding: 8px 16px;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    color: #c7ccdc;
+    cursor: pointer;
+
+    &:hover,
+    &.same-as-selected {
+      background-color: $main-color;
+      color: $main-text-color;
+    }
+  }
+}
+
+.product-category {
+  padding-left: 20px;
+  width: 166px;
+}
