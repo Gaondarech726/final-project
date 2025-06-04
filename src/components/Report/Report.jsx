@@ -92,7 +92,11 @@ const Report = () => {
     let newBalance = currentBalance;
 
     if (type === "Витрати") {
-      if (entryAmount > currentBalance) {
+      if (
+        !currentBalance ||
+        currentBalance <= 0 ||
+        entryAmount > currentBalance
+      ) {
         toast.error("Недостатньо коштів на рахунку", {
           position: "top-right",
           autoClose: 5000,
