@@ -1,3 +1,4 @@
+// Balance.jsx
 import { useEffect, useState } from "react";
 import { MdBarChart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +11,20 @@ import "./Balance.scss";
 const Balance = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
-  const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
+  const [inputBalance, setInputBalance] = useState(() => {
+    return currentUser && currentUser.balance !== undefined
+      ? parseFloat(currentUser.balance).toFixed(2)
+      : "0.00";
+  });
+
+  const [isBalanceSet, setIsBalanceSet] = useState(() => {
+    return currentUser && parseFloat(currentUser.balance) > 0 ? true : false;
+  });
 
   useEffect(() => {
     const alreadyShown = localStorage.getItem("balanceTooltipShown");
 
-    if (!alreadyShown) {
+    if (!alreadyShown && !isBalanceSet) {
       const inputWrapper = document.querySelector(
         ".balance__inputs .input-wrapper"
       );
@@ -45,18 +54,25 @@ const Balance = () => {
         localStorage.setItem("balanceTooltipShown", "true");
       }
     }
-  }, []);
+  }, [isBalanceSet]);
+  useEffect(() => {
+    if (currentUser && currentUser.balance !== undefined) {
+      setInputBalance(parseFloat(currentUser.balance).toFixed(2));
+      setIsBalanceSet(parseFloat(currentUser.balance) > 0);
+    } else {
+      setInputBalance("0.00");
+      setIsBalanceSet(false);
+    }
+  }, [currentUser]);
 
   const handleBalanceSubmit = () => {
     const numericBalance = parseFloat(inputBalance);
     if (!isNaN(numericBalance)) {
       dispatch(updateBalance(numericBalance));
+    } else {
+      alert("Будь ласка, введіть коректне числове значення для балансу.");
     }
   };
-
-  useEffect(() => {
-    setInputBalance(currentUser?.balance || "");
-  }, [currentUser]);
 
   return (
     <section className="balance">
@@ -69,11 +85,21 @@ const Balance = () => {
               type="number"
               placeholder="0.00"
               value={inputBalance}
-              onChange={(e) => setInputBalance(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "" || /^\d*\.?\d{0,2}$/.test(value)) {
+                  setInputBalance(value);
+                }
+              }}
+              disabled={isBalanceSet}
             />
             <span className="currency">UAH</span>
           </div>
-          <button className="button" onClick={handleBalanceSubmit}>
+          <button
+            className="button"
+            onClick={handleBalanceSubmit}
+            disabled={isBalanceSet}
+          >
             ПІДТВЕРДИТИ
           </button>
         </div>

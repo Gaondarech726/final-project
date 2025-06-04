@@ -6,15 +6,22 @@ import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/light.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { Bounce, toast } from "react-toastify";
+import { updateBalance } from "../../redux/authSlice";
+import CategorySelect from "./CategorySelect/CategorySelect";
+
 const Report = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const currentBalance = currentUser ? parseFloat(currentUser.balance) : 0;
+
   const [type, setType] = useState("Витрати");
   const [customCategory, setCustomCategory] = useState("");
-  const [date, setDate] = useState(() => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  });
+  const [date, setDate] = useState(
+    () => new Date().toISOString().split("T")[0]
+  );
   const [description, setDescription] = useState("");
-  // const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
@@ -22,7 +29,7 @@ const Report = () => {
   const [entryToDelete, setEntryToDelete] = useState(null);
 
   const [entries, setEntries] = useState(() => {
-    const saved = localStorage.getItem("entries");
+    const saved = localStorage.getItem("financeEntries");
     return saved ? JSON.parse(saved) : [];
   });
 
@@ -42,10 +49,7 @@ const Report = () => {
   const handleClearFields = () => {
     setDescription("");
     setAmount("");
-    setDate(() => {
-      const today = new Date();
-      return today.toISOString().split("T")[0];
-    });
+    setDate(new Date().toISOString().split("T")[0]);
     setCustomCategory("");
     setExpenseCategory("");
     setIncomeCategory("");
@@ -82,12 +86,38 @@ const Report = () => {
       return;
     }
 
+    const entryAmount = parseFloat(amount);
+    if (isNaN(entryAmount) || entryAmount <= 0) return;
+
+    let newBalance = currentBalance;
+
+    if (type === "Витрати") {
+      if (
+        !currentBalance ||
+        currentBalance <= 0 ||
+        entryAmount > currentBalance
+      ) {
+        toast.error("Недостатньо коштів на рахунку", {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "light",
+          transition: Bounce,
+        });
+        return;
+      }
+      newBalance -= entryAmount;
+    } else {
+      newBalance += entryAmount;
+    }
+
+    dispatch(updateBalance(newBalance));
+
     const newEntry = {
       id: Date.now(),
       type,
       date: new Date(date).toLocaleDateString("uk-UA"),
       description,
-      amount: parseFloat(amount).toFixed(2),
+      amount: entryAmount.toFixed(2),
       category: selectedCategory,
     };
 
@@ -101,12 +131,17 @@ const Report = () => {
   };
 
   const handleConfirmDelete = () => {
-    setEntries(entries.filter((entry) => entry.id !== entryToDelete));
-    setIsModalOpen(false);
-    setEntryToDelete(null);
-  };
-
-  const handleCancelDelete = () => {
+    const entry = entries.find((e) => e.id === entryToDelete);
+    if (entry) {
+      let newBalance = currentBalance;
+      const amountToRemove = parseFloat(entry.amount);
+      newBalance =
+        entry.type === "Витрати"
+          ? newBalance + amountToRemove
+          : newBalance - amountToRemove;
+      dispatch(updateBalance(newBalance));
+    }
+    setEntries(entries.filter((e) => e.id !== entryToDelete));
     setIsModalOpen(false);
     setEntryToDelete(null);
   };
@@ -147,74 +182,23 @@ const Report = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               maxLength={25}
-              spellCheck={true}
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleAddEntry();
                 if (e.key === "Delete") handleClearFields();
               }}
             />
 
-            {type === "Витрати" ? (
-              expenseCategory !== "Інше" ? (
-                <select
-                  className="product-category"
-                  value={expenseCategory}
-                  onChange={(e) => setExpenseCategory(e.target.value)}
-                >
-                  <option value="" disabled>
-                    Категорія витрат
-                  </option>
-                  {[
-                    "Транспорт",
-                    "Продукти",
-                    "Здоров'я",
-                    "Алкоголь",
-                    "Розваги",
-                    "Все для дому",
-                    "Техніка",
-                    "Комунальний зв'язок",
-                    "Спорт, хобі",
-                    "Навчання",
-                    "Інше",
-                  ].map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  className="product-category"
-                  type="text"
-                  placeholder="Інше..."
-                  value={customCategory}
-                  onChange={(e) => setCustomCategory(e.target.value)}
-                />
-              )
-            ) : incomeCategory !== "Інше" ? (
-              <select
-                className="product-category"
-                value={incomeCategory}
-                onChange={(e) => setIncomeCategory(e.target.value)}
-              >
-                <option value="" disabled>
-                  Категорія доходу
-                </option>
-                {["ЗП", "Дод. прибуток", "Інше"].map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              <input
-                className="product-category"
-                type="text"
-                placeholder="Інше..."
-                value={customCategory}
-                onChange={(e) => setCustomCategory(e.target.value)}
-              />
-            )}
+            <CategorySelect
+              type={type}
+              selectedCategory={
+                type === "Витрати" ? expenseCategory : incomeCategory
+              }
+              setSelectedCategory={
+                type === "Витрати" ? setExpenseCategory : setIncomeCategory
+              }
+              customCategory={customCategory}
+              setCustomCategory={setCustomCategory}
+            />
 
             <input
               className="amount-input"
@@ -306,49 +290,46 @@ const Report = () => {
             </div>
           </div>
 
-          {(() => {
-            const getMonthName = (dateString) => {
-              const [day, month, year] = dateString.split(".");
-              const date = new Date(`${year}-${month}-${day}`);
-              return date.toLocaleString("uk-UA", { month: "long" });
-            };
+          <div className="reduction _to-upper-case">
+            <h3 className="reduction-title">Зведення</h3>
+            <div style={{ maxHeight: "238px", overflowY: "auto" }}>
+              {(() => {
+                const getMonthName = (dateString) => {
+                  const [day, month, year] = dateString.split(".");
+                  return new Date(`${year}-${month}-${day}`).toLocaleString(
+                    "uk-UA",
+                    { month: "long" }
+                  );
+                };
 
-            const monthlySummary = {};
+                const summary = {};
+                entries
+                  .filter((e) => e.type === type)
+                  .forEach((e) => {
+                    const month = getMonthName(e.date);
+                    summary[month] =
+                      (summary[month] || 0) + parseFloat(e.amount);
+                  });
 
-            entries
-              .filter((entry) => entry.type === type)
-              .forEach((entry) => {
-                const month = getMonthName(entry.date);
-                if (!monthlySummary[month]) {
-                  monthlySummary[month] = 0;
-                }
-                monthlySummary[month] += parseFloat(entry.amount);
-              });
-
-            return (
-              <div className="reduction _to-upper-case">
-                <h3 className="reduction-title">Зведення</h3>
-                <div style={{ maxHeight: "238px", overflowY: "auto" }}>
-                  {Object.entries(monthlySummary).map(([month, amount]) => (
-                    <ul key={month} className="reduction-list">
-                      <li>
-                        <span className="_mounth-li">{month}</span>
-                        <span className="_mounth-amount-li">
-                          {amount.toFixed(2)}
-                        </span>
-                      </li>
-                    </ul>
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
+                return Object.entries(summary).map(([month, amount]) => (
+                  <ul key={month} className="reduction-list">
+                    <li>
+                      <span className="_mounth-li">{month}</span>
+                      <span className="_mounth-amount-li">
+                        {amount.toFixed(2)}
+                      </span>
+                    </li>
+                  </ul>
+                ));
+              })()}
+            </div>
+          </div>
         </div>
 
         {isModalOpen && (
           <Modal
             onConfirm={handleConfirmDelete}
-            onCancel={handleCancelDelete}
+            onCancel={() => setIsModalOpen(false)}
           />
         )}
       </div>
