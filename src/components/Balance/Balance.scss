@@ -1,5 +1,9 @@
 @import '../../utiles/vars';
 
+::placeholder {
+  font-weight: bold;
+}
+
 .balance {
 	width: 100vw;
 	display: flex;
