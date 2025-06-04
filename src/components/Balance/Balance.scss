@@ -288,9 +288,9 @@
 		}
 
 		.currency {
+			right: 12px
 			color: $main-text-color;
 			position: absolute;
-			right: 22px;
 			top: 50%;
 			transform: translateY(-50%);
 			font-weight: bold;
