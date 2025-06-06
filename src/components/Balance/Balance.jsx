@@ -1,4 +1,3 @@
-// Balance.jsx
 import { useEffect, useState } from "react";
 import { MdBarChart } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +7,7 @@ import { updateBalance } from "../../redux/authSlice";
 
 import "./Balance.scss";
 
-const Balance = () => {
+const Balance = ({ showTooltip }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [inputBalance, setInputBalance] = useState(() => {
@@ -22,39 +21,40 @@ const Balance = () => {
   });
 
   useEffect(() => {
-    const alreadyShown = localStorage.getItem("balanceTooltipShown");
-
-    if (!alreadyShown && !isBalanceSet) {
-      const inputWrapper = document.querySelector(
-        ".balance__inputs .input-wrapper"
-      );
-
-      if (inputWrapper) {
-        const instance = tippy(inputWrapper, {
-          content: `
-            <div class="custom-tooltip">
-              <strong>Привіт! Для початку роботи внесіть свій поточний баланс рахунку!</strong><br/>
-              <span class="note">Ви не можете витрачати гроші, поки їх у Вас немає :)</span>
-            </div>
-          `,
-          allowHTML: true,
-          placement: "bottom",
-          animation: "shift-away",
-          theme: "custom",
-          trigger: "manual",
-          hideOnClick: true,
-        });
-
-        instance.show();
-
-        setTimeout(() => {
-          instance.hide();
-        }, 5000);
-
-        localStorage.setItem("balanceTooltipShown", "true");
-      }
+    if (showTooltip && !isBalanceSet) {
+      showBalanceTooltip();
     }
-  }, [isBalanceSet]);
+  }, [showTooltip, isBalanceSet]);
+
+  const showBalanceTooltip = () => {
+    const inputWrapper = document.querySelector(
+      ".balance__inputs .input-wrapper"
+    );
+
+    if (inputWrapper) {
+      const instance = tippy(inputWrapper, {
+        content: `
+          <div class="custom-tooltip">
+            <strong>Привіт! Для початку роботи внесіть свій поточний баланс рахунку!</strong><br/>
+            <span class="note">Ви не можете витрачати гроші, поки їх у Вас немає :)</span>
+          </div>
+        `,
+        allowHTML: true,
+        placement: "bottom",
+        animation: "shift-away",
+        theme: "custom",
+        trigger: "manual",
+        hideOnClick: true,
+      });
+
+      instance.show();
+
+      setTimeout(() => {
+        instance.hide();
+      }, 5000);
+    }
+  };
+
   useEffect(() => {
     if (currentUser && currentUser.balance !== undefined) {
       setInputBalance(parseFloat(currentUser.balance).toFixed(2));

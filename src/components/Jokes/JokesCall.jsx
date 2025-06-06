@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import { Joke } from "./Jokes";
-import { jokes } from "./jokeList";
+import { jokesList } from "./jokeList";
 
-export const Jokes = () => {
-  const [showModal, setShowModal] = useState(false);
+export const Jokes = ({ onJokeClose }) => {
+  const [showJoke, setShowJoke] = useState(false);
   const [joke, setJoke] = useState("");
 
   useEffect(() => {
-    const today = new Date().toISOString().slice(0, 10);
-    const lastShown = localStorage.getItem("jokeModalShownDate");
+    const shownDate = localStorage.getItem("jokeModalShownDate");
+    const today = new Date().toISOString().split("T")[0];
 
-    if (lastShown !== today) {
-      const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-      setJoke(randomJoke);
-      setShowModal(true);
-      localStorage.setItem("jokeModalShownDate", today);
+    if (shownDate !== today) {
+      const random = Math.floor(Math.random() * jokesList.length);
+      setJoke(jokesList[random]);
+      setShowJoke(true);
     }
   }, []);
 
-  if (!showModal) return null;
+  const handleClose = () => {
+    const today = new Date().toISOString().split("T")[0];
+    localStorage.setItem("jokeModalShownDate", today);
+    setShowJoke(false);
+    onJokeClose();
+  };
 
-  return <Joke joke={joke} onClose={() => setShowModal(false)} />;
+  return showJoke ? <Joke joke={joke} onClose={handleClose} /> : null;
 };

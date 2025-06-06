@@ -1,14 +1,17 @@
+import { useState } from "react";
+import Balance from "../components/Balance/Balance";
 import Header from "../components/Header/Header";
+import { Jokes } from "../components/Jokes/JokesCall";
 import Report from "../components/Report/Report";
-import Balance from "./../components/Balance/Balance";
-import { Jokes } from "./../components/Jokes/JokesCall";
 
 const MainPage = () => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   return (
     <>
-      <Jokes />
+      <Jokes onJokeClose={() => setShowTooltip(true)} />
       <Header />
-      <Balance />
+      <Balance showTooltip={showTooltip} />
       <Report />
     </>
   );

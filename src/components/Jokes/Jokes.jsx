@@ -13,7 +13,7 @@ export const Joke = ({ onClose, joke }) => {
     <div className="JokeOverlay">
       <div className="YouSureJoke">
         <div className="data-container">
-          <h3 className="YouSureTextJoke">Фінансовий жарт дню 💸</h3>
+          <h3 className="YouSureTextJoke">Фінансовий жарт дня 💸</h3>
           <p style={{ fontWeight: "bold", textAlign: "center" }}>{joke}</p>
           <div className="YouSureButtons">
             <button className="btn-orange" onClick={onClose}>
