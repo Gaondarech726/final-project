@@ -18,6 +18,16 @@ const Login = () => {
 	const currentUser = useSelector(state => state.auth.currentUser);
 	const [logName, setLogName] = useState('');
 	const [logPass, setLogPass] = useState('');
+	const [lastRegister, setLastRegister] = useState('');
+
+	useEffect(() => {
+		const lastRegister = JSON.parse(localStorage.getItem('lastRegister'));
+		if (lastRegister) {
+			setLastRegister(lastRegister);
+			setLogName(lastRegister.username);
+			setLogPass(lastRegister.password);
+		}
+	}, []);
 
 	// якщо юзер залогінений, то перекидає на головну сторінку
 	const error = useSelector(state => state.auth.error);

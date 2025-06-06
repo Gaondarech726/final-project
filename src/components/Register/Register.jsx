@@ -22,7 +22,7 @@ const Register = () => {
 	let usersBeforeRegister = useRef(null);
 
 	const isValidEmail = async email => {
-		const apiKey = '6cd2f04760db46df9b9b71f25d1eaa74';
+		const apiKey = '56475003d896495e85e9c7e0b289d3cb';
 		const response = await fetch(
 			`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`
 		);

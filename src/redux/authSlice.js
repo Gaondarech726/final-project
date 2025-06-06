@@ -3,11 +3,13 @@ import { toast } from 'react-toastify';
 
 const usersArray = JSON.parse(localStorage.getItem('users'));
 const userFromStorage = JSON.parse(localStorage.getItem('currentUser'));
+const lastRegisterStorage = JSON.parse(localStorage.getItem('lastRegister'));
 
 const initialState = {
 	users: usersArray || [],
 	currentUser: userFromStorage || null,
 	error: null,
+	lastRegister: lastRegisterStorage || null,
 };
 
 const authSlice = createSlice({
@@ -30,6 +32,15 @@ const authSlice = createSlice({
 				state.users.push(action.payload);
 				state.error = null;
 				localStorage.setItem('users', JSON.stringify(state.users));
+
+				state.lastRegister = {
+					username: action.payload.username,
+					password: action.payload.password,
+				};
+				localStorage.setItem(
+					'lastRegister',
+					JSON.stringify(state.lastRegister)
+				);
 			}
 		},
 
