@@ -46,7 +46,6 @@ $transition: 0.05s ease;
     z-index: 1000;
 
     height: 200px;
-    width: 28vw;
 
     display: flex;
     justify-content: center;
@@ -109,12 +108,12 @@ $transition: 0.05s ease;
 
 @media (max-width: 768px) {
   .YouSureJoke {
-    width: 40vw !important;
+    width: 40vw;
   }
 }
 
 @media (max-width: 420px) {
   .YouSureJoke {
-    width: 100vw !important;
+    width: 100vw;
   }
 }

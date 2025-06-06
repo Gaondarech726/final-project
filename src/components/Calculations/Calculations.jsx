@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useSelector } from "react-redux";
-import tippy from "tippy.js";
 
 import { ReactComponent as AlcoholIcon } from "./svg/costs/Alcohol.svg";
 import { ReactComponent as CommunicationIcon } from "./svg/costs/Communication.svg";
@@ -24,7 +23,6 @@ import "./Calculations.scss";
 import DynamicCategoryChart from "./DynamicCategoryChart";
 
 const Calculations = () => {
-  // Форматирование даты в строку DD.MM.YYYY
   const formatDate = (date) => {
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -32,53 +30,15 @@ const Calculations = () => {
     return `${day}.${month}.${year}`;
   };
 
-  // Состояние выбранной даты
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  // Из Redux текущий пользователь и баланс
   const currentUser = useSelector((state) => state.auth.currentUser);
   const [inputBalance, setInputBalance] = useState(currentUser?.balance || "");
 
-  // Режим просмотра: "costs" или "revenues"
   const [viewMode, setViewMode] = useState("costs");
   const [activeCategory, setActiveCategory] = useState(null);
 
-  // Все финансовые записи (из localStorage)
   const [financeEntries, setFinanceEntries] = useState([]);
-
-  useEffect(() => {
-    const alreadyShown = localStorage.getItem("balanceTooltipShown");
-    if (!alreadyShown) {
-      const inputWrapper = document.querySelector(
-        ".calc-balance__inputs .calc-input-wrapper"
-      );
-
-      if (inputWrapper) {
-        const instance = tippy(inputWrapper, {
-          content: `
-            <div class="custom-tooltip">
-              <strong>Привіт! Для початку роботи внесіть свій поточний баланс рахунку!</strong><br/>
-              <span class="note">Ви не можете витрачати гроші, поки їх у Вас немає :)</span>
-            </div>
-          `,
-          allowHTML: true,
-          placement: "bottom",
-          animation: "shift-away",
-          theme: "custom",
-          trigger: "manual",
-          hideOnClick: true,
-        });
-
-        instance.show();
-
-        setTimeout(() => {
-          instance.hide();
-        }, 5000);
-
-        localStorage.setItem("balanceTooltipShown", "true");
-      }
-    }
-  }, []);
 
   useEffect(() => {
     setInputBalance(currentUser?.balance || "");
