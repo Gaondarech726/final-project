@@ -13,92 +13,90 @@
 
 $transition: 0.05s ease;
 
-@media (min-width: 1280px) {
-  .ModalOverlay {
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .YouSureModal {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
 
-    width: 100vw;
-    height: 100vh;
-
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    z-index: 999;
+    height: 200px;
+    width: 28vw;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    .YouSureModal {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1000;
+    background-color: #fff;
 
-      height: 200px;
-      width: 28vw;
+    border: none;
+    border-radius: 30px;
+
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 14px;
+
+    .data-container {
+      height: 84px;
+      width: 265px;
 
       display: flex;
-      justify-content: center;
+      flex-flow: column wrap;
+      justify-content: space-between;
       align-items: center;
 
-      background-color: #fff;
+      .YouSureTextModal {
+        width: 265px;
+        height: 20px;
+        color: #52555f;
+        display: flex;
 
-      border: none;
-      border-radius: 30px;
+        justify-content: center;
+      }
+      .YouSureButtons {
+        display: flex;
+        flex-flow: row wrap;
 
-      font-family: Roboto;
-      font-weight: 500;
-      font-size: 14px;
-
-      .data-container {
-        height: 84px;
         width: 265px;
 
-        display: flex;
-        flex-flow: column wrap;
         justify-content: space-between;
         align-items: center;
 
-        .YouSureTextModal {
-          width: 265px;
-          height: 20px;
-          color: #52555f;
-          display: flex;
-
-          justify-content: center;
+        button {
+          height: 44px;
+          width: 125px;
+          box-shadow: none;
         }
-        .YouSureButtons {
-          display: flex;
-          flex-flow: row wrap;
+        ._no-btn {
+          background-color: transparent;
 
-          width: 265px;
+          border-radius: 16px;
+          border: 2px solid #f5f6fb;
 
-          justify-content: space-between;
-          align-items: center;
+          &:hover {
+            transition: $transition;
 
-          button {
-            height: 44px;
-            width: 125px;
-            box-shadow: none;
+            background-color: $grey-hover;
+            border: none;
           }
-          ._no-btn {
-            background-color: transparent;
-
-            border-radius: 16px;
-            border: 2px solid #f5f6fb;
-
-            &:hover {
-              transition: $transition;
-
-              background-color: $grey-hover;
-              border: none;
-            }
-            &:active {
-              transform: translateY(2px);
-            }
+          &:active {
+            transform: translateY(2px);
           }
         }
       }
@@ -106,7 +104,7 @@ $transition: 0.05s ease;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .ModalOverlay {
     position: fixed;
     top: 0;
