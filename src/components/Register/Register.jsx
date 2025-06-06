@@ -44,6 +44,7 @@ const Register = () => {
 
 		if (isValid) {
 			dispatch(register({ username: regName, password: regPass }));
+			document.querySelector('.register-input-error').style.display = 'none';
 		} else {
 			document.querySelector('.register-input-error').style.display = 'block';
 			document.querySelector('.register-input-error').innerHTML =
