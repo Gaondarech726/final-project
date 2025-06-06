@@ -13,6 +13,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const DynamicCategoryChart = ({
   activeCategory,
+  categoryDisplayName,
   viewMode,
   currentDate,
   currentCategories,
@@ -55,27 +56,30 @@ const DynamicCategoryChart = ({
 
   const fallbackCategory = "other";
 
-  const validCategoryNames = new Set(currentCategories.map((cat) => cat.name));
+  const renderNameToNameMap = {};
+  currentCategories.forEach(({ name, renderName }) => {
+    renderNameToNameMap[renderName.toLowerCase()] = name;
+  });
+
+  const activeCategoryName =
+    renderNameToNameMap[activeCategory.toLowerCase()] || fallbackCategory;
 
   let entriesByTypeAndDate = financeEntries.filter(
     (entry) => entry.type === typeMap[viewMode] && entry.date === currentDate
   );
 
-  entriesByTypeAndDate = entriesByTypeAndDate.map((entry) => {
-    if (!validCategoryNames.has(entry.category)) {
-      return { ...entry, category: fallbackCategory };
-    }
-    return entry;
+  const normalizedEntries = entriesByTypeAndDate.map((entry) => {
+    const matchedCategory = currentCategories.find(
+      (cat) => cat.renderName === entry.category
+    );
+    return {
+      ...entry,
+      category: matchedCategory?.name || fallbackCategory,
+    };
   });
 
-  const hasCategory = entriesByTypeAndDate.some(
-    (entry) => entry.category?.toLowerCase() === activeCategory.toLowerCase()
-  );
-
-  const categoryToUse = hasCategory ? activeCategory : fallbackCategory;
-
-  const filteredEntries = entriesByTypeAndDate.filter(
-    (entry) => entry.category?.toLowerCase() === categoryToUse.toLowerCase()
+  const filteredEntries = normalizedEntries.filter(
+    (entry) => entry.category === activeCategoryName
   );
 
   if (filteredEntries.length === 0) {

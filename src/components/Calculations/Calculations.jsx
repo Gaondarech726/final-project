@@ -271,6 +271,10 @@ const Calculations = () => {
             <div className="calc-chart">
               <DynamicCategoryChart
                 activeCategory={activeCategory}
+                categoryDisplayName={
+                  currentCategories.find((cat) => cat.name === activeCategory)
+                    ?.renderName
+                }
                 viewMode={viewMode}
                 currentDate={formatDate(selectedDate)}
                 currentCategories={currentCategories}
