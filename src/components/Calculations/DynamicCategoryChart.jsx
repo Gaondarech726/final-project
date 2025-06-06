@@ -13,9 +13,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const DynamicCategoryChart = ({
   activeCategory,
-  categoryDisplayName,
   viewMode,
   currentDate,
+  currentCategories,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
   const [financeEntries, setFinanceEntries] = useState([]);
@@ -40,7 +40,7 @@ const DynamicCategoryChart = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (!activeCategory || !categoryDisplayName) {
+  if (!activeCategory) {
     return (
       <div className="chart__div">
         Оберіть категорію для перегляду деталізації
@@ -53,19 +53,35 @@ const DynamicCategoryChart = ({
     revenues: "Дохід",
   };
 
-  // Фильтруем по категории, типу и по текущей дате
-  const filteredEntries = financeEntries.filter(
-    (entry) =>
-      entry.type === typeMap[viewMode] &&
-      entry.category === categoryDisplayName &&
-      entry.date === currentDate
+  const fallbackCategory = "other";
+
+  const validCategoryNames = new Set(currentCategories.map((cat) => cat.name));
+
+  let entriesByTypeAndDate = financeEntries.filter(
+    (entry) => entry.type === typeMap[viewMode] && entry.date === currentDate
+  );
+
+  entriesByTypeAndDate = entriesByTypeAndDate.map((entry) => {
+    if (!validCategoryNames.has(entry.category)) {
+      return { ...entry, category: fallbackCategory };
+    }
+    return entry;
+  });
+
+  const hasCategory = entriesByTypeAndDate.some(
+    (entry) => entry.category?.toLowerCase() === activeCategory.toLowerCase()
+  );
+
+  const categoryToUse = hasCategory ? activeCategory : fallbackCategory;
+
+  const filteredEntries = entriesByTypeAndDate.filter(
+    (entry) => entry.category?.toLowerCase() === categoryToUse.toLowerCase()
   );
 
   if (filteredEntries.length === 0) {
     return <div className="chart__div">Немає даних для обраної категорії</div>;
   }
 
-  // Группируем суммы по описанию
   const groupedData = {};
   filteredEntries.forEach((entry) => {
     const key = entry.description || "Інше";

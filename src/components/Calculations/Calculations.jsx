@@ -92,17 +92,16 @@ const Calculations = () => {
     salary: SalaryIcon,
     additionalRevenue: AdditionalRevenueIcon,
   };
+
   const toggleDate = (direction) => {
     const newDate = new Date(selectedDate);
     newDate.setHours(0, 0, 0, 0);
-
     if (direction === "prev") {
       newDate.setDate(newDate.getDate() - 1);
-      setSelectedDate(newDate);
     } else if (direction === "next") {
       newDate.setDate(newDate.getDate() + 1);
-      setSelectedDate(newDate);
     }
+    setSelectedDate(newDate);
   };
 
   const toggleViewMode = () => {
@@ -120,10 +119,16 @@ const Calculations = () => {
   );
 
   const getSumByCategory = (renderName) => {
-    const sum = filteredEntries
+    if (renderName === "Інше") {
+      const allRenderNames = currentCategories.map((cat) => cat.renderName);
+      return filteredEntries
+        .filter((entry) => !allRenderNames.includes(entry.category))
+        .reduce((total, entry) => total + Number(entry.amount), 0);
+    }
+
+    return filteredEntries
       .filter((entry) => entry.category === renderName)
       .reduce((total, entry) => total + Number(entry.amount), 0);
-    return sum;
   };
 
   const totalCosts = financeEntries
@@ -224,12 +229,12 @@ const Calculations = () => {
                     <div
                       key={name}
                       className="categories__category"
-                      onClick={() => setActiveCategory(name)}
+                      onClick={() => setActiveCategory(renderName)}
                     >
                       <p className="categories__money">{sum.toFixed(2)}</p>
                       <IconComponent
                         className={`categories__icon ${
-                          activeCategory === name ? "active" : ""
+                          activeCategory === renderName ? "active" : ""
                         }`}
                       />
                       <p className="categories__name">{renderName}</p>
@@ -247,12 +252,12 @@ const Calculations = () => {
                       <div
                         key={name}
                         className="categories__category"
-                        onClick={() => setActiveCategory(name)}
+                        onClick={() => setActiveCategory(renderName)}
                       >
                         <p className="categories__money">{sum.toFixed(2)}</p>
                         <IconComponent
                           className={`categories__icon ${
-                            activeCategory === name ? "active" : ""
+                            activeCategory === renderName ? "active" : ""
                           }`}
                         />
                         <p className="categories__name">{renderName}</p>
@@ -266,12 +271,9 @@ const Calculations = () => {
             <div className="calc-chart">
               <DynamicCategoryChart
                 activeCategory={activeCategory}
-                categoryDisplayName={
-                  currentCategories.find((cat) => cat.name === activeCategory)
-                    ?.renderName
-                }
                 viewMode={viewMode}
                 currentDate={formatDate(selectedDate)}
+                currentCategories={currentCategories}
               />
             </div>
           </div>
