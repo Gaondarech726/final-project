@@ -15,6 +15,8 @@
 		top: 12px;
 		left: 26px;
 		width: 99px;
+
+		z-index: 99;
 	}
 
 	.login-container-background {
@@ -316,8 +318,31 @@
 	}
 }
 
+// 400px
+@media only screen and (max-width: 440px) {
+	.login-container {
+		.login-form-container {
+			width: 366px;
+		}
+		.login-title-container {
+			width: 290px;
+			height: 87px;
+			margin-top: 118px;
+
+			h1 {
+				font-size: 75px;
+			}
+
+			h3 {
+				font-size: 13px;
+				margin-left: 20px;
+			}
+		}
+	}
+}
+
 // 320px
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 380px) {
 	.login-container {
 		flex-direction: column;
 		justify-content: unset;
