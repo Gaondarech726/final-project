@@ -18,7 +18,7 @@ const Login = () => {
 	const currentUser = useSelector(state => state.auth.currentUser);
 	const [logName, setLogName] = useState('');
 	const [logPass, setLogPass] = useState('');
-	const [lastRegister, setLastRegister] = useState('');
+	const [setLastRegister] = useState('');
 
 	useEffect(() => {
 		const lastRegister = JSON.parse(localStorage.getItem('lastRegister'));
