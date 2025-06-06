@@ -261,7 +261,7 @@ body {
 
           ul {
             height: 38px;
-            width: 760px;
+            width: 100%;
 
             display: flex;
             flex-flow: row wrap;
@@ -494,6 +494,108 @@ body {
     &::selection {
       background-color: $orange-color;
       color: #fff;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    width: 100vw;
+
+    .report-container {
+      width: 665px;
+      height: 666px;
+
+      .cost-container {
+        width: 665px;
+        height: 626px;
+
+        display: flex;
+        flex-flow: column nowrap;
+
+        box-shadow: none;
+
+        .filter-container {
+          width: 604px;
+          height: 116px;
+
+          display: flex;
+          flex-flow: column wrap;
+          align-items: center;
+          justify-content: space-between;
+
+          .filter-container-adaptive {
+            width: 100%;
+            height: 40px;
+
+            display: flex;
+            flex-flow: row wrap;
+
+            align-items: center;
+
+            .date-wrapper {
+              width: 104px;
+              height: 20px;
+
+              background-position: 0 1px;
+            }
+            .bill-container {
+              width: 467px;
+              height: 40px;
+              margin: 0;
+              padding: 0;
+
+              .product-description {
+                width: 192px;
+              }
+
+              .amount-input {
+                width: 84px;
+                height: 40px;
+              }
+            }
+          }
+        }
+
+        .reoprt-list-container {
+          width: 605px;
+          height: 382px;
+
+          .bill-table {
+            width: 100%;
+            height: 382px;
+
+            .thead-div {
+              width: 100%;
+            }
+            .tbody-div {
+              width: 100%;
+              height: 344px;
+            }
+
+            ._data-li {
+              width: 64px;
+              text-align: left;
+            }
+
+            ._description-li {
+              width: 138px;
+            }
+
+            ._category-li {
+              width: 124px;
+            }
+
+            ._amount-li {
+              width: 84px;
+            }
+
+            ._delete-li {
+              width: 84px;
+            }
+          }
+        }
+      }
     }
   }
 }

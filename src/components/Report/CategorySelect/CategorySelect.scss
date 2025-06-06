@@ -105,3 +105,31 @@
   padding-left: 20px;
   width: 166px;
 }
+
+@media (min-width: 768px) {
+  .custom-select {
+    width: 168px;
+    height: 40px;
+
+    .select-selected {
+      width: 148px;
+      padding-left: 10px;
+
+      padding-top: 5px;
+
+      .select-arrow {
+        margin-right: 20px;
+      }
+    }
+    .select-items {
+      width: 144.5px;
+
+      top: 41.5px;
+    }
+    &.open {
+      max-height: 362px;
+    }
+    div {
+    }
+  }
+}
