@@ -53,7 +53,7 @@ const CategorySelect = ({
         }`}
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
-        {selectedCategory || "Оберіть категорію"}
+        {selectedCategory || "Категорія товару"}
         <svg
           className="select-arrow"
           xmlns="http://www.w3.org/2000/svg"

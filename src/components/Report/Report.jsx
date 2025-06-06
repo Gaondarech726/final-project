@@ -161,53 +161,55 @@ const Report = () => {
 
       <div className="cost-container">
         <div className="filter-container" ref={inputSectionRef}>
-          <div className="date-wrapper">
-            <input
-              type="date"
-              className="choose-date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </div>
+          <div class="filter-container-adaptive">
+            <div className="date-wrapper">
+              <input
+                type="date"
+                className="choose-date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
 
-          <div className="bill-container">
-            <input
-              className="product-description"
-              type="text"
-              placeholder="Опис товару"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              maxLength={25}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleAddEntry();
-                if (e.key === "Delete") handleClearFields();
-              }}
-            />
+            <div className="bill-container">
+              <input
+                className="product-description"
+                type="text"
+                placeholder="Опис товару"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                maxLength={25}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddEntry();
+                  if (e.key === "Delete") handleClearFields();
+                }}
+              />
 
-            <CategorySelect
-              type={type}
-              selectedCategory={
-                type === "Витрати" ? expenseCategory : incomeCategory
-              }
-              setSelectedCategory={
-                type === "Витрати" ? setExpenseCategory : setIncomeCategory
-              }
-              customCategory={customCategory}
-              setCustomCategory={setCustomCategory}
-            />
+              <CategorySelect
+                type={type}
+                selectedCategory={
+                  type === "Витрати" ? expenseCategory : incomeCategory
+                }
+                setSelectedCategory={
+                  type === "Витрати" ? setExpenseCategory : setIncomeCategory
+                }
+                customCategory={customCategory}
+                setCustomCategory={setCustomCategory}
+              />
 
-            <input
-              className="amount-input"
-              type="number"
-              step="0.10"
-              placeholder="0,00"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleAddEntry();
-                if (e.key === "Delete") handleClearFields();
-              }}
-            />
+              <input
+                className="amount-input"
+                type="number"
+                step="0.10"
+                placeholder="0,00"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleAddEntry();
+                  if (e.key === "Delete") handleClearFields();
+                }}
+              />
+            </div>
           </div>
 
           <div className="btn-operators-container">
