@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
+const usersArray = JSON.parse(localStorage.getItem('users'));
 const userFromStorage = JSON.parse(localStorage.getItem('currentUser'));
 
 const initialState = {
-	users: [],
+	users: usersArray || [],
 	currentUser: userFromStorage || null,
 	error: null,
 };
@@ -28,6 +29,7 @@ const authSlice = createSlice({
 			} else {
 				state.users.push(action.payload);
 				state.error = null;
+				localStorage.setItem('users', JSON.stringify(state.users));
 			}
 		},
 
