@@ -99,14 +99,14 @@ const Register = () => {
 
 			dispatch(
 				register({
-					username: response.given_name,
+					username: response.email,
 					password: response.sub,
 				})
 			);
 
 			dispatch(
 				logining({
-					username: response.given_name,
+					username: response.email,
 					password: response.sub,
 				})
 			);
