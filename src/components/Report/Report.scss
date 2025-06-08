@@ -14,11 +14,10 @@
     transform: translateY(0);
   }
 }
-
 body {
-  background-image: url(../../img/hero.svg);
-  background-repeat: no-repeat;
-  background-size: auto;
+  // background-image: url(./svg/hero.svg);
+  // background-repeat: no-repeat;
+  // background-size: contain;
 
   .report-container {
     width: 1060px;
@@ -82,149 +81,158 @@ body {
         flex-flow: row wrap;
         justify-content: space-between;
 
-        .date-wrapper {
-          width: 98px;
-          height: 44px;
-          padding-top: 2px;
+        .filter-container-adaptive {
+          width: 728px;
 
           display: flex;
           flex-flow: row wrap;
-          justify-content: end;
-          padding-left: 20px;
+
           align-items: center;
 
-          border: none;
-          background-color: transparent;
+          .date-wrapper {
+            width: 98px;
+            height: 44px;
+            padding-top: 2px;
 
-          color: $main-text-color;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: end;
+            padding-left: 20px;
+            align-items: center;
 
-          font-family: Roboto;
-          font-size: 12px;
-          font-weight: 900;
-
-          background-image: url(./svg/calendar-icon.svg);
-          background-repeat: no-repeat;
-          background-position: 0 13.8px;
-
-          .choose-date {
-            position: relative;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            padding-left: 35px;
-            background: transparent;
             border: none;
-            font-weight: 900;
-            font-size: 12px;
-            font-family: Roboto;
-            color: #52555f;
+            background-color: transparent;
 
-            &::-webkit-calendar-picker-indicator {
-              position: absolute;
-              opacity: 0;
-              width: 100%;
-              height: 100%;
-              left: 0;
+            color: $main-text-color;
+
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: 900;
+
+            background-image: url(./svg/calendar-icon.svg);
+            background-repeat: no-repeat;
+            background-position: 0 13.8px;
+
+            .choose-date {
+              position: relative;
               top: 0;
-              cursor: pointer;
+              left: 0;
+
+              width: 100%;
+              padding-left: 35px;
+              background: transparent;
+              border: none;
+              font-weight: 900;
+              font-size: 12px;
+              font-family: Roboto;
+              color: #52555f;
+
+              &::-webkit-calendar-picker-indicator {
+                position: absolute;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .bill-container {
+            width: 600px;
+            height: 44px;
+
+            // overflow: hidden;
+
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+
+            border: $main-color 2px solid;
+            border-radius: 16px 16px 16px 0px;
+
+            input {
+              background-color: transparent;
+              color: #c7ccdc;
+              border: none;
+
+              &:focus {
+                background-color: $grey-hover;
+                color: $main-text-color;
+              }
+
+              &::placeholder {
+                color: #c7ccdc;
+              }
+            }
+
+            .product-description {
+              width: 250px;
+              padding-left: 20px;
+              border-right: $main-color 2px solid;
+
+              border-radius: 15px 0 0 0px;
+            }
+
+            .amount-input {
+              width: 92px;
+              height: 44px;
+
+              border-radius: 0 15px 15px 0;
+
+              color: $main-color;
+
+              display: flex;
+              flex-flow: row wrap;
+
+              text-align: end;
+              align-items: center;
+
+              padding-right: 50px;
+
+              background-image: url(./svg/calculator-icon.svg);
+              background-repeat: no-repeat;
+              background-position: 106px 12px;
+
+              border-left: $main-color 2px solid;
+            }
+
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+              appearance: none;
             }
           }
         }
-      }
-
-      .bill-container {
-        width: 600px;
-        height: 44px;
-
-        // overflow: hidden;
-
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-between;
-
-        border: $main-color 2px solid;
-        border-radius: 16px 16px 16px 0px;
-
-        input {
-          background-color: transparent;
-          color: #c7ccdc;
-          border: none;
-
-          &:focus {
-            background-color: $grey-hover;
-            color: $main-text-color;
-          }
-
-          &::placeholder {
-            color: #c7ccdc;
-          }
-        }
-
-        .product-description {
-          width: 250px;
-          padding-left: 20px;
-          border-right: $main-color 2px solid;
-
-          border-radius: 15px 0 0 0px;
-        }
-
-        .amount-input {
-          width: 92px;
+        .btn-operators-container {
+          width: 265px;
           height: 44px;
-
-          border-radius: 0 15px 15px 0;
-
-          color: $main-color;
 
           display: flex;
           flex-flow: row wrap;
+          justify-content: space-between;
 
-          text-align: end;
-          align-items: center;
+          button {
+            width: 125px;
 
-          padding-right: 50px;
-
-          background-image: url(./svg/calculator-icon.svg);
-          background-repeat: no-repeat;
-          background-position: 106px 12px;
-
-          border-left: $main-color 2px solid;
-        }
-
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-          appearance: none;
-        }
-      }
-      .btn-operators-container {
-        width: 265px;
-        height: 44px;
-
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-
-        button {
-          width: 125px;
-
-          box-shadow: none;
-        }
-
-        ._clear-btn {
-          background-color: transparent;
-
-          border-radius: 16px;
-          border: 2px solid #f5f6fb;
-
-          &:hover {
-            transition: $transition;
-
-            background-color: $grey-hover;
-            border: none;
+            box-shadow: none;
           }
-          &:active {
-            transform: translateY(2px);
+
+          ._clear-btn {
+            background-color: transparent;
+
+            border-radius: 16px;
+            border: 2px solid #f5f6fb;
+
+            &:hover {
+              transition: $transition;
+
+              background-color: $grey-hover;
+              border: none;
+            }
+            &:active {
+              transform: translateY(2px);
+            }
           }
         }
       }
@@ -467,28 +475,6 @@ body {
           }
         }
       }
-
-      @media (min-width: 768px) and (max-width: 1024px) {
-        .reduction {
-          margin: 0;
-          padding: 81px;
-        }
-
-        .reduction-list li {
-          padding: 8px 16px;
-          font-size: 14px;
-        }
-
-        .reduction-title {
-          font-size: 18px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .reduction {
-          display: none;
-        }
-      }
     }
 
     &::selection {
@@ -498,7 +484,7 @@ body {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1280px) {
   body {
     width: 100vw;
 
@@ -527,11 +513,6 @@ body {
           .filter-container-adaptive {
             width: 100%;
             height: 40px;
-
-            display: flex;
-            flex-flow: row wrap;
-
-            align-items: center;
 
             .date-wrapper {
               width: 104px;
@@ -592,6 +573,37 @@ body {
 
             ._delete-li {
               width: 84px;
+            }
+          }
+
+          .reduction {
+            position: relative;
+
+            top: 80px;
+            left: 0;
+
+            width: 230px;
+            max-height: 278px;
+
+            overflow-x: hidden;
+
+            border: red 1px solid;
+            margin: 0;
+
+            .reduction-list {
+              display: flex;
+              justify-content: space-between;
+
+              padding: 0 20px 0 20px;
+              margin: 0;
+
+              li {
+                font-size: 12px;
+              }
+            }
+
+            .reduction-title {
+              font-size: 12px;
             }
           }
         }
