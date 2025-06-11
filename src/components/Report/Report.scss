@@ -611,3 +611,85 @@ body {
     }
   }
 }
+
+@media (min-width: 320px) and (max-width: 768px) {
+  body {
+    width: 320px;
+
+    .report-container {
+      position: relative;
+
+      width: 320px;
+      height: 0;
+      background-color: #145fff;
+      .report-nav-container {
+        position: fixed;
+        z-index: 777;
+
+        left: 0;
+        bottom: 0;
+
+        width: 100%;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        button:active {
+          
+          
+          .filter-container {
+            display: block;
+            ._hidden {
+              display: block;
+            }
+          }
+        }
+
+        .finance {
+          width: 49.5%;
+
+          background-color: $main-color;
+          border-radius: 0;
+
+          &:last-child {
+            border-left: 1px solid #fff;
+          }
+          &:hover {
+            background-color: lighten($main-color, 5%);
+          }
+
+          &._active {
+            background-color: $orange-color;
+            color: #fff;
+          }
+        }
+      }
+
+      .cost-container {
+        .filter-container {
+          width: 100vw;
+          height: 40px;
+
+          .filter-container-adaptive {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            .date-wrapper {
+            }
+          }
+          ._hidden {
+            display: none !important;
+          }
+        }
+        width: 0;
+        height: 0;
+        ._hidden {
+          display: none;
+        }
+      }
+    }
+  }
+}
