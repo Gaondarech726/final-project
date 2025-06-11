@@ -11,6 +11,26 @@ import { Bounce, toast } from "react-toastify";
 import { updateBalance } from "../../redux/authSlice";
 import CategorySelect from "./CategorySelect/CategorySelect";
 
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+
+const COLORS = [
+  "#FF6384",
+  "#36A2EB",
+  "#FFCE56",
+  "#4BC0C0",
+  "#9966FF",
+  "#FF9F40",
+  "#C9CBCF",
+  "#6B7280",
+];
+
 const Report = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);
@@ -146,6 +166,24 @@ const Report = () => {
     setEntryToDelete(null);
   };
 
+  const generateChartData = () => {
+    const categoryTotals = {};
+
+    entries
+      .filter((entry) => entry.type === type)
+      .forEach((entry) => {
+        if (!categoryTotals[entry.category]) {
+          categoryTotals[entry.category] = 0;
+        }
+        categoryTotals[entry.category] += parseFloat(entry.amount);
+      });
+
+    return Object.entries(categoryTotals).map(([category, value]) => ({
+      name: category,
+      value: Number(value.toFixed(2)),
+    }));
+  };
+
   return (
     <div className="report-container">
       <div className="report-nav-container">
@@ -165,7 +203,7 @@ const Report = () => {
 
       <div className="cost-container">
         <div className="filter-container" ref={inputSectionRef}>
-          <div class="filter-container-adaptive">
+          <div className="filter-container-adaptive">
             <div className="date-wrapper">
               <input
                 type="date"
@@ -175,7 +213,7 @@ const Report = () => {
               />
             </div>
 
-            <div className="bill-container">
+            <div className="bill-container _hidden">
               <input
                 className="product-description"
                 type="text"
@@ -202,7 +240,7 @@ const Report = () => {
               />
 
               <input
-                className="amount-input"
+                className="amount-input _hidden"
                 type="number"
                 step="0.10"
                 placeholder="0,00"
@@ -216,7 +254,7 @@ const Report = () => {
             </div>
           </div>
 
-          <div className="btn-operators-container">
+          <div className="btn-operators-container _hidden">
             <button className="btn-orange _enter-btn" onClick={handleAddEntry}>
               Ввести
             </button>
@@ -226,7 +264,7 @@ const Report = () => {
           </div>
         </div>
 
-        <div className="reoprt-list-container">
+        <div className="reoprt-list-container _hidden">
           <div className="bill-table">
             <div className="thead-div">
               <ul className="tr-title _to-upper-case">
@@ -325,6 +363,32 @@ const Report = () => {
                 ));
               })()}
             </div>
+          </div>
+
+          <div className="report-chart-container" style={{ marginTop: "30px" }}>
+            <h3 className="reduction-title">Графік по категоріях</h3>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={generateChartData()}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  label
+                >
+                  {generateChartData().map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
