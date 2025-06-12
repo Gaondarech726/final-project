@@ -12,12 +12,12 @@ import { updateBalance } from "../../redux/authSlice";
 import CategorySelect from "./CategorySelect/CategorySelect";
 
 import {
-  Cell,
-  Legend,
-  Pie,
   PieChart,
-  ResponsiveContainer,
+  Pie,
+  Cell,
   Tooltip,
+  Legend,
+  ResponsiveContainer,
 } from "recharts";
 
 const COLORS = [
@@ -45,7 +45,7 @@ const Report = () => {
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
-  const [setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -99,11 +99,11 @@ const Report = () => {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
-          <div style="text-align:left;">
-            <strong>Заповніть усі поля!</strong><br/>
-            Опис, категорія, сума та дата — обов'язкові
-          </div>
-        `,
+            <div style="text-align:left;">
+              <strong>Заповніть усі поля!</strong><br/>
+              Опис, категорія, сума та дата — обов'язкові
+            </div>
+          `,
           allowHTML: true,
           placement: "top",
           theme: "light",
@@ -136,17 +136,6 @@ const Report = () => {
         return;
       }
       newBalance -= entryAmount;
-    } else if (type === "Дохід") {
-      if (!currentBalance || currentBalance === 0) {
-        toast.error("Баланс дорівнює нулю. Додайте кошти, щоб продовжити.", {
-          position: "top-right",
-          autoClose: 4000,
-          theme: "light",
-          transition: Bounce,
-        });
-        return;
-      }
-      newBalance += entryAmount;
     } else {
       newBalance += entryAmount;
     }
@@ -207,14 +196,14 @@ const Report = () => {
 
   const [isInputModalOpen, setIsInputModalOpen] = useState(false);
 
-  // При зміні типу (Витрати / Дохід) відкриваємо модальне вікно
+  const handleTypeChange = (newType) => {
+    setType(newType);
 
-  // const handleTypeChange = (newType) => {
-  //   setType(newType);
-  //   setIsInputModalOpen(true); // відкриваємо модалку
-  // };
+    if (window.innerWidth < 768) {
+      setIsInputModalOpen(true);
+    }
+  };
 
-  // Закрити модальне вікно при кліку на close
   const handleCloseModal = () => {
     setIsInputModalOpen(false);
   };
@@ -224,21 +213,25 @@ const Report = () => {
       <div className="report-nav-container">
         <button
           className={`finance ${type === "Витрати" ? "_active" : ""}`}
-          onClick={() => setType("Витрати")}
+          onClick={() => handleTypeChange("Витрати")}
         >
           Витрати
         </button>
         <button
           className={`finance ${type === "Дохід" ? "_active" : ""}`}
-          onClick={() => setType("Дохід")}
+          onClick={() => handleTypeChange("Дохід")}
         >
           Дохід
         </button>
       </div>
+
       {isInputModalOpen && (
         <div className="modal-overlay">
           <div className="filter-container" ref={inputSectionRef}>
-            <button className="modal-close" onClick={handleCloseModal}>
+            <button
+              className="modal-close"
+              onClick={() => setIsInputModalOpen(false)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -246,7 +239,7 @@ const Report = () => {
                 viewBox="0 0 24 24"
                 fill="none"
               >
-                <g clipPath="url(#clip0_1_2595)">
+                <g clip-path="url(#clip0_1_2595)">
                   <path
                     d="M21 11H6.83L10.41 7.41L9 6L3 12L9 18L10.41 16.59L6.83 13H21V11Z"
                     fill="#FF751D"
@@ -269,7 +262,6 @@ const Report = () => {
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
-
               <div className="bill-container _hidden">
                 <input
                   className="product-description"
@@ -283,7 +275,6 @@ const Report = () => {
                     if (e.key === "Delete") handleClearFields();
                   }}
                 />
-
                 <CategorySelect
                   type={type}
                   selectedCategory={
@@ -295,11 +286,10 @@ const Report = () => {
                   customCategory={customCategory}
                   setCustomCategory={setCustomCategory}
                 />
-
                 <input
                   className="amount-input _hidden"
                   type="number"
-                  step="0.1"
+                  step="0.10"
                   placeholder="0,00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -328,7 +318,6 @@ const Report = () => {
           </div>
         </div>
       )}
-
       <div className="cost-container">
         <div className="filter-container" ref={inputSectionRef}>
           <div className="filter-container-adaptive">
@@ -493,8 +482,7 @@ const Report = () => {
             </div>
           </div>
 
-          <div className="report-chart-container" style={{ marginTop: "30px" }}>
-            <h3 className="reduction-title">Графік по категоріях</h3>
+          <div className="chart-container">
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
@@ -520,7 +508,7 @@ const Report = () => {
           </div>
         </div>
 
-        {isInputModalOpen && isMobile && (
+        {isModalOpen && (
           <Modal
             onConfirm={handleConfirmDelete}
             onCancel={() => setIsModalOpen(false)}
