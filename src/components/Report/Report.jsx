@@ -45,7 +45,7 @@ const Report = () => {
   const [amount, setAmount] = useState("");
   const [expenseCategory, setExpenseCategory] = useState("");
   const [incomeCategory, setIncomeCategory] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -197,10 +197,11 @@ const Report = () => {
   const [isInputModalOpen, setIsInputModalOpen] = useState(false);
 
   // При зміні типу (Витрати / Дохід) відкриваємо модальне вікно
-  const handleTypeChange = (newType) => {
-    setType(newType);
-    setIsInputModalOpen(true); // відкриваємо модалку
-  };
+
+  // const handleTypeChange = (newType) => {
+  //   setType(newType);
+  //   setIsInputModalOpen(true); // відкриваємо модалку
+  // };
 
   // Закрити модальне вікно при кліку на close
   const handleCloseModal = () => {
