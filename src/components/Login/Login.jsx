@@ -7,7 +7,7 @@ import googleLogo from '../../img/google-logo.svg';
 import loginBackgroundSecond from '../../img/login-background-second.svg';
 import loginBackground from '../../img/login-background.svg';
 import logo from '../../img/logo.svg';
-import { clearError, logining, register } from '../../redux/authSlice';
+import { clearError, logining, googleAuth } from '../../redux/authSlice';
 
 import './Login.scss';
 
@@ -61,14 +61,7 @@ const Login = () => {
 			const response = await res.json();
 
 			dispatch(
-				register({
-					username: response.given_name,
-					password: response.sub,
-				})
-			);
-
-			dispatch(
-				logining({
+				googleAuth({
 					username: response.given_name,
 					password: response.sub,
 				})
