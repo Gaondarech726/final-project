@@ -615,13 +615,20 @@ body {
 @media (min-width: 320px) and (max-width: 768px) {
   body {
     width: 320px;
+    margin: 0;
+    padding: 0;
 
     .report-container {
       position: relative;
 
+      // top: 0;
+      // left: 0;
+
+      // margin: 0;
+
       width: 320px;
-      height: 0;
-      background-color: #145fff;
+      height: 100%;
+
       .report-nav-container {
         position: fixed;
         z-index: 777;
@@ -629,15 +636,13 @@ body {
         left: 0;
         bottom: 0;
 
-        width: 100%;
+        width: 100vw;
 
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
 
         button:active {
-          
-          
           .filter-container {
             display: block;
             ._hidden {
@@ -666,6 +671,129 @@ body {
         }
       }
 
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100vw;
+        height: 100%;
+
+        z-index: 4000;
+        background-color: #fff;
+
+        overflow-y: hidden;
+
+        .filter-container {
+          width: 100vw;
+          height: 257px;
+
+          padding-top: 56px;
+          background-color: $main-color;
+
+          border-radius: 0 0 0 140px;
+          // display: flex;
+          // flex-flow: column nowrap;
+          // align-items: center;
+
+          .filter-container-adaptive {
+            height: 158px;
+            width: 282px;
+
+            display: flex;
+            flex-flow: column wrap;
+
+            margin: 0 auto;
+
+            justify-content: space-between;
+
+            .bill-container {
+              width: 100%;
+              height: 84px;
+
+              border: 2px solid #fff;
+              border-radius: 20px 0;
+
+              font-family: Roboto;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 200;
+
+              // overflow: hidden;
+
+              input {
+                height: 50%;
+                width: calc(100% - 20px);
+
+                padding-left: 20px;
+
+                background-color: transparent;
+                color: #c7ccdc;
+
+                border-bottom: 2px solid #fff;
+                border-radius: 20px 0 0 0;
+
+                &:focus {
+                  background-color: $grey-hover;
+                  color: $main-text-color;
+                }
+
+                &::placeholder {
+                  color: #c7ccdc;
+                }
+              }
+            }
+
+            .input-container {
+              width: 180px;
+              height: 44px;
+
+              border: 2px solid #fff;
+              border-radius: 30px;
+
+              margin: 0 auto;
+
+              display: flex;
+
+              align-items: center;
+
+              .amount-input {
+                width: calc(120px - 45px);
+                height: 100%;
+
+                padding-left: 45px;
+
+                border-right: 2px solid #fff;
+
+                background-color: transparent;
+                color: #000;
+              }
+
+              svg {
+                padding-left: 18px;
+              }
+            }
+          }
+
+          margin-bottom: 40px;
+        }
+        .btn-operators-container {
+          width: 265px;
+          height: 44px;
+
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+
+          margin: 0 auto;
+
+          button {
+            width: 48%;
+            height: 44px;
+          }
+        }
+      }
+
       .cost-container {
         .filter-container {
           width: 100vw;
@@ -676,9 +804,6 @@ body {
 
             display: flex;
             justify-content: center;
-
-            .date-wrapper {
-            }
           }
           ._hidden {
             display: none !important;
