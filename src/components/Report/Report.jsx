@@ -85,7 +85,7 @@ const Report = () => {
     setIncomeCategory("");
   };
 
-  const handleAddEntry = () => {
+   const handleAddEntry = () => {
     const selectedCategory =
       type === "Витрати"
         ? expenseCategory === "Інше"
@@ -99,11 +99,11 @@ const Report = () => {
       if (inputSectionRef.current) {
         const instance = tippy(inputSectionRef.current, {
           content: `
-            <div style="text-align:left;">
-              <strong>Заповніть усі поля!</strong><br/>
-              Опис, категорія, сума та дата — обов'язкові
-            </div>
-          `,
+          <div style="text-align:left;">
+            <strong>Заповніть усі поля!</strong><br/>
+            Опис, категорія, сума та дата — обов'язкові
+          </div>
+        `,
           allowHTML: true,
           placement: "top",
           theme: "light",
@@ -136,6 +136,17 @@ const Report = () => {
         return;
       }
       newBalance -= entryAmount;
+    } else if (type === "Дохід") {
+      if (!currentBalance || currentBalance == 0) {
+        toast.error("Баланс дорівнює нулю. Додайте кошти, щоб продовжити.", {
+          position: "top-right",
+          autoClose: 4000,
+          theme: "light",
+          transition: Bounce,
+        });
+        return;
+      }
+      newBalance += entryAmount;
     } else {
       newBalance += entryAmount;
     }
@@ -154,6 +165,7 @@ const Report = () => {
     setEntries([...entries, newEntry]);
     handleClearFields();
   };
+
 
   const handleAskDelete = (id) => {
     setEntryToDelete(id);
