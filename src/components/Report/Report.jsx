@@ -12,12 +12,12 @@ import { updateBalance } from "../../redux/authSlice";
 import CategorySelect from "./CategorySelect/CategorySelect";
 
 import {
-  PieChart,
-  Pie,
   Cell,
-  Tooltip,
   Legend,
+  Pie,
+  PieChart,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
 
 const COLORS = [
@@ -85,7 +85,7 @@ const Report = () => {
     setIncomeCategory("");
   };
 
-   const handleAddEntry = () => {
+  const handleAddEntry = () => {
     const selectedCategory =
       type === "Витрати"
         ? expenseCategory === "Інше"
@@ -137,7 +137,7 @@ const Report = () => {
       }
       newBalance -= entryAmount;
     } else if (type === "Дохід") {
-      if (!currentBalance || currentBalance == 0) {
+      if (!currentBalance || currentBalance === 0) {
         toast.error("Баланс дорівнює нулю. Додайте кошти, щоб продовжити.", {
           position: "top-right",
           autoClose: 4000,
@@ -165,7 +165,6 @@ const Report = () => {
     setEntries([...entries, newEntry]);
     handleClearFields();
   };
-
 
   const handleAskDelete = (id) => {
     setEntryToDelete(id);
