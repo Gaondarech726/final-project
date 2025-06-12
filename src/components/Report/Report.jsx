@@ -47,6 +47,16 @@ const Report = () => {
   const [incomeCategory, setIncomeCategory] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [entryToDelete, setEntryToDelete] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const [entries, setEntries] = useState(() => {
     const saved = localStorage.getItem("financeEntries");
@@ -184,6 +194,19 @@ const Report = () => {
     }));
   };
 
+  const [isInputModalOpen, setIsInputModalOpen] = useState(false);
+
+  // При зміні типу (Витрати / Дохід) відкриваємо модальне вікно
+  const handleTypeChange = (newType) => {
+    setType(newType);
+    setIsInputModalOpen(true); // відкриваємо модалку
+  };
+
+  // Закрити модальне вікно при кліку на close
+  const handleCloseModal = () => {
+    setIsInputModalOpen(false);
+  };
+
   return (
     <div className="report-container">
       <div className="report-nav-container">
@@ -200,6 +223,99 @@ const Report = () => {
           Дохід
         </button>
       </div>
+      {isInputModalOpen && (
+        <div className="modal-overlay">
+          <div className="filter-container" ref={inputSectionRef}>
+            <button className="modal-close" onClick={handleCloseModal}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <g clipPath="url(#clip0_1_2595)">
+                  <path
+                    d="M21 11H6.83L10.41 7.41L9 6L3 12L9 18L10.41 16.59L6.83 13H21V11Z"
+                    fill="#FF751D"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_1_2595">
+                    <rect width="24" height="24" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </button>
+
+            <div className="filter-container-adaptive">
+              <div className="date-wrapper">
+                <input
+                  type="date"
+                  className="choose-date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </div>
+
+              <div className="bill-container _hidden">
+                <input
+                  className="product-description"
+                  type="text"
+                  placeholder="Опис товару"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  maxLength={25}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAddEntry();
+                    if (e.key === "Delete") handleClearFields();
+                  }}
+                />
+
+                <CategorySelect
+                  type={type}
+                  selectedCategory={
+                    type === "Витрати" ? expenseCategory : incomeCategory
+                  }
+                  setSelectedCategory={
+                    type === "Витрати" ? setExpenseCategory : setIncomeCategory
+                  }
+                  customCategory={customCategory}
+                  setCustomCategory={setCustomCategory}
+                />
+
+                <input
+                  className="amount-input _hidden"
+                  type="number"
+                  step="0.1"
+                  placeholder="0,00"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAddEntry();
+                    if (e.key === "Delete") handleClearFields();
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="btn-operators-container _hidden">
+              <button
+                className="btn-orange _enter-btn"
+                onClick={handleAddEntry}
+              >
+                Ввести
+              </button>
+              <button
+                className="btn-grey _clear-btn"
+                onClick={handleClearFields}
+              >
+                Очистити
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="cost-container">
         <div className="filter-container" ref={inputSectionRef}>
@@ -392,7 +508,7 @@ const Report = () => {
           </div>
         </div>
 
-        {isModalOpen && (
+        {isInputModalOpen && isMobile && (
           <Modal
             onConfirm={handleConfirmDelete}
             onCancel={() => setIsModalOpen(false)}
