@@ -41,6 +41,8 @@ const authSlice = createSlice({
 					'lastRegister',
 					JSON.stringify(state.lastRegister)
 				);
+
+				toast.success('Успішна реєстрація');
 			}
 		},
 
@@ -58,6 +60,46 @@ const authSlice = createSlice({
 				state.error = null;
 			} else {
 				state.error = 'Invalid data';
+			}
+		},
+
+		googleAuth(state, action) {
+			const existing = state.users.find(
+				user => user.username === action.payload.username
+			);
+
+			state.lastRegister = null;
+			localStorage.setItem('lastRegister', JSON.stringify(state.lastRegister));
+
+			if (existing) {
+				const user = state.users.find(
+					user =>
+						user.username === action.payload.username &&
+						user.password === action.payload.password
+				);
+
+				state.currentUser = user;
+				state.error = null;
+
+				toast.success('Вхід виконано успішно');
+
+				localStorage.setItem('currentUser', JSON.stringify(user));
+			} else {
+				state.users.push(action.payload);
+
+				const user = state.users.find(
+					user =>
+						user.username === action.payload.username &&
+						user.password === action.payload.password
+				);
+
+				state.currentUser = user;
+				state.error = null;
+
+				toast.success('Вхід виконано успішно');
+
+				localStorage.setItem('users', JSON.stringify(state.users));
+				localStorage.setItem('currentUser', JSON.stringify(user));
 			}
 		},
 
@@ -83,6 +125,12 @@ const authSlice = createSlice({
 	},
 });
 
-export const { register, logining, logout, updateBalance, clearError } =
-	authSlice.actions;
+export const {
+	register,
+	logining,
+	googleAuth,
+	logout,
+	updateBalance,
+	clearError,
+} = authSlice.actions;
 export default authSlice.reducer;

@@ -6,7 +6,7 @@ import loginBackgroundSecond from '../../img/login-background-second.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, logining } from '../../redux/authSlice';
+import { register, googleAuth } from '../../redux/authSlice';
 import { toast } from 'react-toastify';
 import { useGoogleLogin } from '@react-oauth/google';
 
@@ -22,7 +22,7 @@ const Register = () => {
 	let usersBeforeRegister = useRef(null);
 
 	const isValidEmail = async email => {
-		const apiKey = '56475003d896495e85e9c7e0b289d3cb';
+		const apiKey = '2176e3de42a245afb70ae24bbf773151';
 		const response = await fetch(
 			`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${email}`
 		);
@@ -71,7 +71,6 @@ const Register = () => {
 			usersBeforeRegister.current !== null &&
 			users.length > usersBeforeRegister.current
 		) {
-			toast.success('Успішна реєстрація');
 			navigate('../login');
 
 			document.querySelector('.register-input-pass').value = '';
@@ -98,15 +97,8 @@ const Register = () => {
 			const response = await res.json();
 
 			dispatch(
-				register({
-					username: response.email,
-					password: response.sub,
-				})
-			);
-
-			dispatch(
-				logining({
-					username: response.email,
+				googleAuth({
+					username: response.given_name,
 					password: response.sub,
 				})
 			);
@@ -115,7 +107,7 @@ const Register = () => {
 		},
 
 		onError() {
-			toast.error('Помилка авторизації');
+			console.log('login error');
 		},
 	});
 
