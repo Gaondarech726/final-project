@@ -424,12 +424,14 @@ const Report = () => {
                 .filter((entry) => entry.type === type)
                 .map((entry) => (
                   <ul className="day-report" key={entry.id}>
-                    <li className="date _data-li">{entry.date}</li>
-                    <li className="description _description-li">
-                      {entry.description}
-                    </li>
+                    <div className="tr-container">
+                      <li className="date _data-li">{entry.date}</li>
+                      <li className="description _description-li">
+                        {entry.description}
+                      </li>
+                    </div>
                     <li className="category _category-li">{entry.category}</li>
-                      {/* {isMobile && (
+                    {/* {isMobile && (
                         <li className="type _type-li">
                           {entry.type === "Дохід" ? "+ Дохід" : "- Витрати"}
                         </li>
