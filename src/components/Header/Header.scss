@@ -45,6 +45,8 @@ header {
         font-size: 12px;
         line-height: 100%;
         letter-spacing: 4%;
+
+
         text-align: right;
         color: rgba(82, 85, 95, 1);
       }
@@ -76,7 +78,6 @@ header {
   }
 
   @media (max-width: 1200px) {
-    // tablet
     height: 56px;
     .headerDiv {
       padding-right: 30px;
@@ -87,7 +88,6 @@ header {
   }
 
   @media (max-width: 767px) {
-    // mobile
     .headerDiv {
       padding-right: 20px;
       .user {

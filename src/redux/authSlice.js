@@ -108,7 +108,6 @@ const authSlice = createSlice({
 			localStorage.removeItem('currentUser');
 		},
 
-		// ✅ ДОДАНО updateBalance
 		updateBalance(state, action) {
 			if (state.currentUser) {
 				state.currentUser = {

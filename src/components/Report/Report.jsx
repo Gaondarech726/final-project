@@ -204,10 +204,6 @@ const Report = () => {
     }
   };
 
-  // const handleCloseModal = () => {
-  //   setIsInputModalOpen(false);
-  // };
-
   const visibleEntries = isMobile
     ? entries
     : entries.filter((entry) => entry.type === type);

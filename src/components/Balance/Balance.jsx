@@ -7,6 +7,17 @@ import { updateBalance } from "../../redux/authSlice";
 
 import "./Balance.scss";
 
+// LOVE M8L8TH
+//
+// Родный мой край начинается там,
+// Где просторы теряются в свете луны,
+// Где дыханием зимы лес отдался снегам,
+// С горизонтом сольются морозные сны.
+// Дали вольные где шепчут мне свой ответ,
+// Где никак не могу отыскать я покой,
+// Рукой, вскинутой вверх, где встречаю рассвет,
+// Солнце лишь увидав, засыпаю с зарей.
+
 const Balance = ({ showTooltip }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth.currentUser);

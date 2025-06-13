@@ -35,7 +35,6 @@ const Register = () => {
 		}
 	};
 
-	// відправка форми, додавання юзера
 	const handleSubmit = async e => {
 		e.preventDefault();
 		usersBeforeRegister.current = users.length;
@@ -65,7 +64,6 @@ const Register = () => {
 		}
 	};
 
-	// обробка помилок, успішна рега
 	useEffect(() => {
 		if (
 			usersBeforeRegister.current !== null &&
@@ -84,7 +82,6 @@ const Register = () => {
 		}
 	}, [error, dispatch]);
 
-	// гугл
 	const googleLogin = useGoogleLogin({
 		async onSuccess(tokenResponse) {
 			usersBeforeRegister.current = users.length;

@@ -27,7 +27,6 @@ const Login = () => {
 		}
 	}, []);
 
-	// якщо юзер залогінений, то перекидає на головну сторінку
 	const error = useSelector(state => state.auth.error);
 
 	useEffect(() => {
@@ -43,13 +42,11 @@ const Login = () => {
 		}
 	}, [currentUser, navigate]);
 
-	// відправка форми, додавання юзера
 	const handleSubmit = e => {
 		e.preventDefault();
 		dispatch(logining({ username: logName, password: logPass }));
 	};
 
-	// гугл
 	const googleLogin = useGoogleLogin({
 		async onSuccess(tokenResponse) {
 			const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {

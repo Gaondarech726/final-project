@@ -7,7 +7,7 @@ import DefaultUserAvatar from "./DefaultUserAvatar.svg";
 import "./Header.scss";
 import mobileLogoutBtnImg from "./mobileLogoutBtn.svg";
 import { useState } from "react";
-import { ModalTwo } from "../Modal/Modal"; // <-- імпортуємо модалку
+import { ModalTwo } from "../Modal/Modal";
 
 const Header = ({ username }) => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Header = ({ username }) => {
 
   const handleAuthButton = () => {
     if (currentUser) {
-      setIsModalOpen(true); // відкриваємо модалку замість logout
+      setIsModalOpen(true);
     } else {
       navigate("./register");
     }
