@@ -15,6 +15,15 @@
   }
 }
 body {
+  .tr-container {
+    width: 329px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+  }
+  ._category-li {
+    margin-right: 32px;
+  }
   // background-image: url(./svg/hero.svg);
   // background-repeat: no-repeat;
   // background-size: contain;
@@ -858,7 +867,7 @@ body {
               width: 0;
               height: 0;
             }
- 
+
             .tbody-div {
               width: 100vw;
 
