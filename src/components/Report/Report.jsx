@@ -180,7 +180,7 @@ const Report = () => {
     const categoryTotals = {};
 
     entries
-      .filter((entry) => entry.type === type)
+      .filter((entry) => (isMobile ? true : entry.type === type))
       .forEach((entry) => {
         if (!categoryTotals[entry.category]) {
           categoryTotals[entry.category] = 0;
@@ -256,7 +256,7 @@ const Report = () => {
             </button>
 
             <div className="filter-container-adaptive">
-              <div className="bill-container _hidden">
+              <div className="bill-container ">
                 <input
                   className="product-description"
                   type="text"
@@ -384,7 +384,7 @@ const Report = () => {
               />
 
               <input
-                className="amount-input _hidden"
+                className="amount-input"
                 type="number"
                 step="0.10"
                 placeholder="0,00"
@@ -408,7 +408,7 @@ const Report = () => {
           </div>
         </div>
 
-        <div className="reoprt-list-container _hidden">
+        <div className="reoprt-list-container ">
           <div className="bill-table">
             <div className="thead-div">
               <ul className="tr-title _to-upper-case">
@@ -429,6 +429,12 @@ const Report = () => {
                       {entry.description}
                     </li>
                     <li className="category _category-li">{entry.category}</li>
+                      {/* {isMobile && (
+                        <li className="type _type-li">
+                          {entry.type === "Дохід" ? "+ Дохід" : "- Витрати"}
+                        </li>
+                      )} */}
+
                     <li
                       className={`amount _amount-li ${
                         entry.type === "Дохід" ? "income" : "expense"
