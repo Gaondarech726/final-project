@@ -15,16 +15,9 @@
   }
 }
 body {
-  .tr-container {
-    width: 329px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-  }
-  ._category-li {
-    margin-right: 32px;
-  }
-
+  // background-image: url(./svg/hero.svg);
+  // background-repeat: no-repeat;
+  // background-size: contain;
 
   .report-container {
     width: 1060px;
@@ -150,6 +143,7 @@ body {
             width: 600px;
             height: 44px;
 
+            // overflow: hidden;
 
             display: flex;
             flex-flow: row nowrap;
@@ -265,6 +259,8 @@ body {
         flex-flow: column wrap;
 
         box-shadow: 0px 10px 60px 0px rgba(170, 178, 197, 0.2);
+        // background-color: greenyellow;
+
         .thead-div {
           background-color: $main-color;
 
@@ -294,19 +290,25 @@ body {
             }
           }
         }
-        ._data-li {
-          width: 104px;
-          text-align: left;
-        }
+        .tr-container {
+          width: calc(104px + 184px);
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          ._data-li {
+            width: 104px;
+            text-align: left;
+          }
 
-        ._description-li {
-          height: 14px;
+          ._description-li {
+            height: 14px;
 
-          width: 184px;
-          text-align: left;
+            width: 184px;
+            text-align: left;
 
-          overflow-x: scroll;
-          scrollbar-width: none;
+            overflow-x: scroll;
+            scrollbar-width: none;
+          }
         }
 
         ._category-li {
@@ -422,6 +424,7 @@ body {
         }
       }
 
+      //Аня
 
       .reduction {
         background-color: $main-color;
@@ -731,7 +734,7 @@ body {
               font-style: normal;
               font-weight: 200;
 
-              
+              // overflow: hidden;
 
               input {
                 height: 50%;
@@ -845,14 +848,17 @@ body {
 
           margin-top: 100px;
 
-          background-color: transparent;
-
+          background-color: #fff;
+          display: flex;
+          justify-content: center;
           .bill-table {
-            width: 100vw;
+            width: 95vw;
 
             border-radius: 0;
             background-color: #fff;
             box-shadow: none;
+
+            border: none;
 
             margin: 0;
 
@@ -864,36 +870,59 @@ body {
 
             .tbody-div {
               width: 100vw;
+              .day-report {
+                width: 100vw;
+                height: 42px;
 
-              .tr-container {
-                width: 45px;
-
-                display: flex;
-                flex-flow: column-reverse nowrap;
-                justify-content: space-between;
-
-                ._data-li {
-                  margin: 2px;
+                .tr-container {
                   width: 45px;
-                  text-align: left;
+                  height: 30px;
+
+                  display: flex;
+                  flex-flow: column-reverse nowrap;
+                  justify-content: space-between;
+
+                  ._data-li {
+                    font-family: Roboto;
+                    font-size: 8px;
+                    font-style: normal;
+                    font-weight: 400;
+
+                    width: 45px;
+                    text-align: left;
+
+                    padding: 0;
+                    margin: 0;
+                  }
+
+                  ._description-li {
+                    width: 45px;
+
+                    font-size: 12px;
+                    font-weight: 500;
+
+                    padding: 0;
+                    margin: 0;
+                  }
                 }
 
-                ._description-li {
-                  margin: 2px;
-                  width: 45px;
+                ._category-li {
+                  width: 82px;
+                  height: 7px;
+
+                  font-size: 8px;
+                  font-weight: 400;
+
+                  margin-bottom: 2px;
                 }
-              }
 
-              ._category-li {
-                width: 124px;
-              }
+                ._amount-li {
+                  width: 84px;
+                }
 
-              ._amount-li {
-                width: 84px;
-              }
-
-              ._delete-li {
-                width: 84px;
+                ._delete-li {
+                  width: 84px;
+                }
               }
             }
           }
