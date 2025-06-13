@@ -610,7 +610,6 @@ body {
 
             overflow-x: hidden;
 
-            border: red 1px solid;
             margin: 0;
 
             .reduction-list {
@@ -663,6 +662,7 @@ body {
         button:active {
           .filter-container {
             display: block;
+
             ._hidden {
               display: block;
             }
@@ -733,8 +733,6 @@ body {
               font-size: 12px;
               font-style: normal;
               font-weight: 200;
-
-              // overflow: hidden;
 
               input {
                 height: 50%;

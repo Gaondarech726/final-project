@@ -33,86 +33,143 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+img {
+  width: 100%;
+  height: auto;
+  line-height: 0;
+  display: block;
+}
 
-  img {
-    width: 100%;
-    height: auto;
-    line-height: 0;
-    display: block;
-  }
+a {
+  text-decoration-line: none;
+  color: $main-text-color;
+}
 
-  a {
-    text-decoration-line: none;
-    color: $main-text-color;
-  }
+ul {
+  list-style-type: none;
+}
 
-  ul {
-    list-style-type: none;
-  }
+button {
+  cursor: pointer;
+  display: block;
+  border: none;
+  background-color: transparent;
 
-  button {
-    cursor: pointer;
-    display: block;
-    border: none;
-    background-color: transparent;
+  padding: 12px 24px;
+  border-radius: 16px;
 
-    padding: 12px 24px;
-    border-radius: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+._to-upper-case {
+  text-transform: uppercase;
+}
 
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  ._to-upper-case {
-    text-transform: uppercase;
-  }
+.btn-orange {
+  background-color: $orange-color;
+  color: #fff;
+  box-shadow: $orange-shadow;
 
-  .btn-orange {
-    background-color: $orange-color;
-    color: #fff;
+  &:hover {
+    transition: $transition;
+
+    background-color: #fff;
+    color: $orange-color;
+    border: $orange-color 2px solid;
     box-shadow: $orange-shadow;
-
-    &:hover {
-      transition: $transition;
-
-      background-color: #fff;
-      color: $orange-color;
-      border: $orange-color 2px solid;
-      box-shadow: $orange-shadow;
-    }
-    &:active {
-      transform: translateY(2px);
-    }
   }
+  &:active {
+    transform: translateY(2px);
+  }
+}
 
-  .btn-grey {
-    background-color: $main-color;
-    color: $main-text-color;
+.btn-grey {
+  background-color: $main-color;
+  color: $main-text-color;
+  box-shadow: $grey-shadow;
+
+  &:hover {
+    transition: $transition;
+
+    background-color: $grey-hover;
     box-shadow: $grey-shadow;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
 
-    &:hover {
-      transition: $transition;
+.input-login {
+  width: auto;
+  background-color: $main-color;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
 
-      background-color: $grey-hover;
-      box-shadow: $grey-shadow;
-    }
-    &:active {
-      transform: translateY(2px);
+  color: $main-text-color;
+
+  &:focus {
+    background-color: $grey-hover;
+    box-shadow: $grey-shadow;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  body {
+    #root {
+      background-color: #fff;
+      min-height: 576px;
+      width: 100vw;
+
+      z-index: -2;
+
+      &:after {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        height: 342px;
+        width: 100vw;
+
+        border-radius: 0 0 0 70px;
+        background-color: $main-color;
+
+        z-index: -1;
+      }
     }
   }
+}
 
-  .input-login {
-    width: auto;
-    background-color: $main-color;
-    padding: 12px 24px;
-    border-radius: 30px;
-    border: none;
+@media (min-width: 768px) and (max-width: 1280px) {
+  body {
+    #root {
+      background-color: #fff;
 
-    color: $main-text-color;
+      background-image: url(./hero/hero768.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
 
-    &:focus {
-      background-color: $grey-hover;
-      box-shadow: $grey-shadow;
+      height: 1239px;
+      width: 100vw;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  body {
+    #root {
+      background-color: #fff;
+
+      background-image: url(./hero/hero1028.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      height: 900px;
+      width: 100vw;
     }
   }
 }
