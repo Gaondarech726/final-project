@@ -868,15 +868,15 @@ body {
                 display: flex;
                 flex-flow: column-reverse nowrap;
                 justify-content: space-between;
- 
-                background-color: #f154ff;
 
                 ._data-li {
+                  margin: 2px;
                   width: 45px;
                   text-align: left;
                 }
 
                 ._description-li {
+                  margin: 2px;
                   width: 45px;
                 }
               }
