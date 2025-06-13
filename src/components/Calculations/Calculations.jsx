@@ -66,7 +66,7 @@ const Calculations = () => {
     { order: 5, name: "transport", renderName: "Транспорт" },
     { order: 6, name: "everythingForTheHome", renderName: "Все для дому" },
     { order: 7, name: "equipment", renderName: "Техніка" },
-    { order: 8, name: "communication", renderName: "Комуналка, зв’язок" },
+    { order: 8, name: "communication", renderName: "Комуналка, зв'язок" },
     { order: 9, name: "sport", renderName: "Спорт" },
     { order: 10, name: "education", renderName: "Навчання" },
     { order: 11, name: "other", renderName: "Інше" },
