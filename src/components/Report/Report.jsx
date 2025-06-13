@@ -204,9 +204,9 @@ const Report = () => {
     }
   };
 
-  const handleCloseModal = () => {
-    setIsInputModalOpen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsInputModalOpen(false);
+  // };
 
   return (
     <div className="report-container">
